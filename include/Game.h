@@ -8,7 +8,6 @@
 #include "Menu.h"
 
 
-
 class Game
 {
 public:
@@ -20,5 +19,14 @@ private:
 	Resources& m_resource = Resources::instance();
 	Menu m_menu;
 	Board m_board;
+	//ScoreTable m_score_table;
+	
+
+
+	//functions
+	void handleMenuMouseMoved(const sf::Vector2f);
+	void handleMenuClick(const sf::Vector2f);
+	void startGame();
+
 
 };
