@@ -6,6 +6,7 @@
 #include "Resources.h"
 #include "Board.h"
 #include "Menu.h"
+#include "ScoreTable.h"
 
 
 class Game
@@ -19,7 +20,7 @@ private:
 	Resources& m_resource = Resources::instance();
 	Menu m_menu;
 	Board m_board;
-	//ScoreTable m_score_table;
+	ScoreTable m_score_table;
 	
 
 

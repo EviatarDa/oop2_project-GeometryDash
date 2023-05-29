@@ -23,6 +23,11 @@ const sf::Texture& Resources::getMenuButtons(const MenuButtons button) const
 	return m_menu_buttons[button];
 }
 
+const sf::Font& Resources::getFont() const
+{
+	return m_font;
+}
+
 
 void Resources::LoadFromFile()
 {
@@ -38,5 +43,6 @@ void Resources::LoadFromFile()
 	m_menu_buttons[Box].loadFromFile("Box.png");
 	m_menu_buttons[Score_Table].loadFromFile("Score_Table.png");
 
+	m_font.loadFromFile("C:/Windows/Fonts/Arial.ttf");
 }
 

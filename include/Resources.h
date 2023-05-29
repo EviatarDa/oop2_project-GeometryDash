@@ -26,12 +26,15 @@ public:
 
     const sf::Texture& getMenuTexture(const MenuTextures)const;
     const sf::Texture& getMenuButtons(const MenuButtons)const;
+    const sf::Font& getFont()const;
 
 
 private:
 
     sf::Texture m_menu_textures[MENU_TEXTURES];
     sf::Texture m_menu_buttons[MENU_BUTTONS];
+
+    sf::Font m_font;
 
     void LoadFromFile();
 

@@ -3,7 +3,8 @@
 #include "Game.h"
 
 Game::Game()
-    :m_window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Geometry Dash")
+    :m_window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Geometry Dash"),
+    m_score_table(m_window)
 {
     m_window.setFramerateLimit(60);
 }
@@ -76,6 +77,31 @@ void Game::handleMenuClick(const sf::Vector2f location)
     }
     else if (m_menu.getButton(Score_Table).getGlobalBounds().contains(location))
     {
+        bool click = false;
+
+        while (!click)
+        {
+            m_window.clear(WINDOW_COLOR);
+            m_score_table.draw();
+            m_window.display();
+
+            if (auto event = sf::Event{}; m_window.waitEvent(event))
+            {
+                switch (event.type)
+                {
+                case sf::Event::MouseButtonReleased:
+                {
+                    click = true;
+                    break;
+                }
+                case sf::Event::Closed:
+                    m_window.close();
+                    break;
+                }
+
+            }
+        }
+        
     }
 }
 
