@@ -4,8 +4,8 @@
 
 Menu::Menu()
 {
-	m_backgroung.setTexture(Resources::instance().getMenuTexture(Menu_Backgound));
-	m_backgroung.scale(1.6f, 1.6f);
+	m_background.setTexture(Resources::instance().getMenuTexture(Menu_Background));
+	m_background.scale(1.6f, 1.6f);
 
 	m_Authors.setTexture(Resources::instance().getMenuTexture(Authors));
 
@@ -22,7 +22,7 @@ Menu::Menu()
 
 void Menu::drawMenu(sf::RenderWindow& window) const
 {
-	window.draw(m_backgroung);
+	window.draw(m_background);
 	for (int button = Play; button <= Score_Table; button++)
 	{
 		window.draw(m_back_buttons[button]);

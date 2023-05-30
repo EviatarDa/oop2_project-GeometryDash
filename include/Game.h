@@ -28,6 +28,4 @@ private:
 	void handleMenuMouseMoved(const sf::Vector2f);
 	void handleMenuClick(const sf::Vector2f);
 	void startGame();
-
-
 };

@@ -16,7 +16,7 @@ public:
 
 
 private:
-	sf::Sprite m_backgroung;
+	sf::Sprite m_background;
 	sf::Sprite m_title;
 	sf::Sprite m_Authors;
 
