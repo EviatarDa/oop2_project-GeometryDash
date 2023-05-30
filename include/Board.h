@@ -12,8 +12,10 @@ public:
     void drawBoard(sf::RenderWindow&);
     void moveObjects();
     void jumpPlayer();
-    void movePlayerRight();
-    void movePlayerLeft();
+    void movePlayerRight(sf::Time);
+    void movePlayerLeft(sf::Time);
+    b2Vec2 getPlayerPosition();
+    void viewBackground(float addition);
 
 
 private:

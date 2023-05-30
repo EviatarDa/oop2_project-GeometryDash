@@ -9,7 +9,7 @@ Board::Board()
     m_background.scale(1.6f, 1.6f);
 
     createPlayerBox();
-    createFloor(10, Floor);
+    createFloor(100, Floor);
 
 }
 
@@ -51,7 +51,7 @@ void Board::jumpPlayer()
     }
 }
 
-void Board::movePlayerRight()
+void Board::movePlayerRight(sf::Time delta)
 {
     float currentSpeed = m_player_body->GetLinearVelocity().x;
     if (currentSpeed < MAX_MOVEMENT_SPEED)
@@ -63,9 +63,15 @@ void Board::movePlayerRight()
         }
         m_player_body->ApplyForceToCenter(b2Vec2(forceToApply, 0.0f), true);
     }
+
+    //b2Vec2 currentPosition = m_player_body->GetPosition();
+    //float currentX = currentPosition.x;
+    //float newX = currentX + (40.f * delta.asSeconds()); // Adjust the movement speed as needed
+    //float newY = currentPosition.y; // Maintain the current y position
+    //m_player_body->SetTransform(b2Vec2(newX, newY), m_player_body->GetAngle());
 }
 
-void Board::movePlayerLeft()
+void Board::movePlayerLeft(sf::Time delta)
 {
     float currentSpeed = m_player_body->GetLinearVelocity().x;
     if (currentSpeed > -MAX_MOVEMENT_SPEED)
@@ -77,6 +83,16 @@ void Board::movePlayerLeft()
         }
         m_player_body->ApplyForceToCenter(b2Vec2(forceToApply, 0.0f), true);
     }
+}
+
+b2Vec2 Board::getPlayerPosition()
+{
+    return m_player_body->GetPosition();
+}
+
+void Board::viewBackground(float addition)
+{
+    m_background.setPosition(m_background.getPosition().x +addition , m_background.getPosition().y);
 }
 
 void Board::createPlayerBox()

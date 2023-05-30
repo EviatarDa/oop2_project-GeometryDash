@@ -21,11 +21,13 @@ private:
 	Menu m_menu;
 	Board m_board;
 	ScoreTable m_score_table;
-	
+	sf::Clock m_MoveClock;
+	sf::View m_gameView;
 
 
 	//functions
 	void handleMenuMouseMoved(const sf::Vector2f);
 	void handleMenuClick(const sf::Vector2f);
 	void startGame();
+	void setView();
 };
