@@ -22,9 +22,61 @@ void Board::drawBoard(sf::RenderWindow& window)
     }
     window.draw(m_player_box);
 
-    m_world.Step(1 / 60.f, 8, 3);
+}
+
+void Board::moveObjects()
+{
+    // Update Box2D world
+    float timeStep = 1.0f / 60.0f; // Adjust the time step as needed
+    int32 velocityIterations = 6; // Adjust the iterations as needed
+    int32 positionIterations = 2; // Adjust the iterations as needed
+    m_world.Step(timeStep, velocityIterations, positionIterations);
+    //m_world.Step(1 / 60.f, 8, 3);
     m_player_box.setPosition(SCALE * m_player_body->GetPosition().x, SCALE * m_player_body->GetPosition().y);
     m_player_box.setRotation(m_player_body->GetAngle() * 180 / b2_pi);
+}
+
+void Board::jumpPlayer()
+{
+    b2Vec2 velocity = m_player_body->GetLinearVelocity();
+    float currentHeight = m_player_body->GetPosition().y * SCALE;
+    if (currentHeight < MAX_JUMP_HEIGHT)
+    {
+        float jumpForceToApply = JUMP_FORCE;
+        if (currentHeight + jumpForceToApply > MAX_JUMP_HEIGHT)
+        {
+            jumpForceToApply = MAX_JUMP_HEIGHT - currentHeight;
+        }
+        m_player_body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -jumpForceToApply), true);
+    }
+}
+
+void Board::movePlayerRight()
+{
+    float currentSpeed = m_player_body->GetLinearVelocity().x;
+    if (currentSpeed < MAX_MOVEMENT_SPEED)
+    {
+        float forceToApply = MOVEMENT_FORCE;
+        if (currentSpeed + forceToApply > MAX_MOVEMENT_SPEED)
+        {
+            forceToApply = MAX_MOVEMENT_SPEED - currentSpeed;
+        }
+        m_player_body->ApplyForceToCenter(b2Vec2(forceToApply, 0.0f), true);
+    }
+}
+
+void Board::movePlayerLeft()
+{
+    float currentSpeed = m_player_body->GetLinearVelocity().x;
+    if (currentSpeed > -MAX_MOVEMENT_SPEED)
+    {
+        float forceToApply = -MOVEMENT_FORCE;
+        if (currentSpeed + forceToApply < -MAX_MOVEMENT_SPEED)
+        {
+            forceToApply = -MAX_MOVEMENT_SPEED - currentSpeed;
+        }
+        m_player_body->ApplyForceToCenter(b2Vec2(forceToApply, 0.0f), true);
+    }
 }
 
 void Board::createPlayerBox()

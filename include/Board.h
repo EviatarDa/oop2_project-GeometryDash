@@ -10,6 +10,10 @@ class Board
 public:
     Board();
     void drawBoard(sf::RenderWindow&);
+    void moveObjects();
+    void jumpPlayer();
+    void movePlayerRight();
+    void movePlayerLeft();
 
 
 private:

@@ -16,6 +16,12 @@ const int WINDOW_WIDTH = 1400;
 const sf::Color WINDOW_COLOR = sf::Color::Black;
 
 const float SCALE = 30.f;
+const float JUMP_FORCE = 900.f;
+const float MOVEMENT_FORCE = 1000.f;
+
+const float MAX_JUMP_HEIGHT = 800.0f;
+const float MAX_MOVEMENT_SPEED = 300.0f;
+
 
 const int MENU_TEXTURES = 3;
 const int MENU_BUTTONS = 4;

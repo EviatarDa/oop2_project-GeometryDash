@@ -107,11 +107,14 @@ void Game::handleMenuClick(const sf::Vector2f location)
 
 void Game::startGame()
 {
+
     while (m_window.isOpen())
     {
         m_window.clear(sf::Color::Color(0, 102, 102)); // blue
         m_board.drawBoard(this->m_window);
         m_window.display();
+
+        m_board.moveObjects();
 
         for (auto event = sf::Event{}; m_window.pollEvent(event); )
         {
@@ -120,6 +123,25 @@ void Game::startGame()
             case sf::Event::Closed:
                 m_window.close();
                 break;
+
+            case sf::Event::KeyPressed:
+            {
+                // Move player box left
+                if (event.key.code == sf::Keyboard::Left)
+                {
+                    m_board.movePlayerLeft();
+                }
+                // Move player box right
+                else if (event.key.code == sf::Keyboard::Right)
+                {
+                    m_board.movePlayerRight();
+                }
+                // Move player box up
+                else if (event.key.code == sf::Keyboard::Space)
+                {
+                    m_board.jumpPlayer();
+                }
+            }
             }
         }
     }
