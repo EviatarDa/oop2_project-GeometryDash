@@ -65,26 +65,18 @@ void Board::createPlayerBox()
     m_player_box.setTexture(Resources::instance().getGameTexture(PlayerBox));
     m_player_box.setPosition(WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2);
 
-    // Create a Box2D body definition for the player box
     b2BodyDef bodyDef;
     bodyDef.position.Set(m_player_box.getPosition().x / SCALE, m_player_box.getPosition().y / SCALE); 
     bodyDef.type = b2_dynamicBody; // Set the body type to dynamic
 
-    // Create the Box2D body in the world
     b2Body* body = m_world.CreateBody(&bodyDef);
-
-    // Create a Box2D shape for the player box
     b2PolygonShape shape;
     sf::Vector2u boxSize = Resources::instance().getGameTexture(PlayerBox).getSize();
     shape.SetAsBox(boxSize.x / 2.0f / SCALE, boxSize.y / 2.0f / SCALE);
-
-    // Create a fixture definition for the player box shape
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
     fixtureDef.density = 1.0f; 
     fixtureDef.friction = 0.3f;
-
-    // Attach the fixture to the player box body
     body->CreateFixture(&fixtureDef);
 
     m_player_body = body;
@@ -183,44 +175,4 @@ void Board::createPhysicalBody(const sf::Sprite& sprite, const sf::Vector2u spri
 }
 
 
-//void Board::createFloor(int length, GameTextures texture)
-//{
-//    sf::Vector2u brick_size = Resources::instance().getGameTexture(texture).getSize();
-//    float yPos = static_cast<float>(WINDOW_HEIGHT) - brick_size.y; // Position the sprites at the bottom of the window
-//
-//    for (int bricks = 0; bricks < length; ++bricks)
-//    {
-//        sf::Sprite brick;
-//        brick.setTexture(Resources::instance().getGameTexture(texture));
-//
-//        // Position the first sprite on the lower left side of the window
-//        if (bricks == 0)
-//        {
-//            float xPos = 0.0f;
-//            brick.setPosition(xPos, yPos);
-//        }
-//        else
-//        {
-//            sf::Sprite prev_brick = m_game_floor[bricks - 1];
-//            float xPos = prev_brick.getPosition().x + prev_brick.getGlobalBounds().width;
-//            brick.setPosition(xPos, yPos);
-//        }
-//        m_game_floor.push_back(brick);
-//
-//        b2BodyDef bodyDef;
-//        bodyDef.position.Set(brick.getPosition().x / SCALE, brick.getPosition().y / SCALE); 
-//        bodyDef.type = b2_staticBody; 
-//
-//        b2Body* body = m_world.CreateBody(&bodyDef);
-//
-//
-//        b2PolygonShape shape;
-//        shape.SetAsBox(brick_size.x / 2.0f / SCALE, brick_size.y / 2.0f / SCALE); 
-//        b2FixtureDef fixtureDef;
-//        fixtureDef.shape = &shape;
-//
-//        body->CreateFixture(&fixtureDef);
-//
-//        m_floor_bodies.push_back(body);
-//    }
-//}
+
