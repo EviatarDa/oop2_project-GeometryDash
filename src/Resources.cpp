@@ -58,6 +58,15 @@ void Resources::LoadFromFile()
 	m_game_textures[Level_Background].loadFromFile("Menu_Backgound.png"); //todo change
 	m_game_textures[PlayerBox].loadFromFile("PlayerBox.png");
 	m_game_textures[Spike].loadFromFile("Spike.png");
+	m_game_textures[Coin].loadFromFile("Coin.png");
+	m_game_textures[Cube1].loadFromFile("Cube1.png");
+	m_game_textures[Cube2].loadFromFile("Cube2.png");
+	m_game_textures[CubeCube].loadFromFile("CubeCube.png");
+	m_game_textures[Gate1].loadFromFile("Gate1.png");
+	m_game_textures[Gate2].loadFromFile("Gate2.png");
+	m_game_textures[Gate3].loadFromFile("Gate3.png");
+	m_game_textures[Gate4].loadFromFile("Gate4.png");
+	m_game_textures[Gate5].loadFromFile("Gate5.png");
 
 
 	//game image

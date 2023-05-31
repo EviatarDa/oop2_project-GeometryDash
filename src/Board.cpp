@@ -133,44 +133,44 @@ void Board::createPlayerBox()
 }
 
 
-void Board::createFloor(int length, GameTextures texture)
-{
-    sf::Vector2u brick_size = Resources::instance().getGameTexture(texture).getSize();
-    float yPos = static_cast<float>(WINDOW_HEIGHT) - brick_size.y; // Position the sprites at the bottom of the window
-
-    for (int bricks = 0; bricks < length; ++bricks)
-    {
-        sf::Sprite brick;
-        brick.setTexture(Resources::instance().getGameTexture(texture));
-
-        // Position the first sprite on the lower left side of the window
-        if (bricks == 0)
-        {
-            float xPos = 0.0f;
-            brick.setPosition(xPos, yPos);
-        }
-        else
-        {
-            sf::Sprite prev_brick = m_game_floor[bricks - 1];
-            float xPos = prev_brick.getPosition().x + prev_brick.getGlobalBounds().width;
-            brick.setPosition(xPos, yPos);
-        }
-        m_game_floor.push_back(brick);
-
-        b2BodyDef bodyDef;
-        bodyDef.position.Set(brick.getPosition().x / SCALE, brick.getPosition().y / SCALE); 
-        bodyDef.type = b2_staticBody; 
-
-        b2Body* body = m_world.CreateBody(&bodyDef);
-
-
-        b2PolygonShape shape;
-        shape.SetAsBox(brick_size.x / 2.0f / SCALE, brick_size.y / 2.0f / SCALE); 
-        b2FixtureDef fixtureDef;
-        fixtureDef.shape = &shape;
-
-        body->CreateFixture(&fixtureDef);
-
-        m_floor_bodies.push_back(body);
-    }
-}
+//void Board::createFloor(int length, GameTextures texture)
+//{
+//    sf::Vector2u brick_size = Resources::instance().getGameTexture(texture).getSize();
+//    float yPos = static_cast<float>(WINDOW_HEIGHT) - brick_size.y; // Position the sprites at the bottom of the window
+//
+//    for (int bricks = 0; bricks < length; ++bricks)
+//    {
+//        sf::Sprite brick;
+//        brick.setTexture(Resources::instance().getGameTexture(texture));
+//
+//        // Position the first sprite on the lower left side of the window
+//        if (bricks == 0)
+//        {
+//            float xPos = 0.0f;
+//            brick.setPosition(xPos, yPos);
+//        }
+//        else
+//        {
+//            sf::Sprite prev_brick = m_game_floor[bricks - 1];
+//            float xPos = prev_brick.getPosition().x + prev_brick.getGlobalBounds().width;
+//            brick.setPosition(xPos, yPos);
+//        }
+//        m_game_floor.push_back(brick);
+//
+//        b2BodyDef bodyDef;
+//        bodyDef.position.Set(brick.getPosition().x / SCALE, brick.getPosition().y / SCALE); 
+//        bodyDef.type = b2_staticBody; 
+//
+//        b2Body* body = m_world.CreateBody(&bodyDef);
+//
+//
+//        b2PolygonShape shape;
+//        shape.SetAsBox(brick_size.x / 2.0f / SCALE, brick_size.y / 2.0f / SCALE); 
+//        b2FixtureDef fixtureDef;
+//        fixtureDef.shape = &shape;
+//
+//        body->CreateFixture(&fixtureDef);
+//
+//        m_floor_bodies.push_back(body);
+//    }
+//}
