@@ -9,48 +9,7 @@ Board::Board()
     m_background.scale(1.6f, 1.6f);
 
     createPlayerBox();
-    //createFloor(100, Floor);
-    const sf::Image &source = Resources::instance().getGameMaps(Map1);
-
-    for (size_t y = 0; y < source.getSize().y; ++y)
-    {
-        for (size_t x = 0; x < source.getSize().x; ++x)
-        {
-            if (source.getPixel(x, y) == sf::Color(163, 73, 164))
-            {
-                sf::Sprite spike;
-                spike.setTexture(Resources::instance().getGameTexture(Spike));
-                spike.setPosition(50 * x, 50 * y);
-                m_spikes.push_back(spike);
-            }
-            if ((source.getPixel(x, y) == sf::Color::Black))
-            {
-                sf::Vector2u brick_size = Resources::instance().getGameTexture(Brick).getSize();
-                sf::Sprite brick;
-                brick.setTexture(Resources::instance().getGameTexture(Brick));
-                brick.setPosition(50 * x, 50 * y);
-                m_game_floor.push_back(brick);
-
-                b2BodyDef bodyDef;
-                bodyDef.position.Set(brick.getPosition().x / SCALE, brick.getPosition().y / SCALE);
-                bodyDef.type = b2_staticBody;
-
-                b2Body* body = m_world.CreateBody(&bodyDef);
-
-
-                b2PolygonShape shape;
-                shape.SetAsBox(brick_size.x / 2.0f / SCALE, brick_size.y / 2.0f / SCALE);
-                b2FixtureDef fixtureDef;
-                fixtureDef.shape = &shape;
-
-                body->CreateFixture(&fixtureDef);
-
-                m_floor_bodies.push_back(body);
-            }
-        }
-
-    }
-
+    createLevel();
 }
 
 void Board::drawBoard(sf::RenderWindow& window)
@@ -75,7 +34,6 @@ void Board::moveObjects()
     int32 velocityIterations = 6; // Adjust the iterations as needed
     int32 positionIterations = 2; // Adjust the iterations as needed
     m_world.Step(timeStep, velocityIterations, positionIterations);
-    //m_world.Step(1 / 60.f, 8, 3);
     m_player_box.setPosition(SCALE * m_player_body->GetPosition().x, SCALE * m_player_body->GetPosition().y);
     m_player_box.setRotation(m_player_body->GetAngle() * 180 / b2_pi);
 }
@@ -130,6 +88,98 @@ void Board::createPlayerBox()
     body->CreateFixture(&fixtureDef);
 
     m_player_body = body;
+}
+
+void Board::createLevel()
+{
+    const sf::Image& source = Resources::instance().getGameMaps(Map1);
+
+    for (size_t y = 0; y < source.getSize().y; ++y)
+    {
+        for (size_t x = 0; x < source.getSize().x; ++x)
+        {
+            if (source.getPixel(x, y) == Red)
+            {
+                sf::Vector2u spike_size = Resources::instance().getGameTexture(Spike).getSize();
+                sf::Sprite spike;
+                spike.setTexture(Resources::instance().getGameTexture(Spike));
+                spike.setPosition(50 * x, 50 * y);
+                m_spikes.push_back(spike);
+                createPhysicalBody(spike, spike_size);
+
+            }
+            else if ((source.getPixel(x, y) == Black))
+            {
+                sf::Vector2u brick_size = Resources::instance().getGameTexture(Brick).getSize();
+                sf::Sprite brick;
+                brick.setTexture(Resources::instance().getGameTexture(Brick));
+                brick.setPosition(50 * x, 50 * y);
+                m_game_floor.push_back(brick);
+                createPhysicalBody(brick, brick_size);
+            }
+            else if ((source.getPixel(x, y) == Grey))
+            {
+                sf::Vector2u cube_cube_size = Resources::instance().getGameTexture(CubeCube).getSize();
+                sf::Sprite cube_cube;
+                cube_cube.setTexture(Resources::instance().getGameTexture(CubeCube));
+                cube_cube.setPosition(50 * x, 50 * y);
+                m_game_floor.push_back(cube_cube);
+                createPhysicalBody(cube_cube, cube_cube_size);
+            }
+            else if ((source.getPixel(x, y) == Blue))
+            {
+                sf::Vector2u cube1_size = Resources::instance().getGameTexture(Cube1).getSize();
+                sf::Sprite cube1;
+                cube1.setTexture(Resources::instance().getGameTexture(Cube1));
+                cube1.setPosition(50 * x, 50 * y);
+                m_game_floor.push_back(cube1);
+                createPhysicalBody(cube1, cube1_size);
+            }
+            else if ((source.getPixel(x, y) == Cyan))
+            {
+                sf::Vector2u cube2_size = Resources::instance().getGameTexture(Cube2).getSize();
+                sf::Sprite cube2;
+                cube2.setTexture(Resources::instance().getGameTexture(Cube2));
+                cube2.setPosition(50 * x, 50 * y);
+                m_game_floor.push_back(cube2);
+                createPhysicalBody(cube2, cube2_size);
+            }
+            else if ((source.getPixel(x, y) == Yellow))
+            {
+                sf::Vector2u coin_size = Resources::instance().getGameTexture(Coin).getSize();
+                sf::Sprite coin;
+                coin.setTexture(Resources::instance().getGameTexture(Coin));
+                coin.setPosition(50 * x, 50 * y);
+                m_game_floor.push_back(coin);
+            }
+            else if ((source.getPixel(x, y) == Orange))
+            {
+                sf::Vector2u gate_size = Resources::instance().getGameTexture(Gate1).getSize();
+                sf::Sprite gate;
+                gate.setTexture(Resources::instance().getGameTexture(Gate1));
+                gate.setPosition(50 * x, 50 * y);
+                m_game_floor.push_back(gate);
+                createPhysicalBody(gate, gate_size);
+            }
+
+        }
+
+    }
+}
+
+void Board::createPhysicalBody(const sf::Sprite& sprite, const sf::Vector2u sprite_size)
+{
+    b2BodyDef bodyDef;
+    bodyDef.position.Set(sprite.getPosition().x / SCALE, sprite.getPosition().y / SCALE);
+    bodyDef.type = b2_staticBody;
+    b2Body* body = m_world.CreateBody(&bodyDef);
+    b2PolygonShape shape;
+    shape.SetAsBox(sprite_size.x / 2.0f / SCALE, sprite_size.y / 2.0f / SCALE);
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &shape;
+    body->CreateFixture(&fixtureDef);
+
+    m_floor_bodies.push_back(body);
 }
 
 

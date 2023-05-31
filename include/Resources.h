@@ -9,25 +9,30 @@ enum MenuButtons{ Play, Help, Box, Score_Table };
 enum GameTextures{ Brick, Level_Background, PlayerBox, Spike, Coin, Cube1, Cube2, CubeCube, Gate1, Gate2, Gate3, Gate4, Gate5 };
 enum GameMaps { Map1 };
 
-//window
-const int WINDOW_HEIGHT = 800;
-const int WINDOW_WIDTH = 1400;
-
-//backgraound
-const sf::Color WINDOW_COLOR = sf::Color::Black;
-
-const float SCALE = 30.f;
-const float JUMP_FORCE = 30.f;
-const float MOVEMENT_FORCE = 1000.f;
-
-const float MAX_JUMP_HEIGHT = 800.0f;
-const float MAX_MOVEMENT_SPEED = 300.0f;
-const float MOVEMENT_SPEED = 10;
-
+//arrays
 const int MENU_TEXTURES = 3;
 const int MENU_BUTTONS = 4;
 const int GAME_TEXTURES = 13;
 const int GAME_MAPS = 1;
+
+//window
+const int WINDOW_HEIGHT = 800;
+const int WINDOW_WIDTH = 1400;
+
+//physics
+const float SCALE = 30.f;
+const float JUMP_FORCE = 30.f;
+const float MOVEMENT_SPEED = 10;
+
+//game object by color
+const sf::Color Grey = sf::Color::Color(112, 146, 190);
+const sf::Color Red = sf::Color::Color(237, 28, 36);
+const sf::Color Cyan = sf::Color::Color(0, 162, 232);
+const sf::Color Blue = sf::Color::Color(63, 72, 204);
+const sf::Color Yellow = sf::Color::Color(255, 242, 0);
+const sf::Color Orange = sf::Color::Color(255, 127, 39);
+const sf::Color Black = sf::Color::Black;
+
 
 class Resources
 {

@@ -83,7 +83,7 @@ void Game::handleMenuClick(const sf::Vector2f location)
 
         while (!click)
         {
-            m_window.clear(WINDOW_COLOR);
+            m_window.clear();
             m_score_table.draw();
             m_window.display();
 

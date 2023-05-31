@@ -35,4 +35,6 @@ private:
 
     //void createFloor(int, GameTextures);
     void createPlayerBox();
+    void createLevel();
+    void createPhysicalBody(const sf::Sprite&, const sf::Vector2u);
 };
