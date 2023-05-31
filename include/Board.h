@@ -12,8 +12,7 @@ public:
     void drawBoard(sf::RenderWindow&);
     void moveObjects();
     void jumpPlayer();
-    void movePlayerRight(sf::Time);
-    void movePlayerLeft(sf::Time);
+    void movePlayerRight();
     b2Vec2 getPlayerPosition();
     void viewBackground(float addition);
 
@@ -21,7 +20,9 @@ public:
 private:
     b2Vec2 m_gravity;
     b2World m_world;
+    std::vector<sf::Sprite> m_spikes;
     std::vector<sf::Sprite> m_game_floor;
+    std::vector<b2Body*> m_spikes_bodies;
     std::vector<b2Body*> m_floor_bodies;
 
     sf::Sprite m_background;

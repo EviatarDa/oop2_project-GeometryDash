@@ -28,6 +28,11 @@ const sf::Texture& Resources::getGameTexture(const GameTextures texture) const
 	return m_game_textures[texture];
 }
 
+const sf::Image& Resources::getGameMaps(const GameMaps map) const
+{
+	return m_maps[map];
+}
+
 const sf::Font& Resources::getFont() const
 {
 	return m_font;
@@ -49,9 +54,14 @@ void Resources::LoadFromFile()
 	m_menu_buttons[Score_Table].loadFromFile("Score_Table.png");
 
 	//game textures
-	m_game_textures[Floor].loadFromFile("Floor.png");
+	m_game_textures[Brick].loadFromFile("Floor.png");
 	m_game_textures[Level_Background].loadFromFile("Menu_Backgound.png"); //todo change
 	m_game_textures[PlayerBox].loadFromFile("PlayerBox.png");
+	m_game_textures[Spike].loadFromFile("Spike.png");
+
+
+	//game image
+	m_maps[Map1].loadFromFile("Map.png");
 
 	//font
 	m_font.loadFromFile("C:/Windows/Fonts/Arial.ttf");

@@ -6,7 +6,8 @@
 
 enum MenuTextures { Menu_Background, Title, Authors };
 enum MenuButtons{ Play, Help, Box, Score_Table };
-enum GameTextures{ Floor, Level_Background, PlayerBox};
+enum GameTextures{ Brick, Level_Background, PlayerBox, Spike};
+enum GameMaps { Map1 };
 
 //window
 const int WINDOW_HEIGHT = 800;
@@ -16,16 +17,17 @@ const int WINDOW_WIDTH = 1400;
 const sf::Color WINDOW_COLOR = sf::Color::Black;
 
 const float SCALE = 30.f;
-const float JUMP_FORCE = 900.f;
+const float JUMP_FORCE = 30.f;
 const float MOVEMENT_FORCE = 1000.f;
 
 const float MAX_JUMP_HEIGHT = 800.0f;
 const float MAX_MOVEMENT_SPEED = 300.0f;
-
+const float MOVEMENT_SPEED = 10;
 
 const int MENU_TEXTURES = 3;
 const int MENU_BUTTONS = 4;
-const int GAME_TEXTURES = 3;
+const int GAME_TEXTURES = 4;
+const int GAME_MAPS = 1;
 
 class Resources
 {
@@ -39,6 +41,8 @@ public:
 
     const sf::Texture& getGameTexture(const GameTextures)const;
 
+    const sf::Image& getGameMaps(const GameMaps)const;
+
     const sf::Font& getFont()const;
 
 
@@ -50,6 +54,8 @@ private:
     sf::Texture m_game_textures[GAME_TEXTURES];
 
     sf::Font m_font;
+
+    sf::Image m_maps[GAME_MAPS];
 
     void LoadFromFile();
 

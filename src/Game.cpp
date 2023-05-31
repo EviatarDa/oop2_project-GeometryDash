@@ -109,6 +109,7 @@ void Game::handleMenuClick(const sf::Vector2f location)
 
 void Game::startGame()
 {
+    bool flag = true;
     while (m_window.isOpen())
     {
         m_window.clear(sf::Color::Color(0, 102, 102));
@@ -118,7 +119,8 @@ void Game::startGame()
         m_board.moveObjects();
         setView();
 
-        auto delta = m_MoveClock.restart();
+
+
         for (auto event = sf::Event{}; m_window.pollEvent(event); )
         {
             switch (event.type)
@@ -129,22 +131,21 @@ void Game::startGame()
 
             case sf::Event::KeyPressed:
             {
-                // Move player box left
-                if (event.key.code == sf::Keyboard::Left)
-                {
-                    m_board.movePlayerLeft(delta);
-                }
-                // Move player box right
-                else if (event.key.code == sf::Keyboard::Right)
-                {
-                    m_board.movePlayerRight(delta);
-                }
                 // Move player box up
-                else if (event.key.code == sf::Keyboard::Space)
+                if (flag && event.key.code == sf::Keyboard::Space)
                 {
+                    flag = false;
                     m_board.jumpPlayer();
                 }
+                if (event.key.code == sf::Keyboard::Right)
+                {
+                    m_board.movePlayerRight();
+                }
+                break;
             }
+            case sf::Event::KeyReleased:
+                flag = true;
+
             }
         }
     }
@@ -155,7 +156,6 @@ void Game::setView()
     float last_pos = m_gameView.getCenter().x;
     b2Vec2 playerPosition = m_board.getPlayerPosition();
     float playerX = playerPosition.x * SCALE;
-    float playerY = playerPosition.y * SCALE;
-    m_gameView.setCenter( playerX, WINDOW_HEIGHT / 2);
+    m_gameView.setCenter( playerX , WINDOW_HEIGHT / 2);
     m_board.viewBackground(playerX - last_pos); //make the background move with the view
 }

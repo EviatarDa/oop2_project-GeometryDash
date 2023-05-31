@@ -9,7 +9,47 @@ Board::Board()
     m_background.scale(1.6f, 1.6f);
 
     createPlayerBox();
-    createFloor(100, Floor);
+    //createFloor(100, Floor);
+    const sf::Image &source = Resources::instance().getGameMaps(Map1);
+
+    for (size_t y = 0; y < source.getSize().y; ++y)
+    {
+        for (size_t x = 0; x < source.getSize().x; ++x)
+        {
+            if (source.getPixel(x, y) == sf::Color(163, 73, 164))
+            {
+                sf::Sprite spike;
+                spike.setTexture(Resources::instance().getGameTexture(Spike));
+                spike.setPosition(50 * x, 50 * y);
+                m_spikes.push_back(spike);
+            }
+            if ((source.getPixel(x, y) == sf::Color::Black))
+            {
+                sf::Vector2u brick_size = Resources::instance().getGameTexture(Brick).getSize();
+                sf::Sprite brick;
+                brick.setTexture(Resources::instance().getGameTexture(Brick));
+                brick.setPosition(50 * x, 50 * y);
+                m_game_floor.push_back(brick);
+
+                b2BodyDef bodyDef;
+                bodyDef.position.Set(brick.getPosition().x / SCALE, brick.getPosition().y / SCALE);
+                bodyDef.type = b2_staticBody;
+
+                b2Body* body = m_world.CreateBody(&bodyDef);
+
+
+                b2PolygonShape shape;
+                shape.SetAsBox(brick_size.x / 2.0f / SCALE, brick_size.y / 2.0f / SCALE);
+                b2FixtureDef fixtureDef;
+                fixtureDef.shape = &shape;
+
+                body->CreateFixture(&fixtureDef);
+
+                m_floor_bodies.push_back(body);
+            }
+        }
+
+    }
 
 }
 
@@ -19,6 +59,10 @@ void Board::drawBoard(sf::RenderWindow& window)
     for (int brick = 0; brick < m_game_floor.size(); brick++)
     {
         window.draw(m_game_floor[brick]);
+    }
+    for (int spike = 0; spike < m_spikes.size(); spike++)
+    {
+        window.draw(m_spikes[spike]);
     }
     window.draw(m_player_box);
 
@@ -38,52 +82,15 @@ void Board::moveObjects()
 
 void Board::jumpPlayer()
 {
-    b2Vec2 velocity = m_player_body->GetLinearVelocity();
-    float currentHeight = m_player_body->GetPosition().y * SCALE;
-    if (currentHeight < MAX_JUMP_HEIGHT)
-    {
-        float jumpForceToApply = JUMP_FORCE;
-        if (currentHeight + jumpForceToApply > MAX_JUMP_HEIGHT)
-        {
-            jumpForceToApply = MAX_JUMP_HEIGHT - currentHeight;
-        }
-        m_player_body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -jumpForceToApply), true);
-    }
+    m_player_body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -JUMP_FORCE), true);
 }
 
-void Board::movePlayerRight(sf::Time delta)
+void Board::movePlayerRight()
 {
-    float currentSpeed = m_player_body->GetLinearVelocity().x;
-    if (currentSpeed < MAX_MOVEMENT_SPEED)
-    {
-        float forceToApply = MOVEMENT_FORCE;
-        if (currentSpeed + forceToApply > MAX_MOVEMENT_SPEED)
-        {
-            forceToApply = MAX_MOVEMENT_SPEED - currentSpeed;
-        }
-        m_player_body->ApplyForceToCenter(b2Vec2(forceToApply, 0.0f), true);
-    }
-
-    //b2Vec2 currentPosition = m_player_body->GetPosition();
-    //float currentX = currentPosition.x;
-    //float newX = currentX + (40.f * delta.asSeconds()); // Adjust the movement speed as needed
-    //float newY = currentPosition.y; // Maintain the current y position
-    //m_player_body->SetTransform(b2Vec2(newX, newY), m_player_body->GetAngle());
+    float currentSpeed_y = m_player_body->GetLinearVelocity().y;
+    m_player_body->SetLinearVelocity({ MOVEMENT_SPEED, currentSpeed_y });
 }
 
-void Board::movePlayerLeft(sf::Time delta)
-{
-    float currentSpeed = m_player_body->GetLinearVelocity().x;
-    if (currentSpeed > -MAX_MOVEMENT_SPEED)
-    {
-        float forceToApply = -MOVEMENT_FORCE;
-        if (currentSpeed + forceToApply < -MAX_MOVEMENT_SPEED)
-        {
-            forceToApply = -MAX_MOVEMENT_SPEED - currentSpeed;
-        }
-        m_player_body->ApplyForceToCenter(b2Vec2(forceToApply, 0.0f), true);
-    }
-}
 
 b2Vec2 Board::getPlayerPosition()
 {
@@ -98,7 +105,7 @@ void Board::viewBackground(float addition)
 void Board::createPlayerBox()
 {
     m_player_box.setTexture(Resources::instance().getGameTexture(PlayerBox));
-    m_player_box.setPosition(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2); /// todo change
+    m_player_box.setPosition(WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2);
 
     // Create a Box2D body definition for the player box
     b2BodyDef bodyDef;
@@ -150,28 +157,20 @@ void Board::createFloor(int length, GameTextures texture)
         }
         m_game_floor.push_back(brick);
 
-        // Create a Box2D body definition for the floor sprite
         b2BodyDef bodyDef;
-        // Divide by SCALE to convert from pixel coordinates to Box2D meters
         bodyDef.position.Set(brick.getPosition().x / SCALE, brick.getPosition().y / SCALE); 
-        bodyDef.type = b2_staticBody; // Set the body type to static
+        bodyDef.type = b2_staticBody; 
 
-        // Create the Box2D body in the world
         b2Body* body = m_world.CreateBody(&bodyDef);
 
-        // Create a Box2D shape for the floor sprite
-        b2PolygonShape shape;
-        // Divide by SCALE to convert from pixel sizes to Box2D meters
-        shape.SetAsBox(brick_size.x / 2.0f / SCALE, brick_size.y / 2.0f / SCALE); 
 
-        // Create a fixture definition for the floor shape
+        b2PolygonShape shape;
+        shape.SetAsBox(brick_size.x / 2.0f / SCALE, brick_size.y / 2.0f / SCALE); 
         b2FixtureDef fixtureDef;
         fixtureDef.shape = &shape;
 
-        // Attach the fixture to the floor body
         body->CreateFixture(&fixtureDef);
 
-        // Store the floor body for future reference
         m_floor_bodies.push_back(body);
     }
 }
