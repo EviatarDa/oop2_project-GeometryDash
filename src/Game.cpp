@@ -65,6 +65,21 @@ void Game::handleMenuMouseMoved(const sf::Vector2f location)
     }
 }
 
+void Game::handleBoxShipMouseMoved(const sf::Vector2f location)
+{
+    for (int box_ship = BoxShip1; box_ship <= BoxShip6; box_ship++)
+    {
+        if ((m_menu.getBoxShip((MenuBoxShips)box_ship).getGlobalBounds().contains(location)))
+        {
+            m_menu.boxShipPress((MenuBoxShips)box_ship);
+        }
+        else
+        {
+            m_menu.boxShipRelease((MenuBoxShips)box_ship);
+        }
+    }
+}
+
 void Game::handleMenuClick(const sf::Vector2f location)
 {
     if (m_menu.getButton(Play).getGlobalBounds().contains(location))
@@ -77,6 +92,7 @@ void Game::handleMenuClick(const sf::Vector2f location)
     }
     else if (m_menu.getButton(Box).getGlobalBounds().contains(location))
     {
+        chooseBoxShip();
     }
     else if (m_menu.getButton(Score_Table).getGlobalBounds().contains(location))
     {
@@ -195,6 +211,39 @@ void Game::scoreTable()
                 break;
             }
 
+        }
+    }
+}
+
+void Game::chooseBoxShip()
+{
+    bool click = false;
+
+    while (m_window.isOpen() && !click)
+    {
+        m_window.clear();
+        m_menu.drawBoxShips();
+        m_window.display();
+
+        if (auto event = sf::Event{}; m_window.waitEvent(event))
+        {
+            switch (event.type)
+            {
+            case sf::Event::MouseButtonReleased:
+            {
+                click = true;
+                break;
+            }
+            case sf::Event::MouseMoved:
+            {
+                auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
+                handleBoxShipMouseMoved(location);
+                break;
+            }
+            case sf::Event::Closed:
+                m_window.close();
+                break;
+            }
         }
     }
 }

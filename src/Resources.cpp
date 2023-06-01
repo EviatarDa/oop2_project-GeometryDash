@@ -28,6 +28,11 @@ const sf::Texture& Resources::getMenuInstructions(const MenuInstructions page) c
 	return m_menu_instructions[page];
 }
 
+const sf::Texture& Resources::getMenuBoxShips(const MenuBoxShips box_ship) const
+{
+	return m_menu_box_ships[box_ship];
+}
+
 const sf::Texture& Resources::getGameTexture(const GameTextures texture) const
 {
 	return m_game_textures[texture];
@@ -62,9 +67,17 @@ void Resources::LoadFromFile()
 	m_menu_instructions[Instructions1].loadFromFile("Instructions1.png");
 	m_menu_instructions[DropTheMic].loadFromFile("DropTheMic.png");
 
+	m_menu_box_ships[BoxShip1].loadFromFile("BoxShip1.png");
+	m_menu_box_ships[BoxShip2].loadFromFile("BoxShip2.png");
+	m_menu_box_ships[BoxShip3].loadFromFile("BoxShip3.png");
+	m_menu_box_ships[BoxShip4].loadFromFile("BoxShip4.png");
+	m_menu_box_ships[BoxShip5].loadFromFile("BoxShip5.png");
+	m_menu_box_ships[BoxShip6].loadFromFile("BoxShip6.png");
+
+
 	//game textures
 	m_game_textures[Brick].loadFromFile("Floor.png");
-	m_game_textures[Level_Background].loadFromFile("Menu_Backgound.png"); //todo change
+	m_game_textures[Level_Background].loadFromFile("Menu_Backgound.png");
 	m_game_textures[PlayerBox].loadFromFile("PlayerBox.png");
 	m_game_textures[PlayerShip].loadFromFile("PlayerShip.png");
 	m_game_textures[Spike1].loadFromFile("Spike1.png");

@@ -23,6 +23,19 @@ Menu::Menu(sf::RenderWindow& window)
 	{
 		m_instructions[page].setTexture(Resources::instance().getMenuInstructions((MenuInstructions)page));
 	}
+
+	for (int box_ship = BoxShip1; box_ship <= BoxShip6; box_ship++)
+	{
+		m_box_ships[box_ship].setTexture(Resources::instance().getMenuBoxShips((MenuBoxShips)box_ship));
+		m_box_ships[box_ship].scale(0.5, 0.5);
+
+		m_box_ships_rect[box_ship].setSize(sf::Vector2f(m_box_ships[box_ship].getGlobalBounds().width,
+			m_box_ships[box_ship].getGlobalBounds().height));
+		m_box_ships_rect[box_ship].setFillColor(sf::Color::Transparent);
+		m_box_ships_rect[box_ship].setOutlineColor(sf::Color::White);
+		m_box_ships_rect[box_ship].setOutlineColor(sf::Color::Color(255, 255, 255, 0));
+		m_box_ships_rect[box_ship].setOutlineThickness(2.f);
+	}
 	locateObjects();
 }
 
@@ -41,6 +54,21 @@ void Menu::drawMenu() const
 sf::Sprite Menu::getButton(const MenuButtons button) const
 {
 	return m_buttons[button];
+}
+
+sf::Sprite Menu::getBoxShip(const MenuBoxShips box_ship) const
+{
+	return m_box_ships[box_ship];
+}
+
+void Menu::boxShipPress(const MenuBoxShips box_ship)
+{
+	m_box_ships_rect[box_ship].setOutlineColor(sf::Color::Color(255, 255, 255, 255));
+}
+
+void Menu::boxShipRelease(const MenuBoxShips box_ship)
+{
+	m_box_ships_rect[box_ship].setOutlineColor(sf::Color::Color(255, 255, 255, 0));
 }
 
 void Menu::ButtonPress(const MenuButtons button)
@@ -62,6 +90,16 @@ void Menu::drawInstructions(const MenuInstructions page) const
 void Menu::drawScoreTable()
 {
 	m_score_teble.draw();
+}
+
+void Menu::drawBoxShips()
+{
+	m_window.draw(m_background);
+	for (int box_ship = BoxShip1; box_ship <= BoxShip6; box_ship++)
+	{
+		m_window.draw(m_box_ships[box_ship]);
+		m_window.draw(m_box_ships_rect[box_ship]);
+	}
 }
 
 void Menu::locateObjects()
@@ -99,5 +137,20 @@ void Menu::locateObjects()
 
 	m_title.setPosition(sf::Vector2f((WINDOW_WIDTH - m_title.getTextureRect().width) * 0.5,
 		WINDOW_HEIGHT * 0.15));
+
+	//BoxShips
+	m_box_ships[BoxShip1].setPosition(sf::Vector2f(WINDOW_WIDTH * 0.1f, WINDOW_HEIGHT / 2.5f));
+	m_box_ships[BoxShip2].setPosition(sf::Vector2f(WINDOW_WIDTH * 0.4f, WINDOW_HEIGHT / 2.5f));
+	m_box_ships[BoxShip3].setPosition(sf::Vector2f(WINDOW_WIDTH * 0.7f, WINDOW_HEIGHT / 2.5f));
+	m_box_ships[BoxShip4].setPosition(sf::Vector2f(WINDOW_WIDTH * 0.1, WINDOW_HEIGHT * 3.f / 4.f));
+	m_box_ships[BoxShip5].setPosition(sf::Vector2f(WINDOW_WIDTH * 0.4f, WINDOW_HEIGHT * 3.f / 4.f));
+	m_box_ships[BoxShip6].setPosition(sf::Vector2f(WINDOW_WIDTH * 0.7f, WINDOW_HEIGHT * 3.f / 4.f));
+
+
+	for (int box_ship = BoxShip1; box_ship <= BoxShip6; box_ship++)
+	{
+		m_box_ships_rect[box_ship].setPosition(sf::Vector2f(m_box_ships[box_ship].getGlobalBounds().left,
+			m_box_ships[box_ship].getGlobalBounds().top));
+	}
 
 }
