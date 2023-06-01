@@ -24,6 +24,9 @@ private:
     b2World m_world;
 
     //game objects:
+    //std::vector < std::unique_ptr< MovingObject>>  m_moving_objects;
+    //std::vector < std::unique_ptr< StaticObjects>>  m_Static_objects;
+
     std::vector<sf::Sprite> m_game_floor;
     std::vector<sf::Sprite> m_spikes;
 

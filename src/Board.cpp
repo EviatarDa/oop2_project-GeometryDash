@@ -34,6 +34,13 @@ void Board::moveObjects()
     int32 velocityIterations = 6; // Adjust the iterations as needed
     int32 positionIterations = 2; // Adjust the iterations as needed
     m_world.Step(timeStep, velocityIterations, positionIterations);
+
+    //for (int index = 0; index < m_moving_objects.size(); index++)
+    //{
+    //    m_moving_objects[index]->move();
+    //    handleCollisions(*m_moving_objects[index]);
+    //}
+
     m_player_box.setPosition(SCALE * m_player_body->GetPosition().x, SCALE * m_player_body->GetPosition().y);
     m_player_box.setRotation(m_player_body->GetAngle() * 180 / b2_pi);
 }
@@ -113,7 +120,7 @@ void Board::createLevel()
                 spike.setTexture(Resources::instance().getGameTexture(Spike1));
                 spike.setPosition(50 * x+25, 50 * y+25);
         
-                m_spikes.push_back(spike);
+                m_game_floor.push_back(spike);
                 //createPhysicalBody(spike, spike_size);
             }
             else if ((source.getPixel(x, y) == Black))

@@ -82,6 +82,7 @@ void Resources::LoadFromFile()
 	m_game_textures[PlayerShip].loadFromFile("PlayerShip.png");
 	m_game_textures[Spike1].loadFromFile("Spike1.png");
 	m_game_textures[Spike2].loadFromFile("Spike2.png");
+	m_game_textures[Spikes].loadFromFile("Spikes.png");
 	m_game_textures[Coin].loadFromFile("Coin.png");
 	m_game_textures[Cube1].loadFromFile("Cube1.png");
 	m_game_textures[Cube2].loadFromFile("Cube2.png");

@@ -140,13 +140,18 @@ void Game::startGame()
                 if (event.key.code == sf::Keyboard::Up)
                 {
                     m_board.swapGravity();
+
                 }
                 break;
             }
             case sf::Event::KeyReleased:
                 flag = true;
             }
+
         }
+
+        //m_board.updateDirections();
+        //m_board.moveObjects();
     }
 }
 

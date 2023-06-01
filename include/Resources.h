@@ -9,7 +9,7 @@ enum MenuButtons { Play, Help, Box, Score_Table };
 enum MenuInstructions { OhNo, Instructions1, DropTheMic };
 enum MenuBoxShips { BoxShip1, BoxShip2, BoxShip3, BoxShip4, BoxShip5, BoxShip6 };
 enum GameTextures {
-    Brick, Level_Background, PlayerBox, PlayerShip, Spike1, Spike2, Coin, Cube1, Cube2, CubeCube,
+    Brick, Level_Background, PlayerBox, PlayerShip, Spike1, Spike2, Spikes, Coin, Cube1, Cube2, CubeCube,
     Gate1, Gate2, Gate3, Gate4, Gate5, Jumper1, Jumper2, Jumper3, Jumper4, Rectangle,
 };
 enum GameMaps { Map1 };
@@ -20,7 +20,7 @@ const int MENU_BUTTONS = 4;
 const int MENU_INSTRUCTIONS = 3;
 const int MENU_BOX_SHIPS = 6;
 
-const int GAME_TEXTURES = 20;
+const int GAME_TEXTURES = 21;
 const int GAME_MAPS = 3;
 
 //window
