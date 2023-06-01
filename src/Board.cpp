@@ -7,7 +7,6 @@ Board::Board()
 {
     m_background.setTexture(Resources::instance().getGameTexture(Level_Background));
     m_background.scale(1.6f, 1.6f);
-   
 
     createPlayerBox();
     createLevel();
@@ -50,6 +49,12 @@ void Board::movePlayerRight()
     m_player_body->SetLinearVelocity({ MOVEMENT_SPEED, currentSpeed_y });
 }
 
+void Board::movePlayerLeft()
+{
+    float currentSpeed_y = m_player_body->GetLinearVelocity().y;
+    m_player_body->SetLinearVelocity({ -MOVEMENT_SPEED, currentSpeed_y });
+}
+
 
 b2Vec2 Board::getPlayerPosition()
 {
@@ -59,6 +64,12 @@ b2Vec2 Board::getPlayerPosition()
 void Board::viewBackground(float addition)
 {
     m_background.setPosition(m_background.getPosition().x +addition , m_background.getPosition().y);
+}
+
+void Board::swapGravity()
+{
+    m_gravity = -m_gravity;
+    m_world.SetGravity(m_gravity);
 }
 
 void Board::createPlayerBox()
@@ -72,8 +83,6 @@ void Board::createPlayerBox()
     b2BodyDef bodyDef;
     bodyDef.position.Set(m_player_box.getPosition().x / SCALE, m_player_box.getPosition().y / SCALE); 
     bodyDef.type = b2_dynamicBody; // Set the body type to dynamic
-    
-
 
     b2Body* body = m_world.CreateBody(&bodyDef);
     b2PolygonShape shape;
@@ -86,16 +95,10 @@ void Board::createPlayerBox()
     body->CreateFixture(&fixtureDef);
 
     m_player_body = body;
-
-
- 
-
 }
 
 void Board::createLevel()
 {
-
-    
     const sf::Image& source = Resources::instance().getGameMaps(Map1);
 
     for (size_t y = 0; y < source.getSize().y; ++y)
@@ -104,15 +107,14 @@ void Board::createLevel()
         {
             if (source.getPixel(x, y) == Red)
             {
-                sf::Vector2u spike_size = Resources::instance().getGameTexture(Spike).getSize();
+                sf::Vector2u spike_size = Resources::instance().getGameTexture(Spike1).getSize();
                 sf::Sprite spike;
                 spike.setOrigin(spike_size.x / 2, spike_size.y / 2);
-                spike.setTexture(Resources::instance().getGameTexture(Spike));
+                spike.setTexture(Resources::instance().getGameTexture(Spike1));
                 spike.setPosition(50 * x+25, 50 * y+25);
         
                 m_spikes.push_back(spike);
                 //createPhysicalBody(spike, spike_size);
-
             }
             else if ((source.getPixel(x, y) == Black))
             {
@@ -173,7 +175,6 @@ void Board::createLevel()
                 m_game_floor.push_back(gate);
                // createPhysicalBody(gate, gate_size);
             }
-
         }
 
     }

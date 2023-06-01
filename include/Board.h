@@ -13,8 +13,10 @@ public:
     void moveObjects();
     void jumpPlayer();
     void movePlayerRight();
+    void movePlayerLeft();
     b2Vec2 getPlayerPosition();
     void viewBackground(float addition);
+    void swapGravity();
 
 
 private:

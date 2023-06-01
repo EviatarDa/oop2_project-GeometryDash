@@ -5,14 +5,17 @@
 #include <string.h>
 
 enum MenuTextures { Menu_Background, Title, Authors };
-enum MenuButtons{ Play, Help, Box, Score_Table };
-enum GameTextures{ Brick, Level_Background, PlayerBox, Spike, Coin, Cube1, Cube2, CubeCube, Gate1, Gate2, Gate3, Gate4, Gate5,BigFloor};
+enum MenuButtons { Play, Help, Box, Score_Table };
+enum GameTextures {
+    Brick, Level_Background, PlayerBox, PlayerShip, Spike1, Spike2, Coin, Cube1, Cube2, CubeCube,
+    Gate1, Gate2, Gate3, Gate4, Gate5, Jumper1, Jumper2, Jumper3, Jumper4, Rectangle,
+};
 enum GameMaps { Map1 };
 
 //arrays
 const int MENU_TEXTURES = 3;
 const int MENU_BUTTONS = 4;
-const int GAME_TEXTURES = 14;
+const int GAME_TEXTURES = 20;
 const int GAME_MAPS = 1;
 
 //window
@@ -21,8 +24,8 @@ const int WINDOW_WIDTH = 1400;
 
 //physics
 const float SCALE = 30.f;
-const float JUMP_FORCE = 30.f;
-const float MOVEMENT_SPEED = 10;
+const float JUMP_FORCE = 25.f;
+const float MOVEMENT_SPEED = 7;
 
 //game object by color
 const sf::Color Grey = sf::Color::Color(112, 146, 190);

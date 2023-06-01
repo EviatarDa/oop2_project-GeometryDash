@@ -141,11 +141,18 @@ void Game::startGame()
                 {
                     m_board.movePlayerRight();
                 }
+                if (event.key.code == sf::Keyboard::Left)
+                {
+                    m_board.movePlayerLeft();
+                }
+                if (event.key.code == sf::Keyboard::Up)
+                {
+                    m_board.swapGravity();
+                }
                 break;
             }
             case sf::Event::KeyReleased:
                 flag = true;
-
             }
         }
     }

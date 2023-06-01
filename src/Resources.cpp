@@ -57,7 +57,9 @@ void Resources::LoadFromFile()
 	m_game_textures[Brick].loadFromFile("Floor.png");
 	m_game_textures[Level_Background].loadFromFile("Menu_Backgound.png"); //todo change
 	m_game_textures[PlayerBox].loadFromFile("PlayerBox.png");
-	m_game_textures[Spike].loadFromFile("Spike.png");
+	m_game_textures[PlayerShip].loadFromFile("PlayerShip.png");
+	m_game_textures[Spike1].loadFromFile("Spike1.png");
+	m_game_textures[Spike2].loadFromFile("Spike2.png");
 	m_game_textures[Coin].loadFromFile("Coin.png");
 	m_game_textures[Cube1].loadFromFile("Cube1.png");
 	m_game_textures[Cube2].loadFromFile("Cube2.png");
@@ -67,8 +69,11 @@ void Resources::LoadFromFile()
 	m_game_textures[Gate3].loadFromFile("Gate3.png");
 	m_game_textures[Gate4].loadFromFile("Gate4.png");
 	m_game_textures[Gate5].loadFromFile("Gate5.png");
-	m_game_textures[BigFloor].loadFromFile("Bigfloor.png");
-
+	m_game_textures[Jumper1].loadFromFile("Jumper1.png");
+	m_game_textures[Jumper2].loadFromFile("Jumper2.png");
+	m_game_textures[Jumper3].loadFromFile("Jumper3.png");
+	m_game_textures[Jumper4].loadFromFile("Jumper4.png");
+	m_game_textures[Rectangle].loadFromFile("Rectangle.png");
 
 	//game image
 	m_maps[Map1].loadFromFile("Map.png");
