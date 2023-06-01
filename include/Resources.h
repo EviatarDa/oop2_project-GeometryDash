@@ -6,13 +6,13 @@
 
 enum MenuTextures { Menu_Background, Title, Authors };
 enum MenuButtons{ Play, Help, Box, Score_Table };
-enum GameTextures{ Brick, Level_Background, PlayerBox, Spike, Coin, Cube1, Cube2, CubeCube, Gate1, Gate2, Gate3, Gate4, Gate5 };
+enum GameTextures{ Brick, Level_Background, PlayerBox, Spike, Coin, Cube1, Cube2, CubeCube, Gate1, Gate2, Gate3, Gate4, Gate5,BigFloor};
 enum GameMaps { Map1 };
 
 //arrays
 const int MENU_TEXTURES = 3;
 const int MENU_BUTTONS = 4;
-const int GAME_TEXTURES = 13;
+const int GAME_TEXTURES = 14;
 const int GAME_MAPS = 1;
 
 //window

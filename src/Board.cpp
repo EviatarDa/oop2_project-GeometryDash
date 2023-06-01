@@ -7,6 +7,7 @@ Board::Board()
 {
     m_background.setTexture(Resources::instance().getGameTexture(Level_Background));
     m_background.scale(1.6f, 1.6f);
+   
 
     createPlayerBox();
     createLevel();
@@ -63,11 +64,16 @@ void Board::viewBackground(float addition)
 void Board::createPlayerBox()
 {
     m_player_box.setTexture(Resources::instance().getGameTexture(PlayerBox));
+    sf::Vector2f spriteSize(m_player_box.getTextureRect().width, m_player_box.getTextureRect().height);
+    m_player_box.setOrigin(spriteSize.x / 2, spriteSize.y / 2);
     m_player_box.setPosition(WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2);
+   
 
     b2BodyDef bodyDef;
     bodyDef.position.Set(m_player_box.getPosition().x / SCALE, m_player_box.getPosition().y / SCALE); 
     bodyDef.type = b2_dynamicBody; // Set the body type to dynamic
+    
+
 
     b2Body* body = m_world.CreateBody(&bodyDef);
     b2PolygonShape shape;
@@ -80,10 +86,16 @@ void Board::createPlayerBox()
     body->CreateFixture(&fixtureDef);
 
     m_player_body = body;
+
+
+ 
+
 }
 
 void Board::createLevel()
 {
+
+    
     const sf::Image& source = Resources::instance().getGameMaps(Map1);
 
     for (size_t y = 0; y < source.getSize().y; ++y)
@@ -94,10 +106,12 @@ void Board::createLevel()
             {
                 sf::Vector2u spike_size = Resources::instance().getGameTexture(Spike).getSize();
                 sf::Sprite spike;
+                spike.setOrigin(spike_size.x / 2, spike_size.y / 2);
                 spike.setTexture(Resources::instance().getGameTexture(Spike));
-                spike.setPosition(50 * x, 50 * y);
+                spike.setPosition(50 * x+25, 50 * y+25);
+        
                 m_spikes.push_back(spike);
-                createPhysicalBody(spike, spike_size);
+                //createPhysicalBody(spike, spike_size);
 
             }
             else if ((source.getPixel(x, y) == Black))
@@ -105,7 +119,8 @@ void Board::createLevel()
                 sf::Vector2u brick_size = Resources::instance().getGameTexture(Brick).getSize();
                 sf::Sprite brick;
                 brick.setTexture(Resources::instance().getGameTexture(Brick));
-                brick.setPosition(50 * x, 50 * y);
+                brick.setOrigin(brick_size.x / 2, brick_size.y / 2);
+                brick.setPosition(50 * x + 25, 50 * y + 25);
                 m_game_floor.push_back(brick);
                 createPhysicalBody(brick, brick_size);
             }
@@ -114,7 +129,8 @@ void Board::createLevel()
                 sf::Vector2u cube_cube_size = Resources::instance().getGameTexture(CubeCube).getSize();
                 sf::Sprite cube_cube;
                 cube_cube.setTexture(Resources::instance().getGameTexture(CubeCube));
-                cube_cube.setPosition(50 * x, 50 * y);
+                cube_cube.setOrigin(cube_cube_size.x / 2, cube_cube_size.y / 2);
+                cube_cube.setPosition(50 * x + 25, 50 * y + 25);
                 m_game_floor.push_back(cube_cube);
                 createPhysicalBody(cube_cube, cube_cube_size);
             }
@@ -123,7 +139,8 @@ void Board::createLevel()
                 sf::Vector2u cube1_size = Resources::instance().getGameTexture(Cube1).getSize();
                 sf::Sprite cube1;
                 cube1.setTexture(Resources::instance().getGameTexture(Cube1));
-                cube1.setPosition(50 * x, 50 * y);
+                cube1.setOrigin(cube1_size.x / 2, cube1_size.y / 2);
+                cube1.setPosition(50 * x + 25, 50 * y + 25);
                 m_game_floor.push_back(cube1);
                 createPhysicalBody(cube1, cube1_size);
             }
@@ -132,7 +149,8 @@ void Board::createLevel()
                 sf::Vector2u cube2_size = Resources::instance().getGameTexture(Cube2).getSize();
                 sf::Sprite cube2;
                 cube2.setTexture(Resources::instance().getGameTexture(Cube2));
-                cube2.setPosition(50 * x, 50 * y);
+                cube2.setOrigin(cube2_size.x / 2, cube2_size.y / 2);
+                cube2.setPosition(50 * x + 25, 50 * y + 25);
                 m_game_floor.push_back(cube2);
                 createPhysicalBody(cube2, cube2_size);
             }
@@ -141,7 +159,8 @@ void Board::createLevel()
                 sf::Vector2u coin_size = Resources::instance().getGameTexture(Coin).getSize();
                 sf::Sprite coin;
                 coin.setTexture(Resources::instance().getGameTexture(Coin));
-                coin.setPosition(50 * x, 50 * y);
+                coin.setOrigin(coin_size.x / 2, coin_size.y / 2);
+                coin.setPosition(50 * x + 25, 50 * y + 25);
                 m_game_floor.push_back(coin);
             }
             else if ((source.getPixel(x, y) == Orange))
@@ -149,9 +168,10 @@ void Board::createLevel()
                 sf::Vector2u gate_size = Resources::instance().getGameTexture(Gate1).getSize();
                 sf::Sprite gate;
                 gate.setTexture(Resources::instance().getGameTexture(Gate1));
-                gate.setPosition(50 * x, 50 * y);
+                gate.setOrigin(gate_size.x / 2, gate_size.y / 2);
+                gate.setPosition(50 * x + 25, 50 * y + 25);
                 m_game_floor.push_back(gate);
-                createPhysicalBody(gate, gate_size);
+               // createPhysicalBody(gate, gate_size);
             }
 
         }

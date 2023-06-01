@@ -67,6 +67,7 @@ void Resources::LoadFromFile()
 	m_game_textures[Gate3].loadFromFile("Gate3.png");
 	m_game_textures[Gate4].loadFromFile("Gate4.png");
 	m_game_textures[Gate5].loadFromFile("Gate5.png");
+	m_game_textures[BigFloor].loadFromFile("Bigfloor.png");
 
 
 	//game image
