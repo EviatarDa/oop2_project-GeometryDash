@@ -4,7 +4,7 @@
 
 Game::Game()
     :m_window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Geometry Dash"),
-    m_score_table(m_window)
+    m_menu(m_window)
 {
     m_window.setFramerateLimit(120);
     m_gameView.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -16,7 +16,7 @@ void Game::runMenu()
     while (m_window.isOpen())
     {
         m_window.clear(sf::Color::Color(0, 0, 0));
-        m_menu.drawMenu(this->m_window);
+        m_menu.drawMenu();
         m_window.display();
 
         if (auto event = sf::Event{}; m_window.waitEvent(event))
@@ -73,37 +73,14 @@ void Game::handleMenuClick(const sf::Vector2f location)
     }
     else if (m_menu.getButton(Help).getGlobalBounds().contains(location))
     {
+        instructions();
     }
     else if (m_menu.getButton(Box).getGlobalBounds().contains(location))
     {
     }
     else if (m_menu.getButton(Score_Table).getGlobalBounds().contains(location))
     {
-        bool click = false;
-
-        while (!click)
-        {
-            m_window.clear();
-            m_score_table.draw();
-            m_window.display();
-
-            if (auto event = sf::Event{}; m_window.waitEvent(event))
-            {
-                switch (event.type)
-                {
-                case sf::Event::MouseButtonReleased:
-                {
-                    click = true;
-                    break;
-                }
-                case sf::Event::Closed:
-                    m_window.close();
-                    break;
-                }
-
-            }
-        }
-        
+        scoreTable();
     }
 }
 
@@ -118,7 +95,6 @@ void Game::startGame()
         m_window.display();
         m_board.moveObjects();
         setView();
-
 
 
         for (auto event = sf::Event{}; m_window.pollEvent(event); )
@@ -166,3 +142,61 @@ void Game::setView()
     m_gameView.setCenter( playerX , WINDOW_HEIGHT / 2);
     m_board.viewBackground(playerX - last_pos); //make the background move with the view
 }
+
+void Game::instructions()
+{
+    int page = OhNo;
+
+    while (m_window.isOpen() && page <= DropTheMic)
+    {
+        m_window.clear();
+        m_menu.drawInstructions((MenuInstructions)page);
+        m_window.display();
+
+        if (auto event = sf::Event{}; m_window.waitEvent(event))
+        {
+            switch (event.type)
+            {
+            case sf::Event::MouseButtonReleased:
+            {
+                page++;
+                break;
+            }
+            case sf::Event::Closed:
+                m_window.close();
+                break;
+            }
+
+        }
+    }
+}
+
+void Game::scoreTable()
+{
+    bool click = false;
+
+    while (m_window.isOpen() && !click)
+    {
+        m_window.clear();
+        m_menu.drawScoreTable();
+        m_window.display();
+
+        if (auto event = sf::Event{}; m_window.waitEvent(event))
+        {
+            switch (event.type)
+            {
+            case sf::Event::MouseButtonReleased:
+            {
+                click = true;
+                break;
+            }
+            case sf::Event::Closed:
+                m_window.close();
+                break;
+            }
+
+        }
+    }
+}
+
+

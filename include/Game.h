@@ -20,7 +20,6 @@ private:
 	Resources& m_resource = Resources::instance();
 	Menu m_menu;
 	Board m_board;
-	ScoreTable m_score_table;
 	sf::View m_gameView;
 
 
@@ -29,4 +28,6 @@ private:
 	void handleMenuClick(const sf::Vector2f);
 	void startGame();
 	void setView();
+	void instructions();
+	void scoreTable();
 };

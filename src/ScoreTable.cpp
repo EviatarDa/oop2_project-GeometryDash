@@ -2,8 +2,6 @@
 
 ScoreTable::ScoreTable(sf::RenderWindow& window) : m_window(window)
 {
-    
-
     // Set up table properties
     m_table.setSize(sf::Vector2f(400.f, 300.f));
     m_table.setPosition(m_window.getSize().x / 2.f - m_table.getSize().x / 2.f,

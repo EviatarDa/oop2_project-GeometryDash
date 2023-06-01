@@ -23,6 +23,11 @@ const sf::Texture& Resources::getMenuButtons(const MenuButtons button) const
 	return m_menu_buttons[button];
 }
 
+const sf::Texture& Resources::getMenuInstructions(const MenuInstructions page) const
+{
+	return m_menu_instructions[page];
+}
+
 const sf::Texture& Resources::getGameTexture(const GameTextures texture) const
 {
 	return m_game_textures[texture];
@@ -52,6 +57,10 @@ void Resources::LoadFromFile()
 	m_menu_buttons[Help].loadFromFile("Help.png");
 	m_menu_buttons[Box].loadFromFile("Box.png");
 	m_menu_buttons[Score_Table].loadFromFile("Score_Table.png");
+
+	m_menu_instructions[OhNo].loadFromFile("OhNo.png");
+	m_menu_instructions[Instructions1].loadFromFile("Instructions1.png");
+	m_menu_instructions[DropTheMic].loadFromFile("DropTheMic.png");
 
 	//game textures
 	m_game_textures[Brick].loadFromFile("Floor.png");
