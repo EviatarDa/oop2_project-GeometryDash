@@ -2,29 +2,30 @@
 
 #include "Board.h"
 
-Board::Board()
-	:m_gravity(0.0f,9.8f), m_world(m_gravity)
+Board::Board(sf::RenderWindow& window)
+	:m_window(window), m_gravity(0.0f,9.8f), m_world(m_gravity)
 {
     m_background.setTexture(Resources::instance().getGameTexture(Level_Background));
     m_background.scale(1.6f, 1.6f);
 
-    createPlayerBox();
+    m_moving_objects.push_back(std::make_unique<Player>(m_world, PlayerBox));
+
+    //createPlayerBox();
     createLevel();
 }
 
-void Board::drawBoard(sf::RenderWindow& window)
+void Board::drawBoard()
 {
-    window.draw(m_background);
+    m_window.draw(m_background);
     for (int brick = 0; brick < m_game_floor.size(); brick++)
     {
-        window.draw(m_game_floor[brick]);
+        m_window.draw(m_game_floor[brick]);
     }
-    for (int spike = 0; spike < m_spikes.size(); spike++)
+    for (int object = 0; object < m_moving_objects.size(); object++)
     {
-        window.draw(m_spikes[spike]);
+        m_moving_objects[object]->draw(m_window);
     }
-    window.draw(m_player_box);
-
+    //window.draw(m_player_box);
 }
 
 void Board::moveObjects()
@@ -35,14 +36,14 @@ void Board::moveObjects()
     int32 positionIterations = 2; // Adjust the iterations as needed
     m_world.Step(timeStep, velocityIterations, positionIterations);
 
-    //for (int index = 0; index < m_moving_objects.size(); index++)
-    //{
-    //    m_moving_objects[index]->move();
-    //    handleCollisions(*m_moving_objects[index]);
-    //}
+    for (int index = 0; index < m_moving_objects.size(); index++)
+    {
+        m_moving_objects[index]->move();
+        //handleCollisions(*m_moving_objects[index]);
+    }
 
-    m_player_box.setPosition(SCALE * m_player_body->GetPosition().x, SCALE * m_player_body->GetPosition().y);
-    m_player_box.setRotation(m_player_body->GetAngle() * 180 / b2_pi);
+    //m_player_box.setPosition(SCALE * m_player_body->GetPosition().x, SCALE * m_player_body->GetPosition().y);
+    //m_player_box.setRotation(m_player_body->GetAngle() * 180 / b2_pi);
 }
 
 void Board::jumpPlayer()
@@ -65,7 +66,7 @@ void Board::movePlayerLeft()
 
 b2Vec2 Board::getPlayerPosition()
 {
-    return m_player_body->GetPosition();
+    return m_moving_objects[0]->getPosition();
 }
 
 void Board::viewBackground(float addition)
@@ -77,6 +78,15 @@ void Board::swapGravity()
 {
     m_gravity = -m_gravity;
     m_world.SetGravity(m_gravity);
+}
+
+void Board::updateMovingDirections()
+{
+    //update each moving object direction 
+    for (int object = 0; object < m_moving_objects.size(); ++object)
+    {
+        m_moving_objects[object]->updateDirection();
+    }
 }
 
 void Board::createPlayerBox()

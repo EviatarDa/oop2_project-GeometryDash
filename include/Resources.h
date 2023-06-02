@@ -13,6 +13,7 @@ enum GameTextures {
     Gate1, Gate2, Gate3, Gate4, Gate5, Jumper1, Jumper2, Jumper3, Jumper4, Rectangle,
 };
 enum GameMaps { Map1 };
+enum Direction { Up, Down, Right, Left, Stay };
 
 //arrays
 const int MENU_TEXTURES = 3;

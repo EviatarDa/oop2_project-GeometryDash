@@ -4,12 +4,14 @@
 #include <Box2D/Box2D.h>
 #include <vector>
 #include "Resources.h"
+#include "MovingObject.h"
+#include "Player.h"
 
 class Board
 {
 public:
-    Board();
-    void drawBoard(sf::RenderWindow&);
+    Board(sf::RenderWindow&);
+    void drawBoard();
     void moveObjects();
     void jumpPlayer();
     void movePlayerRight();
@@ -17,14 +19,16 @@ public:
     b2Vec2 getPlayerPosition();
     void viewBackground(float addition);
     void swapGravity();
+    void updateMovingDirections();
 
 
 private:
+    sf::RenderWindow& m_window;
     b2Vec2 m_gravity;
     b2World m_world;
 
     //game objects:
-    //std::vector < std::unique_ptr< MovingObject>>  m_moving_objects;
+    std::vector < std::unique_ptr< MovingObject>>  m_moving_objects;
     //std::vector < std::unique_ptr< StaticObjects>>  m_Static_objects;
 
     std::vector<sf::Sprite> m_game_floor;

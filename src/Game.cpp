@@ -4,7 +4,8 @@
 
 Game::Game()
     :m_window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Geometry Dash"),
-    m_menu(m_window)
+    m_menu(m_window),
+    m_board(m_window)
 {
     m_window.setFramerateLimit(120);
     m_gameView.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -102,13 +103,14 @@ void Game::handleMenuClick(const sf::Vector2f location)
 
 void Game::startGame()
 {
-    bool flag = true;
     while (m_window.isOpen())
     {
         m_window.clear(sf::Color::Color(0, 102, 102));
         m_window.setView(m_gameView);
-        m_board.drawBoard(this->m_window);
+        m_board.drawBoard();
         m_window.display();
+
+        m_board.updateMovingDirections();
         m_board.moveObjects();
         setView();
 
@@ -121,31 +123,32 @@ void Game::startGame()
                 m_window.close();
                 break;
 
-            case sf::Event::KeyPressed:
-            {
-                // Move player box up
-                if (flag && event.key.code == sf::Keyboard::Space)
-                {
-                    flag = false;
-                    m_board.jumpPlayer();
-                }
-                if (event.key.code == sf::Keyboard::Right)
-                {
-                    m_board.movePlayerRight();
-                }
-                if (event.key.code == sf::Keyboard::Left)
-                {
-                    m_board.movePlayerLeft();
-                }
-                if (event.key.code == sf::Keyboard::Up)
-                {
-                    m_board.swapGravity();
+            //case sf::Event::KeyPressed:
+            //{
+            //    // Move player box up
+            //    if (flag && event.key.code == sf::Keyboard::Space)
+            //    {
+            //        flag = false;
+            //        m_board.jumpPlayer();
+            //    }
+            //    if (event.key.code == sf::Keyboard::Right)
+            //    {
+            //        m_board.movePlayerRight();
+            //    }
+            //    if (event.key.code == sf::Keyboard::Left)
+            //    {
+            //        m_board.movePlayerLeft();
+            //    }
+            //    if (event.key.code == sf::Keyboard::Up)
+            //    {
+            //        m_board.swapGravity();
 
-                }
-                break;
-            }
+            //    }
+            //    break;
+            //}
             case sf::Event::KeyReleased:
-                flag = true;
+            {
+            }
             }
 
         }
