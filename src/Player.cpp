@@ -2,6 +2,7 @@
 
 #include "Player.h"
 
+
 Player::Player(b2World& world, GameTextures texture)
 	:MovingObject(world, texture)
 {
@@ -13,8 +14,10 @@ void Player::move()
     {
     case Up:
     {
-        m_object_body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -JUMP_FORCE), true);
-        m_grounded = false;
+        if(true)//to change
+        {
+            m_object_body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -JUMP_FORCE), true);
+        }
         break;
     }
     case Right:
@@ -32,8 +35,11 @@ void Player::move()
     }
 
     case Stay:
-        //m_object_body->SetLinearVelocity({ 0, 0});
+    {
+        float currentSpeed_y = m_object_body->GetLinearVelocity().y;
+        m_object_body->SetLinearVelocity({ 0, currentSpeed_y });
         break;
+    }
 
     default:
         break;
@@ -53,13 +59,12 @@ void Player::updateDirection()
     {
         m_direction = Right;
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && m_grounded)
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
         m_direction = Up;
     }
     else
     {
         m_direction = Stay;
-        m_grounded = true;
     }
 }

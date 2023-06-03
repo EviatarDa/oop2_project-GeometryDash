@@ -21,7 +21,6 @@ public:
 
 private:
     Direction m_direction = Stay;
-    bool m_grounded = true;
     //std::unique_ptr <PlayerState> m_state;
 
 };

@@ -28,6 +28,7 @@ MovingObject::MovingObject(b2World& world, GameTextures texture)
     m_object_body = body;
 }
 
+
 void MovingObject::draw(sf::RenderWindow& window)
 {
     window.draw(m_object);
