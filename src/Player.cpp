@@ -4,46 +4,14 @@
 
 
 Player::Player(b2World& world, GameTextures texture)
-	:MovingObject(world, texture)
+	:MovingObject(world, texture),
+     m_state(std::make_unique<BoxState>())
 {
 }
 
 void Player::move()
 {
-    switch (m_direction)
-    {
-    case Up:
-    {
-        if(true)//to change
-        {
-            m_object_body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -JUMP_FORCE), true);
-        }
-        break;
-    }
-    case Right:
-    {
-        float currentSpeed_y = m_object_body->GetLinearVelocity().y;
-        m_object_body->SetLinearVelocity({ MOVEMENT_SPEED, currentSpeed_y });
-        break;
-    }
-
-    case Left:
-    {
-        float currentSpeed_y = m_object_body->GetLinearVelocity().y;
-        m_object_body->SetLinearVelocity({ -MOVEMENT_SPEED, currentSpeed_y });
-        break;
-    }
-
-    case Stay:
-    {
-        float currentSpeed_y = m_object_body->GetLinearVelocity().y;
-        m_object_body->SetLinearVelocity({ 0, currentSpeed_y });
-        break;
-    }
-
-    default:
-        break;
-    }
+    m_state->move(m_direction, m_object_body);
 
     m_object.setPosition(SCALE * m_object_body->GetPosition().x, SCALE * m_object_body->GetPosition().y);
     m_object.setRotation(m_object_body->GetAngle() * 180 / b2_pi);
@@ -67,4 +35,18 @@ void Player::updateDirection()
     {
         m_direction = Stay;
     }
+}
+
+void Player::shipState()
+{
+    //to change
+    m_object.setTexture(Resources::instance().getGameTexture(PlayerShip));
+    m_state.reset(new ShipState());
+}
+
+void Player::boxState()
+{
+    //to change
+    m_object.setTexture(Resources::instance().getGameTexture(PlayerBox));
+    m_state.reset(new BoxState());
 }

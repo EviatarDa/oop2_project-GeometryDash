@@ -30,7 +30,7 @@ const int WINDOW_WIDTH = 1400;
 
 //physics
 const float SCALE = 30.f;
-const float JUMP_FORCE = 25.f;
+const float JUMP_FORCE = 0.7f;// 25.f;
 const float MOVEMENT_SPEED = 7;
 
 //game object by color

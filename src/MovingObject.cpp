@@ -3,6 +3,7 @@
 #include "MovingObject.h"
 
 MovingObject::MovingObject(b2World& world, GameTextures texture)
+    :m_world(world)
 {
     //grafics
     m_object.setTexture(Resources::instance().getGameTexture(texture));
@@ -15,7 +16,7 @@ MovingObject::MovingObject(b2World& world, GameTextures texture)
     bodyDef.position.Set(m_object.getPosition().x / SCALE, m_object.getPosition().y / SCALE);
     bodyDef.type = b2_dynamicBody; // Set the body type to dynamic
 
-    b2Body* body = world.CreateBody(&bodyDef);
+    m_object_body = world.CreateBody(&bodyDef);
     b2PolygonShape shape;
     sf::Vector2u boxSize = Resources::instance().getGameTexture(texture).getSize();
     shape.SetAsBox(boxSize.x / 2.0f / SCALE, boxSize.y / 2.0f / SCALE);
@@ -23,9 +24,12 @@ MovingObject::MovingObject(b2World& world, GameTextures texture)
     fixtureDef.shape = &shape;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
-    body->CreateFixture(&fixtureDef);
+    m_object_body->CreateFixture(&fixtureDef);
 
-    m_object_body = body;
+}
+
+MovingObject::~MovingObject()
+{
 }
 
 

@@ -9,7 +9,6 @@ Board::Board(sf::RenderWindow& window)
     m_background.scale(1.6f, 1.6f);
 
     m_moving_objects.push_back(std::make_unique<Player>(m_world, PlayerBox));
-
     //createPlayerBox();
     createLevel();
 }
@@ -46,22 +45,22 @@ void Board::moveObjects()
     //m_player_box.setRotation(m_player_body->GetAngle() * 180 / b2_pi);
 }
 
-void Board::jumpPlayer()
-{
-    m_player_body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -JUMP_FORCE), true);
-}
-
-void Board::movePlayerRight()
-{
-    float currentSpeed_y = m_player_body->GetLinearVelocity().y;
-    m_player_body->SetLinearVelocity({ MOVEMENT_SPEED, currentSpeed_y });
-}
-
-void Board::movePlayerLeft()
-{
-    float currentSpeed_y = m_player_body->GetLinearVelocity().y;
-    m_player_body->SetLinearVelocity({ -MOVEMENT_SPEED, currentSpeed_y });
-}
+//void Board::jumpPlayer()
+//{
+//    m_player_body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -JUMP_FORCE), true);
+//}
+//
+//void Board::movePlayerRight()
+//{
+//    float currentSpeed_y = m_player_body->GetLinearVelocity().y;
+//    m_player_body->SetLinearVelocity({ MOVEMENT_SPEED, currentSpeed_y });
+//}
+//
+//void Board::movePlayerLeft()
+//{
+//    float currentSpeed_y = m_player_body->GetLinearVelocity().y;
+//    m_player_body->SetLinearVelocity({ -MOVEMENT_SPEED, currentSpeed_y });
+//}
 
 
 b2Vec2 Board::getPlayerPosition()
@@ -89,30 +88,30 @@ void Board::updateMovingDirections()
     }
 }
 
-void Board::createPlayerBox()
-{
-    m_player_box.setTexture(Resources::instance().getGameTexture(PlayerBox));
-    sf::Vector2f spriteSize(m_player_box.getTextureRect().width, m_player_box.getTextureRect().height);
-    m_player_box.setOrigin(spriteSize.x / 2, spriteSize.y / 2);
-    m_player_box.setPosition(WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2);
-   
-
-    b2BodyDef bodyDef;
-    bodyDef.position.Set(m_player_box.getPosition().x / SCALE, m_player_box.getPosition().y / SCALE); 
-    bodyDef.type = b2_dynamicBody; // Set the body type to dynamic
-
-    b2Body* body = m_world.CreateBody(&bodyDef);
-    b2PolygonShape shape;
-    sf::Vector2u boxSize = Resources::instance().getGameTexture(PlayerBox).getSize();
-    shape.SetAsBox(boxSize.x / 2.0f / SCALE, boxSize.y / 2.0f / SCALE);
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &shape;
-    fixtureDef.density = 1.0f; 
-    fixtureDef.friction = 0.3f;
-    body->CreateFixture(&fixtureDef);
-
-    m_player_body = body;
-}
+//void Board::createPlayerBox()
+//{
+//    m_player_box.setTexture(Resources::instance().getGameTexture(PlayerBox));
+//    sf::Vector2f spriteSize(m_player_box.getTextureRect().width, m_player_box.getTextureRect().height);
+//    m_player_box.setOrigin(spriteSize.x / 2, spriteSize.y / 2);
+//    m_player_box.setPosition(WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2);
+//   
+//
+//    b2BodyDef bodyDef;
+//    bodyDef.position.Set(m_player_box.getPosition().x / SCALE, m_player_box.getPosition().y / SCALE); 
+//    bodyDef.type = b2_dynamicBody; // Set the body type to dynamic
+//
+//    b2Body* body = m_world.CreateBody(&bodyDef);
+//    b2PolygonShape shape;
+//    sf::Vector2u boxSize = Resources::instance().getGameTexture(PlayerBox).getSize();
+//    shape.SetAsBox(boxSize.x / 2.0f / SCALE, boxSize.y / 2.0f / SCALE);
+//    b2FixtureDef fixtureDef;
+//    fixtureDef.shape = &shape;
+//    fixtureDef.density = 1.0f; 
+//    fixtureDef.friction = 0.3f;
+//    body->CreateFixture(&fixtureDef);
+//
+//    m_player_body = body;
+//}
 
 void Board::createLevel()
 {

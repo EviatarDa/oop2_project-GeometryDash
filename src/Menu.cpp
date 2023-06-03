@@ -3,7 +3,7 @@
 #include "Menu.h"
 
 Menu::Menu(sf::RenderWindow& window)
-	:m_window(window), m_score_teble(window)
+	:m_window(window), m_score_teble(window), m_box_ship(BoxShip1)
 {
 	m_background.setTexture(Resources::instance().getMenuTexture(Menu_Background));
 	m_background.scale(1.6f, 1.6f);
@@ -100,6 +100,16 @@ void Menu::drawBoxShips()
 		m_window.draw(m_box_ships[box_ship]);
 		m_window.draw(m_box_ships_rect[box_ship]);
 	}
+}
+
+MenuBoxShips Menu::getChoosenBoxShip()
+{
+	return m_box_ship;
+}
+
+void Menu::chooseBoxShip(MenuBoxShips box_ship)
+{
+	m_box_ship = box_ship;
 }
 
 void Menu::locateObjects()

@@ -22,11 +22,11 @@ private:
 	Board m_board;
 	sf::View m_gameView;
 
-
 	//functions
 	void handleMenuMouseMoved(const sf::Vector2f);
 	void handleBoxShipMouseMoved(const sf::Vector2f);
 	void handleMenuClick(const sf::Vector2f);
+	void handleBoxShipPageClick(const sf::Vector2f);
 	void startGame();
 	void setView();
 	void instructions();

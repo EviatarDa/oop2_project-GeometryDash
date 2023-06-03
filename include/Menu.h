@@ -22,6 +22,8 @@ public:
 	void drawScoreTable();
 	void drawBoxShips();
 
+	MenuBoxShips getChoosenBoxShip();
+	void chooseBoxShip(MenuBoxShips);
 
 private:
 
@@ -37,6 +39,8 @@ private:
 	sf::Sprite m_instructions[MENU_INSTRUCTIONS];
 	sf::Sprite m_box_ships[MENU_BOX_SHIPS];
 	sf::RectangleShape m_box_ships_rect[MENU_BOX_SHIPS];
+
+	MenuBoxShips m_box_ship;
 
 	void locateObjects();
 

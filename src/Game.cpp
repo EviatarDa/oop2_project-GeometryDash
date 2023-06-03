@@ -101,6 +101,17 @@ void Game::handleMenuClick(const sf::Vector2f location)
     }
 }
 
+void Game::handleBoxShipPageClick(const sf::Vector2f location)
+{
+    for (int box_ship = BoxShip1; box_ship < MENU_BOX_SHIPS; box_ship++)
+    {
+        if (m_menu.getBoxShip((MenuBoxShips)box_ship).getGlobalBounds().contains(location))
+        {
+            m_menu.chooseBoxShip((MenuBoxShips)box_ship);
+        }
+    }
+}
+
 void Game::startGame()
 {
     while (m_window.isOpen())
@@ -239,6 +250,9 @@ void Game::chooseBoxShip()
             {
             case sf::Event::MouseButtonReleased:
             {
+                auto location = m_window.mapPixelToCoords(
+                    { event.mouseButton.x, event.mouseButton.y });
+                handleBoxShipPageClick(location);
                 click = true;
                 break;
             }
