@@ -30,6 +30,7 @@ MovingObject::MovingObject(b2World& world, GameTextures texture)
 
 MovingObject::~MovingObject()
 {
+    //m_world.DestroyBody(m_object_body);
 }
 
 

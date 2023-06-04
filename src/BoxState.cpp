@@ -8,7 +8,7 @@ void BoxState::move(Direction direction, b2Body* body)
     {
         if (true)//to change
         {
-            body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -JUMP_FORCE), true);
+            body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -BOX_JUMP_FORCE), true);
         }
         break;
     }
@@ -18,7 +18,6 @@ void BoxState::move(Direction direction, b2Body* body)
         body->SetLinearVelocity({ MOVEMENT_SPEED, currentSpeed_y });
         break;
     }
-
     case Left:
     {
         float currentSpeed_y = body->GetLinearVelocity().y;
