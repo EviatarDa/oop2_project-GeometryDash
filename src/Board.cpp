@@ -123,72 +123,44 @@ void Board::createLevel()
         {
             if (source.getPixel(x, y) == Red)
             {
-                sf::Vector2u spike_size = Resources::instance().getGameTexture(Spike1).getSize();
-                sf::Sprite spike;
-                spike.setOrigin(spike_size.x / 2, spike_size.y / 2);
-                spike.setTexture(Resources::instance().getGameTexture(Spike1));
-                spike.setPosition(50 * x+25, 50 * y+25);
+                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Spike1);
         
-                m_game_floor.push_back(spike);
+                m_game_floor.push_back(result.first);
                 //createPhysicalBody(spike, spike_size);
             }
             else if ((source.getPixel(x, y) == Black))
             {
-                sf::Vector2u brick_size = Resources::instance().getGameTexture(Brick).getSize();
-                sf::Sprite brick;
-                brick.setTexture(Resources::instance().getGameTexture(Brick));
-                brick.setOrigin(brick_size.x / 2, brick_size.y / 2);
-                brick.setPosition(50 * x + 25, 50 * y + 25);
-                m_game_floor.push_back(brick);
-                createPhysicalBody(brick, brick_size);
+                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Brick);
+                m_game_floor.push_back(result.first);
+                createPhysicalBody(result.first, result.second);
             }
             else if ((source.getPixel(x, y) == Grey))
             {
-                sf::Vector2u cube_cube_size = Resources::instance().getGameTexture(CubeCube).getSize();
-                sf::Sprite cube_cube;
-                cube_cube.setTexture(Resources::instance().getGameTexture(CubeCube));
-                cube_cube.setOrigin(cube_cube_size.x / 2, cube_cube_size.y / 2);
-                cube_cube.setPosition(50 * x + 25, 50 * y + 25);
-                m_game_floor.push_back(cube_cube);
-                createPhysicalBody(cube_cube, cube_cube_size);
+                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, CubeCube);
+                m_game_floor.push_back(result.first);
+                createPhysicalBody(result.first, result.second);
             }
             else if ((source.getPixel(x, y) == Blue))
             {
-                sf::Vector2u cube1_size = Resources::instance().getGameTexture(Cube1).getSize();
-                sf::Sprite cube1;
-                cube1.setTexture(Resources::instance().getGameTexture(Cube1));
-                cube1.setOrigin(cube1_size.x / 2, cube1_size.y / 2);
-                cube1.setPosition(50 * x + 25, 50 * y + 25);
-                m_game_floor.push_back(cube1);
-                createPhysicalBody(cube1, cube1_size);
+                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Cube1);
+                m_game_floor.push_back(result.first);
+                createPhysicalBody(result.first, result.second);
             }
             else if ((source.getPixel(x, y) == Cyan))
             {
-                sf::Vector2u cube2_size = Resources::instance().getGameTexture(Cube2).getSize();
-                sf::Sprite cube2;
-                cube2.setTexture(Resources::instance().getGameTexture(Cube2));
-                cube2.setOrigin(cube2_size.x / 2, cube2_size.y / 2);
-                cube2.setPosition(50 * x + 25, 50 * y + 25);
-                m_game_floor.push_back(cube2);
-                createPhysicalBody(cube2, cube2_size);
+                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Cube2);
+                m_game_floor.push_back(result.first);
+                createPhysicalBody(result.first, result.second);
             }
             else if ((source.getPixel(x, y) == Yellow))
             {
-                sf::Vector2u coin_size = Resources::instance().getGameTexture(Coin).getSize();
-                sf::Sprite coin;
-                coin.setTexture(Resources::instance().getGameTexture(Coin));
-                coin.setOrigin(coin_size.x / 2, coin_size.y / 2);
-                coin.setPosition(50 * x + 25, 50 * y + 25);
-                m_game_floor.push_back(coin);
+                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Coin);
+                m_game_floor.push_back(result.first);
             }
             else if ((source.getPixel(x, y) == Orange))
             {
-                sf::Vector2u gate_size = Resources::instance().getGameTexture(Gate1).getSize();
-                sf::Sprite gate;
-                gate.setTexture(Resources::instance().getGameTexture(Gate1));
-                gate.setOrigin(gate_size.x / 2, gate_size.y / 2);
-                gate.setPosition(50 * x + 25, 50 * y + 25);
-                m_game_floor.push_back(gate);
+                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Gate1);
+                m_game_floor.push_back(result.first);
                // createPhysicalBody(gate, gate_size);
             }
         }
@@ -209,6 +181,18 @@ void Board::createPhysicalBody(const sf::Sprite& sprite, const sf::Vector2u spri
     body->CreateFixture(&fixtureDef);
 
     m_floor_bodies.push_back(body);
+}
+
+std::pair<sf::Sprite, sf::Vector2u> Board::createSprite(const int x,const int y,const GameTextures texture)
+{
+    sf::Vector2u object_size = Resources::instance().getGameTexture(CubeCube).getSize();
+
+    sf::Sprite sprite;
+    sprite.setTexture(Resources::instance().getGameTexture(texture));
+    sprite.setOrigin(object_size.x / 2, object_size.y / 2);
+    sprite.setPosition(50 * x + 25, 50 * y + 25);
+
+    return std::make_pair(sprite, object_size);
 }
 
 

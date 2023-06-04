@@ -46,4 +46,5 @@ private:
     //void createPlayerBox();
     void createLevel();
     void createPhysicalBody(const sf::Sprite&, const sf::Vector2u);
+    std::pair<sf::Sprite, sf::Vector2u> createSprite( const int,  const int,  const GameTextures);
 };
