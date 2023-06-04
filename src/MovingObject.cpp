@@ -30,7 +30,11 @@ MovingObject::MovingObject(b2World& world, GameTextures texture)
 
 MovingObject::~MovingObject()
 {
-    //m_world.DestroyBody(m_object_body);
+    if (m_object_body != nullptr)
+    {
+        m_world.DestroyBody(m_object_body);
+        m_object_body = nullptr; // Reset the pointer to null
+    }
 }
 
 

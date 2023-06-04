@@ -12,6 +12,7 @@ Board::Board(sf::RenderWindow& window)
     createLevel();
 }
 
+
 void Board::drawBoard()
 {
     m_window.draw(m_background);

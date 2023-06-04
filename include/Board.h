@@ -13,9 +13,6 @@ public:
     Board(sf::RenderWindow&);
     void drawBoard();
     void moveObjects();
-    //void jumpPlayer();
-    //void movePlayerRight();
-    //void movePlayerLeft();
     b2Vec2 getPlayerPosition();
     void viewBackground(float addition);
     void swapGravity();
@@ -32,18 +29,14 @@ private:
     //std::vector < std::unique_ptr< StaticObjects>>  m_Static_objects;
 
     std::vector<sf::Sprite> m_game_floor;
-    //std::vector<sf::Sprite> m_spikes;
 
     std::vector<b2Body*> m_floor_bodies;
-    //std::vector<b2Body*> m_spikes_bodies;
 
     sf::Sprite m_player_box;
     b2Body* m_player_body;
 
     sf::Sprite m_background;
 
-    //void createFloor(int, GameTextures);
-    //void createPlayerBox();
     void createLevel();
     void createPhysicalBody(const sf::Sprite&, const sf::Vector2u);
     std::pair<sf::Sprite, sf::Vector2u> createSprite( const int,  const int,  const GameTextures);
