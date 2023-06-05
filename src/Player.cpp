@@ -51,6 +51,7 @@ void Player::boxState()
     m_state.reset(new BoxState());
 }
 
+
 void Player::changeBodyAndSprite(GameTextures game_texture)
 {
     m_object.setTexture(Resources::instance().getGameTexture(game_texture), true);

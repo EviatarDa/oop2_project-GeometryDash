@@ -18,7 +18,6 @@ public:
 	b2Body* getBody()const;
 
 protected:
-	//b2World& m_world;
 	sf::Sprite m_object;
 	b2Body* m_object_body;
 

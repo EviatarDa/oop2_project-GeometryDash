@@ -133,39 +133,13 @@ void Game::startGame()
             case sf::Event::Closed:
                 m_window.close();
                 break;
-
-            //case sf::Event::KeyPressed:
-            //{
-            //    // Move player box up
-            //    if (flag && event.key.code == sf::Keyboard::Space)
-            //    {
-            //        flag = false;
-            //        m_board.jumpPlayer();
-            //    }
-            //    if (event.key.code == sf::Keyboard::Right)
-            //    {
-            //        m_board.movePlayerRight();
-            //    }
-            //    if (event.key.code == sf::Keyboard::Left)
-            //    {
-            //        m_board.movePlayerLeft();
-            //    }
-            //    if (event.key.code == sf::Keyboard::Up)
-            //    {
-            //        m_board.swapGravity();
-
-            //    }
-            //    break;
-            //}
             case sf::Event::KeyReleased:
             {
+                break;
             }
             }
 
         }
-
-        //m_board.updateDirections();
-        //m_board.moveObjects();
     }
 }
 
@@ -253,6 +227,7 @@ void Game::chooseBoxShip()
                 auto location = m_window.mapPixelToCoords(
                     { event.mouseButton.x, event.mouseButton.y });
                 handleBoxShipPageClick(location);
+                m_board.changeBoxShip(m_menu.getPlayerTextures());
                 click = true;
                 break;
             }

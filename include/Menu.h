@@ -22,7 +22,6 @@ public:
 	void drawScoreTable();
 	void drawBoxShips();
 
-	MenuBoxShips getChoosenBoxShip();
 	std::pair<GameTextures, GameTextures> getPlayerTextures();
 	void chooseBoxShip(MenuBoxShips);
 
@@ -40,6 +39,7 @@ private:
 	sf::Sprite m_instructions[MENU_INSTRUCTIONS];
 	sf::Sprite m_box_ships[MENU_BOX_SHIPS];
 	sf::RectangleShape m_box_ships_rect[MENU_BOX_SHIPS];
+	sf::Text m_box_ship_text;
 
 	MenuBoxShips m_box_ship;
 

@@ -36,6 +36,14 @@ Menu::Menu(sf::RenderWindow& window)
 		m_box_ships_rect[box_ship].setOutlineColor(sf::Color::Color(255, 255, 255, 0));
 		m_box_ships_rect[box_ship].setOutlineThickness(2.f);
 	}
+
+	m_box_ship_text.setFont(Resources::instance().getFont());
+	m_box_ship_text.setCharacterSize(104);
+	m_box_ship_text.setOutlineThickness(2);
+	m_box_ship_text.setOutlineColor(sf::Color::Red);
+	m_box_ship_text.setString("Choose Your Player:");
+	
+
 	locateObjects();
 }
 
@@ -100,12 +108,9 @@ void Menu::drawBoxShips()
 		m_window.draw(m_box_ships[box_ship]);
 		m_window.draw(m_box_ships_rect[box_ship]);
 	}
+	m_window.draw(m_box_ship_text);
 }
 
-MenuBoxShips Menu::getChoosenBoxShip()
-{
-	return m_box_ship;
-}
 
 std::pair<GameTextures, GameTextures> Menu::getPlayerTextures()
 {
@@ -193,4 +198,6 @@ void Menu::locateObjects()
 			m_box_ships[box_ship].getGlobalBounds().top));
 	}
 
+	m_box_ship_text.setPosition(sf::Vector2f(WINDOW_WIDTH/2 - m_box_ship_text.getLocalBounds().width/2,
+		WINDOW_HEIGHT*0.15));
 }

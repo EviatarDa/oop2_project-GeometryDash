@@ -8,7 +8,6 @@ Board::Board(sf::RenderWindow& window, std::pair<GameTextures, GameTextures> pla
     m_background.setTexture(Resources::instance().getGameTexture(Level_Background));
     m_background.scale(1.6f, 1.6f);
 
-    m_moving_objects.push_back(std::make_unique<Player>(m_world, m_player_textures));
     createLevel();
 }
 
@@ -31,7 +30,6 @@ void Board::drawBoard()
     {
         m_moving_objects[object]->draw(m_window);
     }
-    //window.draw(m_player_box);
 }
 
 void Board::moveObjects()
@@ -76,11 +74,23 @@ void Board::updateMovingDirections()
     }
 }
 
+void Board::changeBoxShip(std::pair<GameTextures, GameTextures> player_textures)
+{
+    //delete the old player body
+    if (m_moving_objects[0]->getBody() != nullptr)
+        m_world.DestroyBody(m_moving_objects[0]->getBody());
+
+    //create the new player
+    m_player_textures = player_textures;
+    m_moving_objects[0] = std::make_unique<Player>(m_world, m_player_textures);
+}
+
 
 void Board::createLevel()
 {
-    const sf::Image& source = Resources::instance().getGameMaps(Map1);
+    m_moving_objects.push_back(std::make_unique<Player>(m_world, m_player_textures));
 
+    const sf::Image& source = Resources::instance().getGameMaps(Map1);
     for (size_t y = 0; y < source.getSize().y; ++y)
     {
         for (size_t x = 0; x < source.getSize().x; ++x)
@@ -90,7 +100,6 @@ void Board::createLevel()
                 std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Spike1);
         
                 m_game_floor.push_back(result.first);
-                //createPhysicalBody(spike, spike_size);
             }
             else if ((source.getPixel(x, y) == Black))
             {
@@ -125,7 +134,6 @@ void Board::createLevel()
             {
                 std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Gate1);
                 m_game_floor.push_back(result.first);
-               // createPhysicalBody(gate, gate_size);
             }
         }
 

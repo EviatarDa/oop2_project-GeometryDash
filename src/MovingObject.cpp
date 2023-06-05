@@ -3,7 +3,6 @@
 #include "MovingObject.h"
 
 MovingObject::MovingObject(b2World& world, GameTextures texture)
-    //:m_world(world)
 {
     //grafics
     m_object.setTexture(Resources::instance().getGameTexture(texture));
