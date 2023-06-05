@@ -10,7 +10,7 @@
 class Board
 {
 public:
-    Board(sf::RenderWindow&);
+    Board(sf::RenderWindow&, std::pair<GameTextures, GameTextures>);
     ~Board();
     void drawBoard();
     void moveObjects();
@@ -18,6 +18,7 @@ public:
     void viewBackground(float addition);
     void swapGravity();
     void updateMovingDirections();
+    
 
 
 private:
@@ -37,6 +38,7 @@ private:
     b2Body* m_player_body;
 
     sf::Sprite m_background;
+    std::pair<GameTextures, GameTextures> m_player_textures;
 
     void createLevel();
     void createPhysicalBody(const sf::Sprite&, const sf::Vector2u);

@@ -23,6 +23,7 @@ public:
 	void drawBoxShips();
 
 	MenuBoxShips getChoosenBoxShip();
+	std::pair<GameTextures, GameTextures> getPlayerTextures();
 	void chooseBoxShip(MenuBoxShips);
 
 private:

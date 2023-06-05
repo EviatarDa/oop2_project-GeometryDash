@@ -2,13 +2,13 @@
 
 #include "Board.h"
 
-Board::Board(sf::RenderWindow& window)
-	:m_window(window), m_gravity(0.0f,9.8f), m_world(m_gravity)
+Board::Board(sf::RenderWindow& window, std::pair<GameTextures, GameTextures> player_texture)
+	:m_window(window), m_gravity(0.0f,9.8f), m_world(m_gravity), m_player_textures(player_texture)
 {
     m_background.setTexture(Resources::instance().getGameTexture(Level_Background));
     m_background.scale(1.6f, 1.6f);
 
-    m_moving_objects.push_back(std::make_unique<Player>(m_world, PlayerBox));
+    m_moving_objects.push_back(std::make_unique<Player>(m_world, m_player_textures));
     createLevel();
 }
 

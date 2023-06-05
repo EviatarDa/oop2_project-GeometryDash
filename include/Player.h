@@ -12,7 +12,7 @@
 class Player : public MovingObject
 {
 public:
-    Player(b2World&, GameTextures);
+    Player(b2World&, std::pair<GameTextures, GameTextures>);
     void move();
     void updateDirection();
     void shipState();
@@ -22,5 +22,9 @@ public:
 private:
     Direction m_direction = Stay;
     std::unique_ptr <PlayerState> m_state;
+    std::pair<GameTextures, GameTextures> m_player_textures;
+
+    void changeBodyAndSprite(GameTextures);
+
 
 };

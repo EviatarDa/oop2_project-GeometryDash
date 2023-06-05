@@ -107,6 +107,36 @@ MenuBoxShips Menu::getChoosenBoxShip()
 	return m_box_ship;
 }
 
+std::pair<GameTextures, GameTextures> Menu::getPlayerTextures()
+{
+	switch (m_box_ship)
+	{
+	case BoxShip1:
+		return std::pair<GameTextures, GameTextures>(PlayerBox1, PlayerShip1);
+		break;
+
+	case BoxShip2:
+		return std::pair<GameTextures, GameTextures>(PlayerBox2, PlayerShip2);
+		break;
+
+	case BoxShip3:
+		return std::pair<GameTextures, GameTextures>(PlayerBox3, PlayerShip3);
+		break;
+
+	case BoxShip4:
+		return std::pair<GameTextures, GameTextures>(PlayerBox4, PlayerShip4);
+		break;
+
+	case BoxShip5:
+		return std::pair<GameTextures, GameTextures>(PlayerBox5, PlayerShip5);
+		break;
+
+	case BoxShip6:
+		return std::pair<GameTextures, GameTextures>(PlayerBox6, PlayerShip6);
+		break;
+	}
+}
+
 void Menu::chooseBoxShip(MenuBoxShips box_ship)
 {
 	m_box_ship = box_ship;

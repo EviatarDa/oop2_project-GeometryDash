@@ -78,8 +78,18 @@ void Resources::LoadFromFile()
 	//game textures
 	m_game_textures[Brick].loadFromFile("Floor.png");
 	m_game_textures[Level_Background].loadFromFile("Menu_Backgound.png");
-	m_game_textures[PlayerBox].loadFromFile("PlayerBox.png");
-	m_game_textures[PlayerShip].loadFromFile("PlayerShip.png");
+	m_game_textures[PlayerBox1].loadFromFile("PlayerBox1.png");
+	m_game_textures[PlayerBox2].loadFromFile("PlayerBox2.png");
+	m_game_textures[PlayerBox3].loadFromFile("PlayerBox3.png");
+	m_game_textures[PlayerBox4].loadFromFile("PlayerBox4.png");
+	m_game_textures[PlayerBox5].loadFromFile("PlayerBox5.png");
+	m_game_textures[PlayerBox6].loadFromFile("PlayerBox6.png");
+	m_game_textures[PlayerShip1].loadFromFile("PlayerShip1.png");
+	m_game_textures[PlayerShip2].loadFromFile("PlayerShip2.png");
+	m_game_textures[PlayerShip3].loadFromFile("PlayerShip3.png");
+	m_game_textures[PlayerShip4].loadFromFile("PlayerShip4.png");
+	m_game_textures[PlayerShip5].loadFromFile("PlayerShip5.png");
+	m_game_textures[PlayerShip6].loadFromFile("PlayerShip6.png");
 	m_game_textures[Spike1].loadFromFile("Spike1.png");
 	m_game_textures[Spike2].loadFromFile("Spike2.png");
 	m_game_textures[Spikes].loadFromFile("Spikes.png");

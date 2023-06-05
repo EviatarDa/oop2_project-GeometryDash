@@ -3,11 +3,12 @@
 #include "Player.h"
 
 
-Player::Player(b2World& world, GameTextures texture)
-	:MovingObject(world, texture),
+Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures)
+	: m_player_textures(textures),
+     MovingObject(world, textures.first),
      m_state(std::make_unique<BoxState>())
 {
-    shipState();
+    //shipState();
 }
 
 void Player::move()
@@ -40,13 +41,25 @@ void Player::updateDirection()
 
 void Player::shipState()
 {
-    m_object.setTexture(Resources::instance().getGameTexture(PlayerShip), true);
+    changeBodyAndSprite(m_player_textures.second);
+    m_state.reset(new ShipState());
+}
+
+void Player::boxState()
+{
+    changeBodyAndSprite(m_player_textures.first);
+    m_state.reset(new BoxState());
+}
+
+void Player::changeBodyAndSprite(GameTextures game_texture)
+{
+    m_object.setTexture(Resources::instance().getGameTexture(game_texture), true);
     sf::Vector2f spriteSize(m_object.getTextureRect().width, m_object.getTextureRect().height);
     m_object.setOrigin(spriteSize.x / 2, spriteSize.y / 2);
 
     //create new shape
     b2PolygonShape shape;
-    sf::Vector2u boxSize = Resources::instance().getGameTexture(PlayerShip).getSize();
+    sf::Vector2u boxSize = Resources::instance().getGameTexture(game_texture).getSize();
     shape.SetAsBox(boxSize.x / 2.0f / SCALE, boxSize.y / 2.0f / SCALE);
 
     //distroy the old fixture
@@ -59,13 +72,4 @@ void Player::shipState()
     fixtureDef.friction = 0.3f;
 
     m_object_body->CreateFixture(&fixtureDef);
-
-    m_state.reset(new ShipState());
-}
-
-void Player::boxState()
-{
-    //to change
-    m_object.setTexture(Resources::instance().getGameTexture(PlayerBox));
-    m_state.reset(new BoxState());
 }
