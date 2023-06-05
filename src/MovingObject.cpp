@@ -3,7 +3,7 @@
 #include "MovingObject.h"
 
 MovingObject::MovingObject(b2World& world, GameTextures texture)
-    :m_world(world)
+    //:m_world(world)
 {
     //grafics
     m_object.setTexture(Resources::instance().getGameTexture(texture));
@@ -30,11 +30,7 @@ MovingObject::MovingObject(b2World& world, GameTextures texture)
 
 MovingObject::~MovingObject()
 {
-    if (m_object_body != nullptr)
-    {
-        m_world.DestroyBody(m_object_body);
-        m_object_body = nullptr; // Reset the pointer to null
-    }
+    m_object_body = nullptr; // Reset the pointer to null
 }
 
 
@@ -46,4 +42,9 @@ void MovingObject::draw(sf::RenderWindow& window)
 b2Vec2 MovingObject::getPosition()
 {
     return m_object_body->GetPosition();
+}
+
+b2Body* MovingObject::getBody()const
+{
+    return m_object_body;
 }

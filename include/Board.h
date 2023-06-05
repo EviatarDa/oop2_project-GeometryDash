@@ -11,6 +11,7 @@ class Board
 {
 public:
     Board(sf::RenderWindow&);
+    ~Board();
     void drawBoard();
     void moveObjects();
     b2Vec2 getPlayerPosition();

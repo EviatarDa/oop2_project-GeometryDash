@@ -12,6 +12,13 @@ Board::Board(sf::RenderWindow& window)
     createLevel();
 }
 
+Board::~Board()
+{
+    for (auto& object : m_moving_objects)
+        if (object->getBody() != nullptr)
+            m_world.DestroyBody(object->getBody());
+}
+
 
 void Board::drawBoard()
 {

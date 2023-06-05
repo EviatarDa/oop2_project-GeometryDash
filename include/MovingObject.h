@@ -9,14 +9,16 @@ class MovingObject
 {
 public:
 	MovingObject(b2World&, GameTextures);
-	~MovingObject();
+	virtual ~MovingObject();
 	void draw(sf::RenderWindow&);
 	b2Vec2 getPosition();
 	virtual void updateDirection() = 0;
 	virtual void move() = 0;
 
+	b2Body* getBody()const;
+
 protected:
-	b2World& m_world;
+	//b2World& m_world;
 	sf::Sprite m_object;
 	b2Body* m_object_body;
 
