@@ -8,7 +8,7 @@ Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures)
      MovingObject(world, textures.first),
      m_state(std::make_unique<BoxState>())
 {
-    //shipState();
+    shipState();
 }
 
 void Player::move()
