@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Board.h"
+class Brick;
 
 Board::Board(sf::RenderWindow& window, std::pair<GameTextures, GameTextures> player_texture)
 	:m_window(window), m_gravity(0.0f,9.8f), m_world(m_gravity), m_player_textures(player_texture)
@@ -26,6 +27,10 @@ void Board::drawBoard()
     {
         m_window.draw(m_game_floor[brick]);
     }
+    for (int object = 0; object < m_static_objects.size(); object++)
+    {
+        m_static_objects[object]->draw(m_window);
+    }
     for (int object = 0; object < m_moving_objects.size(); object++)
     {
         m_moving_objects[object]->draw(m_window);
@@ -45,7 +50,6 @@ void Board::moveObjects()
         m_moving_objects[index]->move();
         //handleCollisions(*m_moving_objects[index]);
     }
-
 }
 
 
@@ -95,50 +99,68 @@ void Board::createLevel()
     {
         for (size_t x = 0; x < source.getSize().x; ++x)
         {
-            if (source.getPixel(x, y) == Red)
+            sf::Vector2f location(50 * x + 25, 50 * y + 25);
+            if (source.getPixel(x, y) == SPIKE1_COLOR)
             {
                 std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Spike1);
         
                 m_game_floor.push_back(result.first);
             }
-            else if ((source.getPixel(x, y) == Black))
+            else if ((source.getPixel(x, y) == FLOOR_COLOR))
             {
-                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Brick);
-                m_game_floor.push_back(result.first);
-                createPhysicalBody(result.first, result.second);
+                m_static_objects.push_back(std::make_unique<Brick>(m_world, Floor, location));
             }
-            else if ((source.getPixel(x, y) == Grey))
+            else if ((source.getPixel(x, y) == CUBE_CUBE_COLOR))
             {
-                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, CubeCube);
-                m_game_floor.push_back(result.first);
-                createPhysicalBody(result.first, result.second);
+                m_static_objects.push_back(std::make_unique<Brick>(m_world, CubeCube, location));
             }
-            else if ((source.getPixel(x, y) == Blue))
+            else if ((source.getPixel(x, y) == CUBE1_COLOR))
             {
-                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Cube1);
-                m_game_floor.push_back(result.first);
-                createPhysicalBody(result.first, result.second);
+                m_static_objects.push_back(std::make_unique<Brick>(m_world, Cube1, location));
             }
-            else if ((source.getPixel(x, y) == Cyan))
+            else if ((source.getPixel(x, y) == CUBE2_COLOR))
             {
-                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Cube2);
-                m_game_floor.push_back(result.first);
-                createPhysicalBody(result.first, result.second);
+                m_static_objects.push_back(std::make_unique<Brick>(m_world, Cube2, location));
             }
-            else if ((source.getPixel(x, y) == Yellow))
+            else if ((source.getPixel(x, y) == COIN_COLOR))
             {
                 std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Coin);
                 m_game_floor.push_back(result.first);
             }
-            else if ((source.getPixel(x, y) == Orange))
+            else if ((source.getPixel(x, y) == GATE1_COLOR))
             {
                 std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Gate1);
+                m_game_floor.push_back(result.first);
+            }
+            else if ((source.getPixel(x, y) == RECTANGLE_COLOR))
+            {
+                m_static_objects.push_back(std::make_unique<Brick>(m_world, Rectangle, location));
+            }
+            else if ((source.getPixel(x, y) == SPIKES_COLOR))
+            {
+                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Spikes);
+                m_game_floor.push_back(result.first);
+            }
+            else if ((source.getPixel(x, y) == SPIKE2_COLOR))
+            {
+                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Spike2);
+                m_game_floor.push_back(result.first);
+            }
+            else if ((source.getPixel(x, y) == JUMPER1_COLOR))
+            {
+                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Jumper1);
+                m_game_floor.push_back(result.first);
+            }
+            else if ((source.getPixel(x, y) == JUMPER2_COLOR))
+            {
+                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Jumper2);
                 m_game_floor.push_back(result.first);
             }
         }
 
     }
 }
+
 
 void Board::createPhysicalBody(const sf::Sprite& sprite, const sf::Vector2u sprite_size)
 {

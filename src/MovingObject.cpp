@@ -6,8 +6,8 @@ MovingObject::MovingObject(b2World& world, GameTextures texture)
 {
     //grafics
     m_object.setTexture(Resources::instance().getGameTexture(texture));
-    sf::Vector2f spriteSize(m_object.getTextureRect().width, m_object.getTextureRect().height);
-    m_object.setOrigin(spriteSize.x / 2, spriteSize.y / 2);
+    sf::Vector2f sprite_size(m_object.getTextureRect().width, m_object.getTextureRect().height);
+    m_object.setOrigin(sprite_size.x / 2, sprite_size.y / 2);
     m_object.setPosition(WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2);
 
     //physics
@@ -17,19 +17,18 @@ MovingObject::MovingObject(b2World& world, GameTextures texture)
 
     m_object_body = world.CreateBody(&bodyDef);
     b2PolygonShape shape;
-    sf::Vector2u boxSize = Resources::instance().getGameTexture(texture).getSize();
-    shape.SetAsBox(boxSize.x / 2.0f / SCALE, boxSize.y / 2.0f / SCALE);
+    shape.SetAsBox(sprite_size.x / 2.0f / SCALE, sprite_size.y / 2.0f / SCALE);
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
     m_object_body->CreateFixture(&fixtureDef);
-
 }
 
 MovingObject::~MovingObject()
 {
-    m_object_body = nullptr; // Reset the pointer to null
+    // Reset the pointer to null
+    m_object_body = nullptr; 
 }
 
 

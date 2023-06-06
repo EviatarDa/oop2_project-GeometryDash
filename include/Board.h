@@ -5,7 +5,9 @@
 #include <vector>
 #include "Resources.h"
 #include "MovingObject.h"
+#include "StaticObject.h"
 #include "Player.h"
+#include "Brick.h"
 
 class Board
 {
@@ -29,7 +31,7 @@ private:
 
     //game objects:
     std::vector < std::unique_ptr< MovingObject>>  m_moving_objects;
-    //std::vector < std::unique_ptr< StaticObjects>>  m_Static_objects;
+    std::vector < std::unique_ptr< StaticObject>>  m_static_objects;
 
     std::vector<sf::Sprite> m_game_floor;
     std::vector<b2Body*> m_floor_bodies;

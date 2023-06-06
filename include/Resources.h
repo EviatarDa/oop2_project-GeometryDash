@@ -9,7 +9,7 @@ enum MenuButtons { Play, Help, Box, Score_Table };
 enum MenuInstructions { OhNo, Instructions1, DropTheMic };
 enum MenuBoxShips { BoxShip1, BoxShip2, BoxShip3, BoxShip4, BoxShip5, BoxShip6 };
 enum GameTextures {
-    Brick, Level_Background, PlayerBox1, PlayerBox2, PlayerBox3, PlayerBox4, PlayerBox5, PlayerBox6,
+    Floor, Level_Background, PlayerBox1, PlayerBox2, PlayerBox3, PlayerBox4, PlayerBox5, PlayerBox6,
     PlayerShip1, PlayerShip2, PlayerShip3, PlayerShip4, PlayerShip5, PlayerShip6, Spike1, Spike2, Spikes,
     Coin, Cube1, Cube2, CubeCube, Gate1, Gate2, Gate3, Gate4, Gate5, Jumper1, Jumper2, Jumper3, Jumper4, Rectangle,
 };
@@ -31,18 +31,24 @@ const int WINDOW_WIDTH = 1400;
 
 //physics
 const float SCALE = 30.f;
-const float BOX_JUMP_FORCE =  0.7f;// 25.f;
+const float BOX_JUMP_FORCE = 0.7f;// 25.f;
 const float SHIP_JUMP_FORCE = 5.f;
 const float MOVEMENT_SPEED = 7;
 
 //game object by color
-const sf::Color Grey = sf::Color::Color(112, 146, 190);
-const sf::Color Red = sf::Color::Color(237, 28, 36);
-const sf::Color Cyan = sf::Color::Color(0, 162, 232);
-const sf::Color Blue = sf::Color::Color(63, 72, 204);
-const sf::Color Yellow = sf::Color::Color(255, 242, 0);
-const sf::Color Orange = sf::Color::Color(255, 127, 39);
-const sf::Color Black = sf::Color::Black;
+const sf::Color CUBE_CUBE_COLOR = sf::Color(112, 146, 190);
+const sf::Color SPIKE1_COLOR = sf::Color(237, 28, 36);
+const sf::Color CUBE2_COLOR = sf::Color(0, 162, 232);
+const sf::Color CUBE1_COLOR = sf::Color(63, 72, 204);
+const sf::Color COIN_COLOR = sf::Color(255, 242, 0);
+const sf::Color GATE1_COLOR = sf::Color(255, 127, 39);
+const sf::Color RECTANGLE_COLOR = sf::Color(153, 217, 234);
+const sf::Color FLOOR_COLOR = sf::Color::Black;
+const sf::Color SPIKES_COLOR = sf::Color(255, 174, 201);
+const sf::Color SPIKE2_COLOR = sf::Color(234, 54, 128);
+const sf::Color JUMPER1_COLOR = sf::Color(34, 177, 76);
+const sf::Color JUMPER2_COLOR = sf::Color(181, 230, 29);
+
 
 
 class Resources
