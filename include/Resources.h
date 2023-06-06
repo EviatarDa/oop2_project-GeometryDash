@@ -46,8 +46,8 @@ const sf::Color RECTANGLE_COLOR = sf::Color(153, 217, 234);
 const sf::Color FLOOR_COLOR = sf::Color::Black;
 const sf::Color SPIKES_COLOR = sf::Color(255, 174, 201);
 const sf::Color SPIKE2_COLOR = sf::Color(234, 54, 128);
-const sf::Color JUMPER1_COLOR = sf::Color(34, 177, 76);
-const sf::Color JUMPER2_COLOR = sf::Color(181, 230, 29);
+const sf::Color JUMPER2_COLOR = sf::Color(34, 177, 76);
+const sf::Color JUMPER1_COLOR = sf::Color(181, 230, 29);
 
 
 
