@@ -26,6 +26,10 @@ StaticObject::StaticObject(b2World& world, GameTextures texture, sf::Vector2f lo
 StaticObject::StaticObject(GameTextures texture, sf::Vector2f location)
     :m_object_body(nullptr)
 {
+    if (texture == Spike2)
+    {
+        sf::Vector2f locationn = location;
+    }
     //grafics
     m_object.setTexture(Resources::instance().getGameTexture(texture));
     sf::Vector2f sprite_size(m_object.getTextureRect().width, m_object.getTextureRect().height);

@@ -86,13 +86,15 @@ void Board::changeBoxShip(std::pair<GameTextures, GameTextures> player_textures)
 
     //create the new player
     m_player_textures = player_textures;
-    m_moving_objects[0] = std::make_unique<Player>(m_world, m_player_textures);
+    sf::Vector2f player_location(WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2);
+    m_moving_objects[0] = std::make_unique<Player>(m_world, m_player_textures, player_location);
 }
 
 
 void Board::createLevel()
 {
-    m_moving_objects.push_back(std::make_unique<Player>(m_world, m_player_textures));
+    sf::Vector2f player_location(WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2);
+    m_moving_objects.push_back(std::make_unique<Player>(m_world, m_player_textures, player_location));
 
     const sf::Image& source = Resources::instance().getGameMaps(Map1);
     for (size_t y = 0; y < source.getSize().y; ++y)
@@ -100,13 +102,7 @@ void Board::createLevel()
         for (size_t x = 0; x < source.getSize().x; ++x)
         {
             sf::Vector2f location(50 * x + 25, 50 * y + 25);
-            if (source.getPixel(x, y) == SPIKE1_COLOR)
-            {
-                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Spike1);
-        
-                m_game_floor.push_back(result.first);
-            }
-            else if ((source.getPixel(x, y) == FLOOR_COLOR))
+            if ((source.getPixel(x, y) == FLOOR_COLOR))
             {
                 m_static_objects.push_back(std::make_unique<Brick>(m_world, Floor, location));
             }
@@ -124,70 +120,70 @@ void Board::createLevel()
             }
             else if ((source.getPixel(x, y) == COIN_COLOR))
             {
-                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Coin);
-                m_game_floor.push_back(result.first);
+                m_static_objects.push_back(std::make_unique<StaticObject>(Coin, location));
             }
             else if ((source.getPixel(x, y) == GATE1_COLOR))
             {
-                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Gate1);
-                m_game_floor.push_back(result.first);
+                m_static_objects.push_back(std::make_unique<StaticObject>( Gate1, location));
             }
             else if ((source.getPixel(x, y) == RECTANGLE_COLOR))
             {
-                m_static_objects.push_back(std::make_unique<Brick>(m_world, Rectangle, location));
+                sf::Vector2f rectangle_location(50 * x + 25, 50 * y + 38);
+                m_static_objects.push_back(std::make_unique<Brick>(m_world, Rectangle, rectangle_location));
             }
             else if ((source.getPixel(x, y) == SPIKES_COLOR))
             {
-                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Spikes);
-                m_game_floor.push_back(result.first);
+                m_static_objects.push_back(std::make_unique<StaticObject>(Spikes, location));
+            }
+            else if (source.getPixel(x, y) == SPIKE1_COLOR)
+            {
+                m_static_objects.push_back(std::make_unique<StaticObject>(Spike1, location));
             }
             else if ((source.getPixel(x, y) == SPIKE2_COLOR))
             {
-                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Spike2);
-                m_game_floor.push_back(result.first);
+                sf::Vector2f spike2_location(50 * x + 25, 50 * y +38);
+                m_static_objects.push_back(std::make_unique<StaticObject>(Spike2, spike2_location));
             }
             else if ((source.getPixel(x, y) == JUMPER1_COLOR))
             {
-                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Jumper1);
-                m_game_floor.push_back(result.first);
+                sf::Vector2f jumper2_location(50 * x + 25, 50 * y + 38);
+                m_static_objects.push_back(std::make_unique<StaticObject>(Jumper1, jumper2_location));
             }
             else if ((source.getPixel(x, y) == JUMPER2_COLOR))
             {
-                std::pair<sf::Sprite, sf::Vector2u> result = createSprite(x, y, Jumper2);
-                m_game_floor.push_back(result.first);
+                m_static_objects.push_back(std::make_unique<StaticObject>(Jumper2, location));
             }
         }
-
     }
 }
 
 
-void Board::createPhysicalBody(const sf::Sprite& sprite, const sf::Vector2u sprite_size)
-{
-    b2BodyDef bodyDef;
-    bodyDef.position.Set(sprite.getPosition().x / SCALE, sprite.getPosition().y / SCALE);
-    bodyDef.type = b2_staticBody;
-    b2Body* body = m_world.CreateBody(&bodyDef);
-    b2PolygonShape shape;
-    shape.SetAsBox(sprite_size.x / 2.0f / SCALE, sprite_size.y / 2.0f / SCALE);
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &shape;
-    body->CreateFixture(&fixtureDef);
+//void Board::createPhysicalBody(const sf::Sprite& sprite, const sf::Vector2u sprite_size)
+//{
+//    b2BodyDef bodyDef;
+//    bodyDef.position.Set(sprite.getPosition().x / SCALE, sprite.getPosition().y / SCALE);
+//    bodyDef.type = b2_staticBody;
+//    b2Body* body = m_world.CreateBody(&bodyDef);
+//    b2PolygonShape shape;
+//    shape.SetAsBox(sprite_size.x / 2.0f / SCALE, sprite_size.y / 2.0f / SCALE);
+//    b2FixtureDef fixtureDef;
+//    fixtureDef.shape = &shape;
+//    body->CreateFixture(&fixtureDef);
+//
+//    m_floor_bodies.push_back(body);
+//}
 
-    m_floor_bodies.push_back(body);
-}
-
-std::pair<sf::Sprite, sf::Vector2u> Board::createSprite(const int x,const int y,const GameTextures texture)
-{
-    sf::Vector2u object_size = Resources::instance().getGameTexture(CubeCube).getSize();
-
-    sf::Sprite sprite;
-    sprite.setTexture(Resources::instance().getGameTexture(texture));
-    sprite.setOrigin(object_size.x / 2, object_size.y / 2);
-    sprite.setPosition(50 * x + 25, 50 * y + 25);
-
-    return std::make_pair(sprite, object_size);
-}
+//std::pair<sf::Sprite, sf::Vector2u> Board::createSprite(const int x,const int y,const GameTextures texture)
+//{
+//    sf::Vector2u object_size = Resources::instance().getGameTexture(CubeCube).getSize();
+//
+//    sf::Sprite sprite;
+//    sprite.setTexture(Resources::instance().getGameTexture(texture));
+//    sprite.setOrigin(object_size.x / 2, object_size.y / 2);
+//    sprite.setPosition(50 * x + 25, 50 * y + 25);
+//
+//    return std::make_pair(sprite, object_size);
+//}
 
 
 

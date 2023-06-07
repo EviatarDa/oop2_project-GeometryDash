@@ -12,7 +12,7 @@
 class Player : public MovingObject
 {
 public:
-    Player(b2World&, std::pair<GameTextures, GameTextures>);
+    Player(b2World&, std::pair<GameTextures, GameTextures>, sf::Vector2f);
     void move();
     void updateDirection();
     void shipState();

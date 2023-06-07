@@ -8,7 +8,7 @@
 class MovingObject
 {
 public:
-	MovingObject(b2World&, GameTextures);
+	MovingObject(b2World&, GameTextures, sf::Vector2f);
 	virtual ~MovingObject();
 	void draw(sf::RenderWindow&);
 	b2Vec2 getPosition();

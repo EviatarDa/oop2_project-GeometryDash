@@ -2,13 +2,14 @@
 
 #include "MovingObject.h"
 
-MovingObject::MovingObject(b2World& world, GameTextures texture)
+MovingObject::MovingObject(b2World& world, GameTextures texture, sf::Vector2f location)
 {
     //grafics
     m_object.setTexture(Resources::instance().getGameTexture(texture));
     sf::Vector2f sprite_size(m_object.getTextureRect().width, m_object.getTextureRect().height);
     m_object.setOrigin(sprite_size.x / 2, sprite_size.y / 2);
-    m_object.setPosition(WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2);
+    //m_object.setPosition(WINDOW_WIDTH / 3, WINDOW_HEIGHT / 2);
+    m_object.setPosition(location);
 
     //physics
     b2BodyDef bodyDef;

@@ -3,9 +3,9 @@
 #include "Player.h"
 
 
-Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures)
-	: m_player_textures(textures),
-     MovingObject(world, textures.first),
+Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures, sf::Vector2f location)
+    :MovingObject(world, textures.first, location),
+     m_player_textures(textures),
      m_state(std::make_unique<BoxState>())
 {
     //shipState();
