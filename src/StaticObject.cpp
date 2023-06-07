@@ -6,15 +6,16 @@ StaticObject::StaticObject(b2World& world, GameTextures texture, sf::Vector2f lo
     :GameObject(texture, location)
 {
     //grafics
-    m_object.setTexture(Resources::instance().getGameTexture(texture));
+    //m_object.setTexture(Resources::instance().getGameTexture(texture));
     sf::Vector2f sprite_size(m_object.getTextureRect().width, m_object.getTextureRect().height);
-    m_object.setOrigin(sprite_size.x / 2, sprite_size.y / 2);
-    m_object.setPosition(location);
+    //m_object.setOrigin(sprite_size.x / 2, sprite_size.y / 2);
+    //m_object.setPosition(location);
 
     //physics
     b2BodyDef bodyDef;
     bodyDef.position.Set(m_object.getPosition().x / SCALE, m_object.getPosition().y / SCALE);
     bodyDef.type = b2_staticBody;
+    bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
 
     m_object_body = world.CreateBody(&bodyDef);
     b2PolygonShape shape;
