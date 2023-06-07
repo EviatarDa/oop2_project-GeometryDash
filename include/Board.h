@@ -8,6 +8,9 @@
 #include "StaticObject.h"
 #include "Player.h"
 #include "Brick.h"
+#include "Coin.h"
+#include "Gate.h"
+#include "Spike.h"
 
 class Board
 {
@@ -33,12 +36,12 @@ private:
     std::vector < std::unique_ptr< MovingObject>>  m_moving_objects;
     std::vector < std::unique_ptr< StaticObject>>  m_static_objects;
 
-    std::vector<sf::Sprite> m_game_floor;
-    std::vector<b2Body*> m_floor_bodies;
 
     sf::Sprite m_background;
 
+    int m_player_index;
+    sf::Vector2f m_player_location;
+
     void createLevel();
-    //void createPhysicalBody(const sf::Sprite&, const sf::Vector2u);
-    //std::pair<sf::Sprite, sf::Vector2u> createSprite( const int,  const int,  const GameTextures);
+
 };

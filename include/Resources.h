@@ -36,18 +36,22 @@ const float SHIP_JUMP_FORCE = 5.f;
 const float MOVEMENT_SPEED = 7;
 
 //game object by color
+const sf::Color FLOOR_COLOR = sf::Color::Black;
 const sf::Color CUBE_CUBE_COLOR = sf::Color(112, 146, 190);
 const sf::Color SPIKE1_COLOR = sf::Color(237, 28, 36);
 const sf::Color CUBE2_COLOR = sf::Color(0, 162, 232);
 const sf::Color CUBE1_COLOR = sf::Color(63, 72, 204);
 const sf::Color COIN_COLOR = sf::Color(255, 242, 0);
 const sf::Color GATE1_COLOR = sf::Color(255, 127, 39);
+const sf::Color GATE2_COLOR = sf::Color(163, 73, 164);
+const sf::Color GATE3_COLOR = sf::Color(200, 191, 231);
+const sf::Color GATE4_COLOR = sf::Color(136, 0, 21);
 const sf::Color RECTANGLE_COLOR = sf::Color(153, 217, 234);
-const sf::Color FLOOR_COLOR = sf::Color::Black;
 const sf::Color SPIKES_COLOR = sf::Color(255, 174, 201);
-const sf::Color SPIKE2_COLOR = sf::Color(234, 54, 128);
+const sf::Color SPIKE2_COLOR = sf::Color(185, 122, 87);
 const sf::Color JUMPER2_COLOR = sf::Color(34, 177, 76);
 const sf::Color JUMPER1_COLOR = sf::Color(181, 230, 29);
+const sf::Color PLAYER_COLOR = sf::Color(255, 201, 14);
 
 
 
