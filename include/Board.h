@@ -11,6 +11,7 @@
 #include "Coin.h"
 #include "Gate.h"
 #include "Spike.h"
+#include "Jumper.h"
 
 class Board
 {

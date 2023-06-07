@@ -156,11 +156,11 @@ void Board::createLevel()
             else if ((source.getPixel(x, y) == JUMPER1_COLOR))
             {
                 sf::Vector2f jumper1_location(50 * x + 25, 50 * y + 38);
-                m_static_objects.push_back(std::make_unique<StaticObject>(Jumper1, jumper1_location));
+                m_static_objects.push_back(std::make_unique<Jumper>(Jumper1, jumper1_location));
             }
             else if ((source.getPixel(x, y) == JUMPER2_COLOR))
             {
-                m_static_objects.push_back(std::make_unique<StaticObject>(Jumper2, location));
+                m_static_objects.push_back(std::make_unique<Jumper>(Jumper2, location));
             }
         }
     }
