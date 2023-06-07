@@ -3,6 +3,7 @@
 #include "StaticObject.h"
 
 StaticObject::StaticObject(b2World& world, GameTextures texture, sf::Vector2f location)
+    :GameObject(texture, location)
 {
     //grafics
     m_object.setTexture(Resources::instance().getGameTexture(texture));
@@ -24,7 +25,7 @@ StaticObject::StaticObject(b2World& world, GameTextures texture, sf::Vector2f lo
 }
 
 StaticObject::StaticObject(GameTextures texture, sf::Vector2f location)
-    :m_object_body(nullptr)
+    :GameObject(texture, location)
 {
     if (texture == Spike2)
     {
@@ -37,18 +38,18 @@ StaticObject::StaticObject(GameTextures texture, sf::Vector2f location)
     m_object.setPosition(location);
 }
 
-StaticObject::~StaticObject()
-{
-	// Reset the pointer to null
-	m_object_body = nullptr; 
-}
+//StaticObject::~StaticObject()
+//{
+//	// Reset the pointer to null
+//	m_object_body = nullptr; 
+//}
 
-void StaticObject::draw(sf::RenderWindow& window)
-{
-    window.draw(m_object);
-}
-
-b2Body* StaticObject::getBody() const
-{
-    return m_object_body;
-}
+//void StaticObject::draw(sf::RenderWindow& window)
+//{
+//    window.draw(m_object);
+//}
+//
+//b2Body* StaticObject::getBody() const
+//{
+//    return m_object_body;
+//}

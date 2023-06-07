@@ -37,7 +37,6 @@ private:
     std::vector < std::unique_ptr< MovingObject>>  m_moving_objects;
     std::vector < std::unique_ptr< StaticObject>>  m_static_objects;
 
-
     sf::Sprite m_background;
 
     int m_player_index;
