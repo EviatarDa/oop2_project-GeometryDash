@@ -7,6 +7,8 @@
 
 void processCollision(GameObject& object1, GameObject& object2);
 
+//--------------------------------------------------------------------
+
 void playerCoin(GameObject& player_object, GameObject& coin_object)
 {
 	Player& player = dynamic_cast<Player&>(player_object);
@@ -19,6 +21,42 @@ void coinPlayer(GameObject& coin, GameObject& player)
 {
 	playerCoin(player, coin);
 }
+//--------------------------------------------------------------------
+
+void playerGate(GameObject& player_object, GameObject& gate_object)
+{
+	Player& player = dynamic_cast<Player&>(player_object);
+	Gate& gate = dynamic_cast<Gate&>(gate_object);
+	//if(gate.isActive())
+	//{
+	//	switch (gate.getType())
+	//	{
+	//	case Gate1:		player.setState();		break;
+	//	case Gate2:		player.setState();		break;
+	//	}
+	//}
+}
+
+void gatePlayer(GameObject& gate, GameObject& player)
+{
+	playerGate(player, gate);
+}
+
+//--------------------------------------------------------------------
+
+void playerSpike(GameObject& player_object, GameObject& spike_object)
+{
+	Player& player = dynamic_cast<Player&>(player_object);
+	Spike& spike= dynamic_cast<Spike&>(spike_object);
+
+	player.setDead();
+}
+
+void spikePlayer(GameObject& spike, GameObject& player)
+{
+	playerSpike(player, spike);
+}
+//--------------------------------------------------------------------
 
 void MyContactListener::BeginContact(b2Contact* contact)
 {
@@ -49,6 +87,10 @@ namespace // anonymous namespace — the standard way to make function "static"
 		HitMap phm;
 		phm[Key(typeid(Player), typeid(class Coin))] = &playerCoin;
 		phm[Key(typeid(class Coin), typeid(Player))] = &coinPlayer;
+		phm[Key(typeid(Player), typeid(Gate))] = &playerGate;
+		phm[Key(typeid(Gate), typeid(Player))] = &gatePlayer;
+		phm[Key(typeid(Player), typeid(Spike))] = &playerSpike;
+		phm[Key(typeid(Spike), typeid(Player))] = &spikePlayer;
 		//phm[Key(typeid(SpaceShip), typeid(SpaceStation))] = &shipStation;
 		//phm[Key(typeid(Asteroid), typeid(SpaceStation))] = &asteroidStation;
 		//phm[Key(typeid(SpaceShip), typeid(SpaceShip))] = &shipShip;

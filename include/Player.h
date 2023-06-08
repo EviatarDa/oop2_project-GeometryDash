@@ -18,14 +18,16 @@ public:
     void shipState();
     void boxState();
     void increasePoints();
+    void kill()override;
+
 
 private:
     Direction m_direction = Stay;
     std::unique_ptr <PlayerState> m_state;
     std::pair<GameTextures, GameTextures> m_player_textures;
+    int m_points;
+    b2Vec2 m_first_location;
 
     void changeBodyAndSprite(GameTextures);
-    int m_points;
-
 
 };

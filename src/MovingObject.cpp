@@ -28,3 +28,13 @@ b2Vec2 MovingObject::getPosition()
 {
     return m_object_body->GetPosition();
 }
+
+void MovingObject::setDead()
+{
+    m_alive = false;
+}
+
+bool MovingObject::isAlive()
+{
+    return m_alive;
+}

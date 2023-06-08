@@ -11,5 +11,10 @@ class StaticObject : public GameObject
 public:
 	StaticObject(b2World&, GameTextures, sf::Vector2f);
 	StaticObject(GameTextures, sf::Vector2f); //TODELETE
-	virtual bool getDelete();
+
+	void setDelete();
+	bool getDelete();
+
+protected:
+	bool m_delete = false;
 };

@@ -136,6 +136,8 @@ void Game::startGame()
                 break;
             case sf::Event::KeyReleased:
             {
+                //if()
+
                 break;
             }
             }

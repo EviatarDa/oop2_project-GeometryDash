@@ -11,9 +11,7 @@ class Coin : public StaticObject
 {
 public:
 	Coin(b2World&, GameTextures, sf::Vector2f);
-	void setDelete();
-	bool getDelete()override;
 
 private:
-	bool m_delete;
+
 };

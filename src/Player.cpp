@@ -7,7 +7,8 @@ Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures, s
     :MovingObject(world, textures.first, location),
     m_player_textures(textures),
     m_state(std::make_unique<BoxState>()),
-    m_points(0)
+    m_points(0),
+    m_first_location(m_object_body->GetPosition())
 {
     //shipState();
 }
@@ -56,6 +57,13 @@ void Player::increasePoints()
 {
     m_points++;
 }
+
+void Player::kill()
+{
+    m_object_body->SetTransform(m_first_location, m_object_body->GetAngle());
+    m_alive = true;
+}
+
 
 
 void Player::changeBodyAndSprite(GameTextures game_texture)

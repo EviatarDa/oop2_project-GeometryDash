@@ -24,7 +24,6 @@ void BoxState::move(Direction direction, b2Body* body)
         body->SetLinearVelocity({ -MOVEMENT_SPEED, currentSpeed_y });
         break;
     }
-
     case Stay:
     {
         float currentSpeed_y = body->GetLinearVelocity().y;

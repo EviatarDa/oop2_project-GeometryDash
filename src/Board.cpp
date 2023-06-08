@@ -88,6 +88,13 @@ void Board::changeBoxShip(std::pair<GameTextures, GameTextures> player_textures)
 void Board::handleCollision()
 {
     std::erase_if(m_static_objects, [](const auto& static_object) {return static_object->getDelete(); });
+    for (auto& object : m_moving_objects)
+    {
+        if (!object->isAlive())
+        {
+            object->kill();
+        }
+    }
 }
 
 

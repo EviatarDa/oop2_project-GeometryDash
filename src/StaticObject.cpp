@@ -32,7 +32,12 @@ StaticObject::StaticObject(GameTextures texture, sf::Vector2f location)
     m_object.setPosition(location);
 }
 
+void StaticObject::setDelete()
+{
+    m_delete = true;
+}
+
 bool StaticObject::getDelete()
 {
-    return false;
+    return m_delete;
 }
