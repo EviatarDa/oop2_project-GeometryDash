@@ -123,6 +123,7 @@ void Game::startGame()
 
         m_board.updateMovingDirections();
         m_board.moveObjects();
+        m_board.handleCollision();
         setView();
 
 

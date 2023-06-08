@@ -12,12 +12,13 @@
 #include "Gate.h"
 #include "Spike.h"
 #include "Jumper.h"
+#include "MyContactListener.h"
 
 class Board
 {
 public:
     Board(sf::RenderWindow&, std::pair<GameTextures, GameTextures>);
-    ~Board();
+    //~Board();
     void drawBoard();
     void moveObjects();
     b2Vec2 getPlayerPosition();
@@ -25,6 +26,7 @@ public:
     void swapGravity();
     void updateMovingDirections();
     void changeBoxShip(std::pair<GameTextures, GameTextures>);
+    void handleCollision();
 
 
 private:
@@ -41,6 +43,8 @@ private:
 
     int m_player_index;
     sf::Vector2f m_player_location;
+    MyContactListener m_contact;
+    
 
     void createLevel();
 

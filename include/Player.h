@@ -17,7 +17,7 @@ public:
     void updateDirection();
     void shipState();
     void boxState();
-
+    void increasePoints();
 
 private:
     Direction m_direction = Stay;
@@ -25,6 +25,7 @@ private:
     std::pair<GameTextures, GameTextures> m_player_textures;
 
     void changeBodyAndSprite(GameTextures);
+    int m_points;
 
 
 };

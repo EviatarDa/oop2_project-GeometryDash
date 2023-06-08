@@ -10,7 +10,7 @@
 class Gate : public StaticObject
 {
 public:
-	Gate(GameTextures, sf::Vector2f);
+	Gate(b2World&, GameTextures, sf::Vector2f);
 
 private:
 

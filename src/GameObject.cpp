@@ -13,6 +13,7 @@ GameObject::GameObject(GameTextures texture, sf::Vector2f location)
 
 GameObject::~GameObject()
 {
+    m_object_body->DestroyFixture(m_object_body->GetFixtureList());
     m_object_body = nullptr;
 }
 

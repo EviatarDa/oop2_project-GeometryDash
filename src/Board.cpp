@@ -9,14 +9,15 @@ Board::Board(sf::RenderWindow& window, std::pair<GameTextures, GameTextures> pla
     m_background.scale(1.6f, 1.6f);
 
     createLevel();
+    m_world.SetContactListener(&m_contact);
 }
 
-Board::~Board()
-{
-    for (auto& object : m_moving_objects)
-        if (object->getBody() != nullptr)
-            m_world.DestroyBody(object->getBody());
-}
+//Board::~Board()
+//{
+//    for (auto& object : m_moving_objects)
+//        if (object->getBody() != nullptr)
+//            m_world.DestroyBody(object->getBody());
+//}
 
 
 void Board::drawBoard()
@@ -84,6 +85,11 @@ void Board::changeBoxShip(std::pair<GameTextures, GameTextures> player_textures)
     m_moving_objects[m_player_index] = std::make_unique<Player>(m_world, m_player_textures, m_player_location);
 }
 
+void Board::handleCollision()
+{
+    std::erase_if(m_static_objects, [](const auto& static_object) {return static_object->getDelete(); });
+}
+
 
 void Board::createLevel()
 {
@@ -117,23 +123,23 @@ void Board::createLevel()
             }
             else if ((source.getPixel(x, y) == COIN_COLOR))
             {
-                m_static_objects.push_back(std::make_unique<class Coin>(Coin, location));
+                m_static_objects.push_back(std::make_unique<class Coin>(m_world, Coin, location));
             }
             else if ((source.getPixel(x, y) == GATE1_COLOR))
             {
-                m_static_objects.push_back(std::make_unique<Gate>(Gate1, location));
+                m_static_objects.push_back(std::make_unique<Gate>(m_world, Gate1, location));
             }
             else if ((source.getPixel(x, y) == GATE2_COLOR))
             {
-                m_static_objects.push_back(std::make_unique<Gate>(Gate2, location));
+                m_static_objects.push_back(std::make_unique<Gate>(m_world, Gate2, location));
             }
             else if ((source.getPixel(x, y) == GATE3_COLOR))
             {
-                m_static_objects.push_back(std::make_unique<Gate>(Gate3, location));
+                m_static_objects.push_back(std::make_unique<Gate>(m_world, Gate3, location));
             }
             else if ((source.getPixel(x, y) == GATE4_COLOR))
             {
-                m_static_objects.push_back(std::make_unique<Gate>(Gate4, location));
+                m_static_objects.push_back(std::make_unique<Gate>(m_world, Gate4, location));
             }
             else if ((source.getPixel(x, y) == RECTANGLE_COLOR))
             {
@@ -142,25 +148,25 @@ void Board::createLevel()
             }
             else if ((source.getPixel(x, y) == SPIKES_COLOR))
             {
-                m_static_objects.push_back(std::make_unique<Spike>(Spikes, location));
+                m_static_objects.push_back(std::make_unique<Spike>(m_world, Spikes, location));
             }
             else if (source.getPixel(x, y) == SPIKE1_COLOR)
             {
-                m_static_objects.push_back(std::make_unique<Spike>(Spike1, location));
+                m_static_objects.push_back(std::make_unique<Spike>(m_world, Spike1, location));
             }
             else if ((source.getPixel(x, y) == SPIKE2_COLOR))
             {
                 sf::Vector2f spike2_location(50 * x + 25, 50 * y +38);
-                m_static_objects.push_back(std::make_unique<Spike>(Spike2, spike2_location));
+                m_static_objects.push_back(std::make_unique<Spike>(m_world, Spike2, spike2_location));
             }
             else if ((source.getPixel(x, y) == JUMPER1_COLOR))
             {
                 sf::Vector2f jumper1_location(50 * x + 25, 50 * y + 38);
-                m_static_objects.push_back(std::make_unique<Jumper>(Jumper1, jumper1_location));
+                m_static_objects.push_back(std::make_unique<Jumper>(m_world, Jumper1, jumper1_location));
             }
             else if ((source.getPixel(x, y) == JUMPER2_COLOR))
             {
-                m_static_objects.push_back(std::make_unique<Jumper>(Jumper2, location));
+                m_static_objects.push_back(std::make_unique<Jumper>(m_world, Jumper2, location));
             }
         }
     }

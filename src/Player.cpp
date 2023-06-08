@@ -5,8 +5,9 @@
 
 Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures, sf::Vector2f location)
     :MovingObject(world, textures.first, location),
-     m_player_textures(textures),
-     m_state(std::make_unique<BoxState>())
+    m_player_textures(textures),
+    m_state(std::make_unique<BoxState>()),
+    m_points(0)
 {
     //shipState();
 }
@@ -49,6 +50,11 @@ void Player::boxState()
 {
     changeBodyAndSprite(m_player_textures.first);
     m_state.reset(new BoxState());
+}
+
+void Player::increasePoints()
+{
+    m_points++;
 }
 
 

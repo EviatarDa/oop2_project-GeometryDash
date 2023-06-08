@@ -10,12 +10,6 @@ class StaticObject : public GameObject
 {
 public:
 	StaticObject(b2World&, GameTextures, sf::Vector2f);
-	StaticObject(GameTextures, sf::Vector2f);
-	//virtual ~StaticObject();
-	//void draw(sf::RenderWindow&);
-	//b2Body* getBody()const;
-
-//protected:
-	//sf::Sprite m_object;
-	//b2Body* m_object_body;
+	StaticObject(GameTextures, sf::Vector2f); //TODELETE
+	virtual bool getDelete();
 };

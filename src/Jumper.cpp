@@ -2,7 +2,7 @@
 
 #include "Jumper.h"
 
-Jumper::Jumper(GameTextures texture, sf::Vector2f location)
-	:StaticObject(texture, location)
+Jumper::Jumper(b2World& world, GameTextures texture, sf::Vector2f location)
+	:StaticObject(world, texture, location)
 {
 }
