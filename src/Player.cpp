@@ -3,12 +3,14 @@
 #include "Player.h"
 
 
-Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures, sf::Vector2f location)
+Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures, sf::Vector2f location /*b2Vec2& gravity*/)
     :MovingObject(world, textures.first, location),
     m_player_textures(textures),
     m_state(std::make_unique<BoxState>()),
     m_points(0),
     m_first_location(m_object_body->GetPosition())
+    //m_world(world),
+    //m_gravity(gravity)
 {
     //shipState();
 }
@@ -90,6 +92,12 @@ void Player::hop()
     //to avoid "icetower" jumps
     m_object_body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
     m_object_body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -BOX_HOP_FORCE), true);
+}
+
+void Player::reverseGravity()
+{
+    //m_gravity = -m_gravity;
+    //m_world.SetGravity(m_gravity);
 }
 
 

@@ -12,20 +12,19 @@
 class Player : public MovingObject
 {
 public:
-    Player(b2World&, std::pair<GameTextures, GameTextures>, sf::Vector2f);
+    Player(b2World&, std::pair<GameTextures, GameTextures>, sf::Vector2f/*, b2Vec2&*/);
     void move();
     void updateDirection();
     void shipState();
     void boxState();
     void increasePoints();
     void kill()override;
-
     void releaseRight()override;
     void releaseLeft()override;
     void releaseSpace()override;
-
     void canJump();
     void hop();
+    void reverseGravity();
 
 private:
     bool m_direction[4] = { false, false, false, false };
@@ -34,7 +33,8 @@ private:
     int m_points;
     b2Vec2 m_first_location;
     bool m_touching_ground = false;
-
     void changeBodyAndSprite(GameTextures);
+    //b2World m_world;
+    //b2Vec2 m_gravity;
 
 };

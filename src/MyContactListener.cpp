@@ -27,14 +27,17 @@ void playerGate(GameObject& player_object, GameObject& gate_object)
 {
 	Player& player = dynamic_cast<Player&>(player_object);
 	Gate& gate = dynamic_cast<Gate&>(gate_object);
-	//if(gate.isActive())
-	//{
-	//	switch (gate.getType())
-	//	{
-	//	case Gate1:		player.setState();		break;
-	//	case Gate2:		player.setState();		break;
-	//	}
-	//}
+ 	if(gate.isActive())
+	{
+		switch (gate.getType())
+		{
+		//case Gate1:		player.setState();		break;
+		//case Gate2:		player.setState();		break;
+		//case Gate3:		player.reverseGravity();		break;
+		//case Gate4:		player.reverseGravity();		break;
+		}
+		//gate.shutDown();
+	}
 }
 
 void gatePlayer(GameObject& gate, GameObject& player)
