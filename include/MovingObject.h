@@ -15,6 +15,10 @@ public:
 	virtual void updateDirection() = 0;
 	virtual void move() = 0;
 
+	virtual void releaseRight() {};
+	virtual void releaseLeft() {};
+	virtual void releaseSpace() {};
+
 	void setDead();
 	bool isAlive();
 	virtual void kill() = 0;

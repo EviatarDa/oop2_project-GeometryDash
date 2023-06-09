@@ -58,6 +58,38 @@ void spikePlayer(GameObject& spike, GameObject& player)
 }
 //--------------------------------------------------------------------
 
+void playerBrick(GameObject& player_object, GameObject& brick_object)
+{
+	Player& player = dynamic_cast<Player&>(player_object);
+	Brick& brick = dynamic_cast<Brick&>(brick_object);
+	player.canJump();
+}
+
+void brickPlayer(GameObject& brick, GameObject& player)
+{
+	playerBrick(player, brick);
+}
+
+//--------------------------------------------------------------------
+
+void playerJumper(GameObject& player_object, GameObject& jumper_object)
+{
+	Player& player = dynamic_cast<Player&>(player_object);
+	Jumper& jumper= dynamic_cast<Jumper&>(jumper_object);
+
+	switch (jumper.getType())
+	{
+	case Jumper1:		player.hop();		break;
+	}
+}
+
+void jumperPlayer(GameObject& jumper, GameObject& player)
+{
+	playerJumper(player, jumper);
+}
+
+//--------------------------------------------------------------------
+
 void MyContactListener::BeginContact(b2Contact* contact)
 {
 	b2Fixture* fixtureA = contact->GetFixtureA();
@@ -91,6 +123,10 @@ namespace // anonymous namespace — the standard way to make function "static"
 		phm[Key(typeid(Gate), typeid(Player))] = &gatePlayer;
 		phm[Key(typeid(Player), typeid(Spike))] = &playerSpike;
 		phm[Key(typeid(Spike), typeid(Player))] = &spikePlayer;
+		phm[Key(typeid(Player), typeid(Brick))] = &playerBrick;
+		phm[Key(typeid(Brick), typeid(Player))] = &brickPlayer;
+		phm[Key(typeid(Player), typeid(Jumper))] = &playerJumper;
+		phm[Key(typeid(Jumper), typeid(Player))] = &jumperPlayer;
 		//phm[Key(typeid(SpaceShip), typeid(SpaceStation))] = &shipStation;
 		//phm[Key(typeid(Asteroid), typeid(SpaceStation))] = &asteroidStation;
 		//phm[Key(typeid(SpaceShip), typeid(SpaceShip))] = &shipShip;

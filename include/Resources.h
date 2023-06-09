@@ -14,7 +14,7 @@ enum GameTextures {
     Coin, Cube1, Cube2, CubeCube, Gate1, Gate2, Gate3, Gate4, Gate5, Jumper1, Jumper2, Jumper3, Jumper4, Rectangle,
 };
 enum GameMaps { Map1 };
-enum Direction { Up, Down, Right, Left, Stay };
+enum Direction { Up, Right, Left, Stay };
 
 //arrays
 const int MENU_TEXTURES = 3;
@@ -31,7 +31,8 @@ const int WINDOW_WIDTH = 1400;
 
 //physics
 const float SCALE = 30.f;
-const float BOX_JUMP_FORCE = 0.7f;// 25.f;
+const float BOX_JUMP_FORCE = 25.f;// 0.7f;// 25.f;
+const float BOX_HOP_FORCE = 50.f;
 const float SHIP_JUMP_FORCE = 5.f;
 const float MOVEMENT_SPEED = 7;
 

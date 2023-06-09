@@ -9,7 +9,7 @@ class PlayerState
 {
 public:
     virtual ~PlayerState() = default;
-    virtual void move(Direction, b2Body*) = 0;
+    virtual void move(bool*, b2Body*, bool&) = 0;
 
 private:
 };

@@ -1,37 +1,32 @@
 #include "BoxState.h"
 
-void BoxState::move(Direction direction, b2Body* body)
+void BoxState::move(bool* direction, b2Body* body, bool& touching_ground)
 {
-    switch (direction)
+    if(direction[Up])
     {
-    case Up:
-    {
-        if (true)//to change
+        if (touching_ground)
         {
+            //to avoid "icetower" jumps
+            body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+
             body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -BOX_JUMP_FORCE), true);
+            direction[Up] = false;
+            touching_ground = false;
         }
-        break;
     }
-    case Right:
+    if(direction[Right])
     {
         float currentSpeed_y = body->GetLinearVelocity().y;
         body->SetLinearVelocity({ MOVEMENT_SPEED, currentSpeed_y });
-        break;
     }
-    case Left:
+    if(direction[Left])
     {
         float currentSpeed_y = body->GetLinearVelocity().y;
         body->SetLinearVelocity({ -MOVEMENT_SPEED, currentSpeed_y });
-        break;
     }
-    case Stay:
+    if(direction[Stay])
     {
         float currentSpeed_y = body->GetLinearVelocity().y;
         body->SetLinearVelocity({ 0, currentSpeed_y });
-        break;
-    }
-
-    default:
-        break;
     }
 }

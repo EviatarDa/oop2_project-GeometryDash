@@ -11,9 +11,7 @@ class Gate : public StaticObject
 {
 public:
 	Gate(b2World&, GameTextures, sf::Vector2f);
-	GameTextures getType();
 
 
 private:
-	GameTextures m_type;
 };

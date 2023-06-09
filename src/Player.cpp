@@ -15,8 +15,7 @@ Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures, s
 
 void Player::move()
 {
-    m_state->move(m_direction, m_object_body);
-
+    m_state->move(m_direction, m_object_body, m_touching_ground);
     m_object.setPosition(SCALE * m_object_body->GetPosition().x, SCALE * m_object_body->GetPosition().y);
     m_object.setRotation(m_object_body->GetAngle() * 180 / b2_pi);
 }
@@ -25,19 +24,18 @@ void Player::updateDirection()
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
-        m_direction = Left;
+        m_direction[Left] = true;
+        m_direction[Stay] = false;
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-        m_direction = Right;
+        m_direction[Right] = true;
+        m_direction[Stay] = false;
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-        m_direction = Up;
-    }
-    else
-    {
-        m_direction = Stay;
+        m_direction[Up] = true;
+        m_direction[Stay] = false;
     }
 }
 
@@ -62,6 +60,36 @@ void Player::kill()
 {
     m_object_body->SetTransform(m_first_location, m_object_body->GetAngle());
     m_alive = true;
+}
+
+void Player::releaseRight()
+{
+    m_direction[Right] = false;
+    m_direction[Stay] = true;
+}
+
+void Player::releaseLeft()
+{
+    m_direction[Left] = false;
+    m_direction[Stay] = true;
+}
+
+void Player::releaseSpace()
+{
+    m_direction[Up] = false;
+    m_direction[Stay] = true;
+}
+
+void Player::canJump()
+{
+    m_touching_ground = true;
+}
+
+void Player::hop()
+{
+    //to avoid "icetower" jumps
+    m_object_body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+    m_object_body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -BOX_HOP_FORCE), true);
 }
 
 

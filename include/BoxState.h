@@ -5,7 +5,7 @@
 class BoxState : public PlayerState
 {
 public:
-	void move(Direction, b2Body*)override;
+	void move(bool*, b2Body*, bool&)override;
 
 private:
 };

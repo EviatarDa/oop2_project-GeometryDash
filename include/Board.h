@@ -25,6 +25,9 @@ public:
     void viewBackground(float addition);
     void swapGravity();
     void updateMovingDirections();
+    void rightReleased();
+    void leftReleased();
+    void spaceReleased();
     void changeBoxShip(std::pair<GameTextures, GameTextures>);
     void handleCollision();
 

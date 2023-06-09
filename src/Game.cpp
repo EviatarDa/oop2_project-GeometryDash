@@ -136,7 +136,18 @@ void Game::startGame()
                 break;
             case sf::Event::KeyReleased:
             {
-                //if()
+                if (event.key.code == sf::Keyboard::Right)
+                {
+                    m_board.rightReleased();
+                }
+                else if (event.key.code == sf::Keyboard::Left)
+                {
+                    m_board.leftReleased();
+                }
+                else if (event.key.code == sf::Keyboard::Space)
+                {
+                    
+                }m_board.spaceReleased();
 
                 break;
             }

@@ -74,6 +74,21 @@ void Board::updateMovingDirections()
     }
 }
 
+void Board::rightReleased()
+{
+    m_moving_objects[m_player_index]->releaseRight();
+}
+
+void Board::leftReleased()
+{
+    m_moving_objects[m_player_index]->releaseLeft();
+}
+
+void Board::spaceReleased()
+{
+    m_moving_objects[m_player_index]->releaseSpace();
+}
+
 void Board::changeBoxShip(std::pair<GameTextures, GameTextures> player_textures)
 {
     //delete the old player body

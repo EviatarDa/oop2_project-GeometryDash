@@ -20,13 +20,20 @@ public:
     void increasePoints();
     void kill()override;
 
+    void releaseRight()override;
+    void releaseLeft()override;
+    void releaseSpace()override;
+
+    void canJump();
+    void hop();
 
 private:
-    Direction m_direction = Stay;
+    bool m_direction[4] = { false, false, false, false };
     std::unique_ptr <PlayerState> m_state;
     std::pair<GameTextures, GameTextures> m_player_textures;
     int m_points;
     b2Vec2 m_first_location;
+    bool m_touching_ground = false;
 
     void changeBodyAndSprite(GameTextures);
 
