@@ -11,6 +11,7 @@ GameObject::GameObject(GameTextures texture, sf::Vector2f location)
     m_object.setPosition(location);
 }
 
+
 GameObject::~GameObject()
 {
     m_object_body = nullptr;

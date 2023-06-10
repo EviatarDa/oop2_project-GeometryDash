@@ -45,6 +45,22 @@ void MovingObject::setMarked()
     m_marked = true;
 }
 
+void MovingObject::setGravity()
+{
+    m_gravity_changed = true;
+}
+
+bool MovingObject::isGravityMarked()
+{
+    if (m_gravity_changed)
+    {
+        m_gravity_changed = false;
+        return true;
+    }
+    else
+        return m_gravity_changed;
+}
+
 bool MovingObject::isMarked()
 {
     return m_marked;

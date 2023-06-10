@@ -3,21 +3,20 @@
 #include "Player.h"
 
 
-Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures, sf::Vector2f location /*b2Vec2& gravity*/)
+Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures, sf::Vector2f location/*, b2Vec2& gravity*/)
     :MovingObject(world, textures.first, location),
     m_player_textures(textures),
     m_state(std::make_unique<BoxState>()),
     m_points(0),
-    m_first_location(m_object_body->GetPosition())
-    //m_world(world),
-    //m_gravity(gravity)
+    m_first_location(m_object_body->GetPosition()),
+    m_gravity(world.GetGravity())
 {
-    //shipState();
+    shipState();
 }
 
 void Player::move()
 {
-    m_state->move(m_direction, m_object_body, m_touching_ground);
+    m_state->move(m_direction, m_object_body, m_touching_ground, m_gravity);
     m_object.setPosition(SCALE * m_object_body->GetPosition().x, SCALE * m_object_body->GetPosition().y);
     m_object.setRotation(m_object_body->GetAngle() * 180 / b2_pi);
 }
@@ -90,13 +89,15 @@ void Player::hop(float hop_force)
 {
     //to avoid "icetower" jumps
     m_object_body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
-    m_object_body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -hop_force), true);
+    if(m_gravity.y>0)
+        m_object_body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -hop_force), true);
+    else
+        m_object_body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, hop_force), true);
 }
 
 void Player::reverseGravity()
 {
-    //m_gravity = -m_gravity;
-    //m_world.SetGravity(m_gravity);
+    m_gravity = -m_gravity;
 }
 
 void Player::collideBrick(GameTextures brick_type)

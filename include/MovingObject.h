@@ -27,8 +27,12 @@ public:
 	bool isMarked();
 	virtual void handleMarking() {};
 
+	void setGravity();
+	bool isGravityMarked();
+
 protected:
 	bool m_alive = true;
 	bool m_marked = false;
+	bool m_gravity_changed = false;
 
 };

@@ -35,7 +35,7 @@ private:
     b2Vec2 m_first_location;
     bool m_touching_ground = false;
     void changeBodyAndSprite(GameTextures);
-    //b2World m_world;
-    //b2Vec2 m_gravity;
+
+    b2Vec2 m_gravity;
 
 };

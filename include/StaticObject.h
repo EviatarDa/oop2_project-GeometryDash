@@ -10,7 +10,7 @@ class StaticObject : public GameObject
 {
 public:
 	StaticObject(b2World&, GameTextures, sf::Vector2f);
-	StaticObject(GameTextures, sf::Vector2f); //TODELETE
+	//StaticObject(GameTextures, sf::Vector2f); //TODELETE
 	virtual ~StaticObject();
 	GameTextures getType();
 

@@ -33,8 +33,8 @@ void playerGate(GameObject& player_object, GameObject& gate_object)
 		{
 		case Gate1:		player.setMarked();		break;
 		case Gate2:		player.setMarked();		break;
-		//case Gate3:		player.reverseGravity();		break;
-		//case Gate4:		player.reverseGravity();		break;
+		case Gate3:		player.setGravity();	player.reverseGravity();		break;
+		case Gate4:		player.setGravity();	player.reverseGravity();		break;
 		}
 		gate.inactive();
 	}

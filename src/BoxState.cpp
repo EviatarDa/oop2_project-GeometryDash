@@ -1,6 +1,6 @@
 #include "BoxState.h"
 
-void BoxState::move(bool* direction, b2Body* body, bool& touching_ground)
+void BoxState::move(bool* direction, b2Body* body, bool& touching_ground, b2Vec2 gravity)
 {
     if(direction[Up])
     {
@@ -9,7 +9,11 @@ void BoxState::move(bool* direction, b2Body* body, bool& touching_ground)
             //to avoid "icetower" jumps
             body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
 
-            body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -BOX_JUMP_FORCE), true);
+            if(gravity.y > 0)
+                body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -BOX_JUMP_FORCE), true);
+            else
+                body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, BOX_JUMP_FORCE), true);
+
             direction[Up] = false;
             touching_ground = false;
         }

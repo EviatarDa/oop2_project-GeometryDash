@@ -113,6 +113,10 @@ void Board::handleCollision()
         {
             object->handleMarking();
         }
+        if (object->isGravityMarked())
+        {
+            swapGravity();
+        }
     }
     for (auto& object : m_static_objects)
     {
