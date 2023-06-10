@@ -31,12 +31,12 @@ void playerGate(GameObject& player_object, GameObject& gate_object)
 	{
 		switch (gate.getType())
 		{
-		//case Gate1:		player.setState();		break;
-		//case Gate2:		player.setState();		break;
+		case Gate1:		player.setMarked();		break;
+		case Gate2:		player.setMarked();		break;
 		//case Gate3:		player.reverseGravity();		break;
 		//case Gate4:		player.reverseGravity();		break;
 		}
-		//gate.shutDown();
+		gate.inactive();
 	}
 }
 
@@ -65,7 +65,11 @@ void playerBrick(GameObject& player_object, GameObject& brick_object)
 {
 	Player& player = dynamic_cast<Player&>(player_object);
 	Brick& brick = dynamic_cast<Brick&>(brick_object);
-	player.canJump();
+	if (brick.getType() == Rectangle)
+	{
+		brick.inactive();
+	}
+	player.collideBrick(brick.getType());
 }
 
 void brickPlayer(GameObject& brick, GameObject& player)
@@ -82,7 +86,8 @@ void playerJumper(GameObject& player_object, GameObject& jumper_object)
 
 	switch (jumper.getType())
 	{
-	case Jumper1:		player.hop();		break;
+	case Jumper1:		player.hop(50.f);		break;
+	case Jumper2:		player.hop(40.f);		break;
 	}
 }
 

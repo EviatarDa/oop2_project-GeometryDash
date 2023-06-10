@@ -109,6 +109,18 @@ void Board::handleCollision()
         {
             object->kill();
         }
+        if (object->isMarked())
+        {
+            object->handleMarking();
+        }
+    }
+    for (auto& object : m_static_objects)
+    {
+        if (!object->isActive())
+        {
+            object->shutDown();
+        }
+        object->restart();
     }
 }
 

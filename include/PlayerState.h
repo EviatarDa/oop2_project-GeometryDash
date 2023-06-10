@@ -10,6 +10,7 @@ class PlayerState
 public:
     virtual ~PlayerState() = default;
     virtual void move(bool*, b2Body*, bool&) = 0;
+    virtual void collideBrick(bool&, bool&) = 0;
 
 private:
 };

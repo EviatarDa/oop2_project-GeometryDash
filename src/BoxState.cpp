@@ -30,3 +30,8 @@ void BoxState::move(bool* direction, b2Body* body, bool& touching_ground)
         body->SetLinearVelocity({ 0, currentSpeed_y });
     }
 }
+
+void BoxState::collideBrick(bool& touching_ground, bool& alive)
+{
+    touching_ground = true;
+}

@@ -39,3 +39,13 @@ bool MovingObject::isAlive()
 {
     return m_alive;
 }
+
+void MovingObject::setMarked()
+{
+    m_marked = true;
+}
+
+bool MovingObject::isMarked()
+{
+    return m_marked;
+}

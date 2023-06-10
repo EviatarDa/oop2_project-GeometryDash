@@ -60,6 +60,10 @@ void Player::increasePoints()
 
 void Player::kill()
 {
+    if (dynamic_cast<ShipState*>(m_state.get()) != nullptr)
+    {
+        boxState();
+    }
     m_object_body->SetTransform(m_first_location, m_object_body->GetAngle());
     m_alive = true;
 }
@@ -82,22 +86,36 @@ void Player::releaseSpace()
     m_direction[Stay] = true;
 }
 
-void Player::canJump()
-{
-    m_touching_ground = true;
-}
-
-void Player::hop()
+void Player::hop(float hop_force)
 {
     //to avoid "icetower" jumps
     m_object_body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
-    m_object_body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -BOX_HOP_FORCE), true);
+    m_object_body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -hop_force), true);
 }
 
 void Player::reverseGravity()
 {
     //m_gravity = -m_gravity;
     //m_world.SetGravity(m_gravity);
+}
+
+void Player::collideBrick(GameTextures brick_type)
+{
+    if (brick_type != Floor)
+        m_state->collideBrick(m_touching_ground, m_alive);
+    else
+        m_touching_ground = true;
+}
+
+void Player::handleMarking()
+{
+    if (dynamic_cast<ShipState*>(m_state.get()) != nullptr)
+    {
+        boxState();
+    }
+    else
+        shipState();
+    m_marked = false;
 }
 
 

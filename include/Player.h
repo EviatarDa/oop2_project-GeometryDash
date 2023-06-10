@@ -22,9 +22,10 @@ public:
     void releaseRight()override;
     void releaseLeft()override;
     void releaseSpace()override;
-    void canJump();
-    void hop();
+    void hop(float);
     void reverseGravity();
+    void collideBrick(GameTextures);
+    void handleMarking() override;
 
 private:
     bool m_direction[4] = { false, false, false, false };

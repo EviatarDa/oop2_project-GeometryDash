@@ -15,3 +15,8 @@ void ShipState::move(bool* direction, b2Body* body, bool&)
     }
 }
 
+void ShipState::collideBrick(bool& touching_ground, bool& alive)
+{
+    alive = false;
+}
+

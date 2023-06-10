@@ -23,7 +23,12 @@ public:
 	bool isAlive();
 	virtual void kill() = 0;
 
+	void setMarked();
+	bool isMarked();
+	virtual void handleMarking() {};
+
 protected:
 	bool m_alive = true;
+	bool m_marked = false;
 
 };
