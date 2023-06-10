@@ -5,6 +5,7 @@
 #include <Box2D/Box2D.h>
 #include "Resources.h"
 #include "GameObject.h"
+//#include <limits>
 
 
 class MovingObject : public GameObject
@@ -23,8 +24,8 @@ public:
 	bool isAlive();
 	virtual void kill() = 0;
 
-	void setMarked();
-	bool isMarked();
+	void setState();
+	bool isStateMarked();
 	virtual void handleMarking() {};
 
 	void setGravity();
@@ -32,7 +33,7 @@ public:
 
 protected:
 	bool m_alive = true;
-	bool m_marked = false;
+	bool m_state_change = false;
 	bool m_gravity_changed = false;
 
 };

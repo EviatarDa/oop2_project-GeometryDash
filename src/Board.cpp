@@ -109,7 +109,7 @@ void Board::handleCollision()
         {
             object->kill();
         }
-        if (object->isMarked())
+        if (object->isStateMarked())
         {
             object->handleMarking();
         }

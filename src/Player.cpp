@@ -116,7 +116,7 @@ void Player::handleMarking()
     }
     else
         shipState();
-    m_marked = false;
+    m_state_change = false;
 }
 
 

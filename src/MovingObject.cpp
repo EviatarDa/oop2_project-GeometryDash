@@ -11,6 +11,9 @@ MovingObject::MovingObject(b2World& world, GameTextures texture, sf::Vector2f lo
     b2BodyDef bodyDef;
     bodyDef.position.Set(m_object.getPosition().x / SCALE, m_object.getPosition().y / SCALE);
     bodyDef.type = b2_dynamicBody; // Set the body type to dynamic
+    //bodyDef.angularDamping = 1.0f;  // Set a non-zero angular damping value
+    //bodyDef.fixedRotation = true;  // Set the fixedRotation flag to true
+
     bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
 
     m_object_body = world.CreateBody(&bodyDef);
@@ -20,7 +23,14 @@ MovingObject::MovingObject(b2World& world, GameTextures texture, sf::Vector2f lo
     fixtureDef.shape = &shape;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
+
     m_object_body->CreateFixture(&fixtureDef);
+
+    // Set a high moment of inertia to prevent rotation
+    //b2MassData massData;
+    //m_object_body->GetMassData(&massData);
+    //massData.I = 1e9f;  // Set a high moment of inertia
+    //m_object_body->SetMassData(&massData);
 }
 
 
@@ -40,9 +50,9 @@ bool MovingObject::isAlive()
     return m_alive;
 }
 
-void MovingObject::setMarked()
+void MovingObject::setState()
 {
-    m_marked = true;
+    m_state_change = true;
 }
 
 void MovingObject::setGravity()
@@ -61,7 +71,7 @@ bool MovingObject::isGravityMarked()
         return m_gravity_changed;
 }
 
-bool MovingObject::isMarked()
+bool MovingObject::isStateMarked()
 {
-    return m_marked;
+    return m_state_change;
 }
