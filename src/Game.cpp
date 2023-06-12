@@ -146,9 +146,8 @@ void Game::startGame()
                 }
                 else if (event.key.code == sf::Keyboard::Space)
                 {
-                    
-                }m_board.spaceReleased();
-
+                    m_board.spaceReleased();
+                }
                 break;
             }
             }

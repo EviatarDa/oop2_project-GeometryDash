@@ -13,6 +13,7 @@
 #include "Spike.h"
 #include "Jumper.h"
 #include "MyContactListener.h"
+#include "Enemy.h"
 
 class Board
 {

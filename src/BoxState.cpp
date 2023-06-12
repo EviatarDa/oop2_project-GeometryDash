@@ -21,12 +21,12 @@ void BoxState::move(bool* direction, b2Body* body, bool& touching_ground, b2Vec2
     if(direction[Right])
     {
         float currentSpeed_y = body->GetLinearVelocity().y;
-        body->SetLinearVelocity({ MOVEMENT_SPEED, currentSpeed_y });
+        body->SetLinearVelocity({ PLAYER_MOVEMENT_SPEED, currentSpeed_y });
     }
     if(direction[Left])
     {
         float currentSpeed_y = body->GetLinearVelocity().y;
-        body->SetLinearVelocity({ -MOVEMENT_SPEED, currentSpeed_y });
+        body->SetLinearVelocity({ -PLAYER_MOVEMENT_SPEED, currentSpeed_y });
     }
     if(direction[Stay])
     {

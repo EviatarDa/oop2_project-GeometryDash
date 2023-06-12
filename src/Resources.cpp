@@ -107,6 +107,7 @@ void Resources::LoadFromFile()
 	m_game_textures[Jumper3].loadFromFile("Jumper3.png");
 	m_game_textures[Jumper4].loadFromFile("Jumper4.png");
 	m_game_textures[Rectangle].loadFromFile("Rectangle.png");
+	m_game_textures[EnemySpriteSheet].loadFromFile("EnemiesSpritesheet.png");
 
 	//game image
 	m_maps[Map1].loadFromFile("Map.png");

@@ -10,7 +10,7 @@
 class Spike : public StaticObject
 {
 public:
-	Spike(b2World&, GameTextures, sf::Vector2f);
+	Spike(b2World&, GameTextures, sf::Vector2f, bool);
 
 private:
 

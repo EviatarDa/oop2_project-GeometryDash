@@ -12,9 +12,10 @@ enum GameTextures {
     Floor, Level_Background, PlayerBox1, PlayerBox2, PlayerBox3, PlayerBox4, PlayerBox5, PlayerBox6,
     PlayerShip1, PlayerShip2, PlayerShip3, PlayerShip4, PlayerShip5, PlayerShip6, Spike1, Spike2, Spikes,
     Coin, Cube1, Cube2, CubeCube, Gate1, Gate2, Gate3, Gate4, Gate5, Jumper1, Jumper2, Jumper3, Jumper4, Rectangle,
+    EnemySpriteSheet
 };
 enum GameMaps { Map1 };
-enum Direction { Up, Right, Left, Stay };
+enum Direction { Right, Left, Up, Stay };
 
 //arrays
 const int MENU_TEXTURES = 3;
@@ -22,7 +23,7 @@ const int MENU_BUTTONS = 4;
 const int MENU_INSTRUCTIONS = 3;
 const int MENU_BOX_SHIPS = 6;
 
-const int GAME_TEXTURES = 31;
+const int GAME_TEXTURES = 32;
 const int GAME_MAPS = 3;
 
 //window
@@ -34,12 +35,15 @@ const float SCALE = 30.f;
 const float BOX_JUMP_FORCE = 25.f;// 0.7f;// 25.f;
 const float BOX_HOP_FORCE = 50.f;
 const float SHIP_JUMP_FORCE = 5.f;
-const float MOVEMENT_SPEED = 7;
+const float PLAYER_MOVEMENT_SPEED = 7;
+const float ENEMY_MOVEMENT_SPEED = 6;
+
 
 //game object by color
 const sf::Color FLOOR_COLOR = sf::Color::Black;
 const sf::Color CUBE_CUBE_COLOR = sf::Color(112, 146, 190);
 const sf::Color SPIKE1_COLOR = sf::Color(237, 28, 36);
+const sf::Color SPIKE1_UP_COLOR = sf::Color(239, 228, 176);
 const sf::Color CUBE2_COLOR = sf::Color(0, 162, 232);
 const sf::Color CUBE1_COLOR = sf::Color(63, 72, 204);
 const sf::Color COIN_COLOR = sf::Color(255, 242, 0);
@@ -52,7 +56,9 @@ const sf::Color SPIKES_COLOR = sf::Color(255, 174, 201);
 const sf::Color SPIKE2_COLOR = sf::Color(185, 122, 87);
 const sf::Color JUMPER2_COLOR = sf::Color(34, 177, 76);
 const sf::Color JUMPER1_COLOR = sf::Color(181, 230, 29);
+const sf::Color JUMPER1_UP_COLOR = sf::Color(195, 195, 195);
 const sf::Color PLAYER_COLOR = sf::Color(255, 201, 14);
+const sf::Color ENEMY_COLOR = sf::Color(195, 195, 195);
 
 
 

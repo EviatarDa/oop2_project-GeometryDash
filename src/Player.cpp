@@ -11,7 +11,7 @@ Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures, s
     m_first_location(m_object_body->GetPosition()),
     m_gravity(world.GetGravity())
 {
-    shipState();
+    //shipState();
 }
 
 void Player::move()
@@ -62,6 +62,11 @@ void Player::kill()
     if (dynamic_cast<ShipState*>(m_state.get()) != nullptr)
     {
         boxState();
+    }
+    if (m_gravity.y < 0)
+    {
+        m_gravity_changed = true;
+        m_gravity = -m_gravity;
     }
     m_object_body->SetTransform(m_first_location, m_object_body->GetAngle());
     m_alive = true;

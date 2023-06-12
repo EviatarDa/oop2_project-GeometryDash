@@ -10,7 +10,7 @@
 class Jumper : public StaticObject
 {
 public:
-	Jumper(b2World&, GameTextures, sf::Vector2f);
+	Jumper(b2World&, GameTextures, sf::Vector2f, bool);
 
 private:
 

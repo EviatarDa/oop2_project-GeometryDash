@@ -13,6 +13,7 @@
 #include "Gate.h"
 #include "Spike.h"
 #include "Jumper.h"
+#include "Enemy.h"
 
 
 #include <functional>
