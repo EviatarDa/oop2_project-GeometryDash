@@ -98,18 +98,19 @@ void jumperPlayer(GameObject& jumper, GameObject& player)
 
 //--------------------------------------------------------------------
 
-void enemyBrick(GameObject& enemy_object, GameObject& brick_object)
+void enemySpike(GameObject& enemy_object, GameObject& spike_object)
 {
+	//Spike& spike = dynamic_cast<Spike&>(spike_object);
+
 	Enemy& enemy = dynamic_cast<Enemy&>(enemy_object);
-	//Brick& brick = dynamic_cast<Brick&>(brick_object);
-	
 	enemy.swap();
 
 }
 
-void brickEnemy(GameObject& enemy, GameObject& brick)
+
+void spikeEnemy(GameObject& spike, GameObject& enemy)
 {
-	enemyBrick(enemy, brick);
+	enemySpike(enemy, spike);
 }
 
 //--------------------------------------------------------------------
@@ -152,8 +153,8 @@ namespace // anonymous namespace — the standard way to make function "static"
 		phm[Key(typeid(Brick), typeid(Player))] = &brickPlayer;
 		phm[Key(typeid(Player), typeid(Jumper))] = &playerJumper;
 		phm[Key(typeid(Jumper), typeid(Player))] = &jumperPlayer;
-		phm[Key(typeid(Enemy), typeid(Brick))] = &enemyBrick;
-		phm[Key(typeid(Brick), typeid(Enemy))] = &brickEnemy;
+		phm[Key(typeid(Enemy), typeid(Spike))] = &enemySpike;
+		phm[Key(typeid(Spike), typeid(Enemy))] = &spikeEnemy;
 		//...
 		return phm;
 	}

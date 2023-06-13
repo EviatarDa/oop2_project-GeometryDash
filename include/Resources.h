@@ -36,7 +36,7 @@ const float BOX_JUMP_FORCE = 25.f;// 0.7f;// 25.f;
 const float BOX_HOP_FORCE = 50.f;
 const float SHIP_JUMP_FORCE = 5.f;
 const float PLAYER_MOVEMENT_SPEED = 7;
-const float ENEMY_MOVEMENT_SPEED = 6;
+const float ENEMY_MOVEMENT_SPEED = 3;
 
 
 //game object by color
@@ -56,9 +56,10 @@ const sf::Color SPIKES_COLOR = sf::Color(255, 174, 201);
 const sf::Color SPIKE2_COLOR = sf::Color(185, 122, 87);
 const sf::Color JUMPER2_COLOR = sf::Color(34, 177, 76);
 const sf::Color JUMPER1_COLOR = sf::Color(181, 230, 29);
-const sf::Color JUMPER1_UP_COLOR = sf::Color(195, 195, 195);
+const sf::Color JUMPER1_UP_COLOR = sf::Color(127, 127, 127);
 const sf::Color PLAYER_COLOR = sf::Color(255, 201, 14);
 const sf::Color ENEMY_COLOR = sf::Color(195, 195, 195);
+const sf::Color ENEMY_UP_COLOR = sf::Color(117, 22, 63);
 
 
 

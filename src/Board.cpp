@@ -213,13 +213,16 @@ void Board::createLevel()
             }
             else if ((source.getPixel(x, y) == JUMPER1_UP_COLOR))
             {
-                sf::Vector2f jumper1_location(50 * x + 25, 50 * y - 88);
+                sf::Vector2f jumper1_location(50 * x + 25, 50 * y +13);
                 m_static_objects.push_back(std::make_unique<Jumper>(m_world, Jumper1, jumper1_location, true));
             }
             else if ((source.getPixel(x, y) == ENEMY_COLOR))
             {
-                sf::Vector2f jumper1_location(50 * x + 25, 50 * y - 88);
-                m_moving_objects.push_back(std::make_unique<Enemy>(m_world, Jumper1, jumper1_location));
+                m_moving_objects.push_back(std::make_unique<Enemy>(m_world, Spike1, location, false));
+            }
+            else if ((source.getPixel(x, y) == ENEMY_UP_COLOR))
+            {
+                m_moving_objects.push_back(std::make_unique<Enemy>(m_world, Spike1, location, true));
             }
         }
     }
