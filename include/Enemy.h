@@ -5,6 +5,8 @@
 #include <Box2D/Box2D.h>
 #include "Resources.h"
 #include "MovingObject.h"
+#include "Animation.h"
+
 
 class Enemy : public MovingObject
 {
@@ -17,5 +19,6 @@ private:
     //0-Right 1-Left
     bool m_direction[2] = { true, false };
     float m_attach;
+    Animation m_animation;
 
 };

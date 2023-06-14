@@ -48,7 +48,6 @@ private:
     int m_player_index;
     sf::Vector2f m_player_location;
     MyContactListener m_contact;
-    
 
     void createLevel();
 

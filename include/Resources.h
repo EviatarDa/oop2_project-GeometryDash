@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <string.h>
+#include "AnimationData.h"
 
 enum MenuTextures { Menu_Background, Title, Authors };
 enum MenuButtons { Play, Help, Box, Score_Table };
@@ -16,6 +17,7 @@ enum GameTextures {
 };
 enum GameMaps { Map1 };
 enum Direction { Right, Left, Up, Stay };
+enum GameAnimations { EnemyAnimation };
 
 //arrays
 const int MENU_TEXTURES = 3;
@@ -25,6 +27,8 @@ const int MENU_BOX_SHIPS = 6;
 
 const int GAME_TEXTURES = 32;
 const int GAME_MAPS = 3;
+
+const int GAME_ANIMATIONS = 1;
 
 //window
 const int WINDOW_HEIGHT = 800;
@@ -62,6 +66,13 @@ const sf::Color ENEMY_COLOR = sf::Color(195, 195, 195);
 const sf::Color ENEMY_UP_COLOR = sf::Color(117, 22, 63);
 
 
+struct AnimationData
+{
+    using ListType = std::vector<sf::IntRect>;
+    using DataType = std::unordered_map<Direction, ListType>;
+    DataType m_data;
+};
+
 
 class Resources
 {
@@ -81,6 +92,8 @@ public:
 
     const sf::Font& getFont()const;
 
+    const AnimationData& getAnimationData(GameAnimations)const;
+
 
 private:
 
@@ -88,12 +101,14 @@ private:
     sf::Texture m_menu_buttons[MENU_BUTTONS];
     sf::Texture m_menu_instructions[MENU_INSTRUCTIONS];
     sf::Texture m_menu_box_ships[MENU_BOX_SHIPS];
-
+    
     sf::Texture m_game_textures[GAME_TEXTURES];
 
     sf::Font m_font;
 
     sf::Image m_maps[GAME_MAPS];
+
+    std::vector<AnimationData> m_animation_data;
 
     void LoadFromFile();
 

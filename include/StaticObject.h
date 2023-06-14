@@ -28,6 +28,5 @@ protected:
 	bool m_fixture_destroyed = false;
 	GameTextures m_type;
 	sf::Time m_inactive_timer;
-	sf::Clock m_clock;
 
 };

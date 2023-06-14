@@ -2,9 +2,49 @@
 
 #include "Resources.h"
 
+
+namespace
+{
+	AnimationData enemyData()
+	{
+		const auto size = sf::Vector2i(60, 65);// (320, 260);
+		const auto initSpace = sf::Vector2i(1, 3);
+		const auto middleSpace = sf::Vector2i(1, 0);
+
+		auto enemy = AnimationData{};
+		auto currentStart = initSpace;
+
+		auto nextStart = [&]()
+		{
+			currentStart += middleSpace;
+			currentStart.x += size.x;
+			return currentStart;
+		};
+
+		enemy.m_data[Right].emplace_back(currentStart, size);
+		enemy.m_data[Right].emplace_back(nextStart(), size);
+		enemy.m_data[Right].emplace_back(nextStart(), size);
+		enemy.m_data[Right].emplace_back(nextStart(), size);
+		enemy.m_data[Right].emplace_back(nextStart(), size);
+		enemy.m_data[Right].emplace_back(nextStart(), size);
+
+		enemy.m_data[Left].emplace_back(currentStart, size);
+		enemy.m_data[Left].emplace_back(nextStart(), size);
+		enemy.m_data[Left].emplace_back(nextStart(), size);
+		enemy.m_data[Left].emplace_back(nextStart(), size);
+		enemy.m_data[Left].emplace_back(nextStart(), size);
+		enemy.m_data[Left].emplace_back(nextStart(), size);
+
+		return enemy;
+	}
+}
+
+
 Resources::Resources()
+	:m_animation_data(GAME_ANIMATIONS)
 {
 	LoadFromFile();
+	m_animation_data[EnemyAnimation] = enemyData();
 }
 
 Resources& Resources::instance()
@@ -46,6 +86,11 @@ const sf::Image& Resources::getGameMaps(const GameMaps map) const
 const sf::Font& Resources::getFont() const
 {
 	return m_font;
+}
+
+const AnimationData& Resources::getAnimationData(GameAnimations animation) const
+{
+	return m_animation_data[animation];
 }
 
 
@@ -107,7 +152,7 @@ void Resources::LoadFromFile()
 	m_game_textures[Jumper3].loadFromFile("Jumper3.png");
 	m_game_textures[Jumper4].loadFromFile("Jumper4.png");
 	m_game_textures[Rectangle].loadFromFile("Rectangle.png");
-	m_game_textures[EnemySpriteSheet].loadFromFile("EnemiesSpritesheet.png");
+	m_game_textures[EnemySpriteSheet].loadFromFile("EnemiesSpritesheetttt.png");
 
 	//game image
 	m_maps[Map1].loadFromFile("Map.png");
