@@ -13,11 +13,11 @@ enum GameTextures {
     Floor, Level_Background, PlayerBox1, PlayerBox2, PlayerBox3, PlayerBox4, PlayerBox5, PlayerBox6,
     PlayerShip1, PlayerShip2, PlayerShip3, PlayerShip4, PlayerShip5, PlayerShip6, Spike1, Spike2, Spikes,
     Coin, Cube1, Cube2, CubeCube, Gate1, Gate2, Gate3, Gate4, Gate5, Jumper1, Jumper2, Jumper3, Jumper4, Rectangle,
-    EnemySpriteSheet
+    Enemy1SpriteSheet, Enemy2SpriteSheet, Enemy1, Enemy2
 };
 enum GameMaps { Map1 };
 enum Direction { Right, Left, Up, Stay };
-enum GameAnimations { EnemyAnimation };
+enum GameAnimations { Enemy1Animation, Enemy2Animation };
 
 //arrays
 const int MENU_TEXTURES = 3;
@@ -25,10 +25,10 @@ const int MENU_BUTTONS = 4;
 const int MENU_INSTRUCTIONS = 3;
 const int MENU_BOX_SHIPS = 6;
 
-const int GAME_TEXTURES = 32;
+const int GAME_TEXTURES = 35;
 const int GAME_MAPS = 3;
 
-const int GAME_ANIMATIONS = 1;
+const int GAME_ANIMATIONS = 2;
 
 //window
 const int WINDOW_HEIGHT = 800;
@@ -36,7 +36,7 @@ const int WINDOW_WIDTH = 1400;
 
 //physics
 const float SCALE = 30.f;
-const float BOX_JUMP_FORCE = 25.f;// 0.7f;// 25.f;
+const float BOX_JUMP_FORCE = 25.f;
 const float BOX_HOP_FORCE = 50.f;
 const float SHIP_JUMP_FORCE = 5.f;
 const float PLAYER_MOVEMENT_SPEED = 7;
@@ -62,9 +62,10 @@ const sf::Color JUMPER2_COLOR = sf::Color(34, 177, 76);
 const sf::Color JUMPER1_COLOR = sf::Color(181, 230, 29);
 const sf::Color JUMPER1_UP_COLOR = sf::Color(127, 127, 127);
 const sf::Color PLAYER_COLOR = sf::Color(255, 201, 14);
-const sf::Color ENEMY_COLOR = sf::Color(195, 195, 195);
-const sf::Color ENEMY_UP_COLOR = sf::Color(117, 22, 63);
-
+const sf::Color ENEMY1_COLOR = sf::Color(195, 195, 195);
+const sf::Color ENEMY1_UP_COLOR = sf::Color(117, 22, 63);
+const sf::Color ENEMY2_COLOR = sf::Color(234, 54, 128);
+const sf::Color ENEMY2_UP_COLOR = sf::Color(120, 67, 21);
 
 struct AnimationData
 {

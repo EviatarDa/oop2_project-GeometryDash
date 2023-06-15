@@ -4,10 +4,10 @@
 
 const auto AnimationTime = sf::seconds(0.07f);
 
-Animation::Animation(const AnimationData& data, Direction dir, sf::Sprite& sprite)
+Animation::Animation(const AnimationData& data, Direction dir, sf::Sprite& sprite, GameTextures sprite_sheet)
     : m_data(data), m_dir(dir), m_sprite(sprite)
 {
-    m_sprite.setTexture(Resources::instance().getGameTexture(EnemySpriteSheet));
+    m_sprite.setTexture(Resources::instance().getGameTexture(sprite_sheet));
     update();
 }
 

@@ -11,7 +11,7 @@
 class Enemy : public MovingObject
 {
 public:
-    Enemy(b2World&, GameTextures, sf::Vector2f, bool);
+    Enemy(b2World&, GameTextures, sf::Vector2f, bool, GameAnimations, GameTextures);
     void move()override;
     void swap();
 
@@ -20,5 +20,6 @@ private:
     bool m_direction[2] = { true, false };
     float m_attach;
     Animation m_animation;
+    bool m_up;
 
 };

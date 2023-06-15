@@ -115,6 +115,30 @@ void spikeEnemy(GameObject& spike, GameObject& enemy)
 
 //--------------------------------------------------------------------
 
+void playerEnemy(GameObject& player_object, GameObject& enemy_object)
+{
+	Player& player = dynamic_cast<Player&>(player_object);
+	player.setDead();
+}
+
+
+void enemyPlayer(GameObject& enemy, GameObject& player)
+{
+	playerEnemy(player, enemy);
+}
+
+//--------------------------------------------------------------------
+
+void enemyEnemy(GameObject& enemy1_object, GameObject& enemy2_object)
+{
+	Enemy& enemy1 = dynamic_cast<Enemy&>(enemy1_object);
+	Enemy& enemy2 = dynamic_cast<Enemy&>(enemy2_object);
+	
+	enemy1.swap();
+	enemy2.swap();
+}
+
+
 
 void MyContactListener::BeginContact(b2Contact* contact)
 {
@@ -155,6 +179,12 @@ namespace // anonymous namespace — the standard way to make function "static"
 		phm[Key(typeid(Jumper), typeid(Player))] = &jumperPlayer;
 		phm[Key(typeid(Enemy), typeid(Spike))] = &enemySpike;
 		phm[Key(typeid(Spike), typeid(Enemy))] = &spikeEnemy;
+		phm[Key(typeid(Player), typeid(Enemy))] = &playerEnemy;
+		phm[Key(typeid(Enemy), typeid(Player))] = &enemyPlayer;
+		phm[Key(typeid(Enemy), typeid(Enemy))] = &enemyEnemy;
+
+
+
 		//...
 		return phm;
 	}

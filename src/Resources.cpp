@@ -3,11 +3,11 @@
 #include "Resources.h"
 
 
-namespace
+namespace 
 {
-	AnimationData enemyData()
+	AnimationData enemyData(sf::Vector2i enemy_size)
 	{
-		const auto size = sf::Vector2i(53, 50);
+		const auto size = enemy_size;
 		const auto initSpace = sf::Vector2i(0, 0);
 		const auto middleSpace = sf::Vector2i(0, 0);
 
@@ -52,7 +52,8 @@ Resources::Resources()
 	:m_animation_data(GAME_ANIMATIONS)
 {
 	LoadFromFile();
-	m_animation_data[EnemyAnimation] = enemyData();
+	m_animation_data[Enemy1Animation] = enemyData(sf::Vector2i(62, 50));
+	m_animation_data[Enemy2Animation] = enemyData(sf::Vector2i(53, 50));
 }
 
 Resources& Resources::instance()
@@ -160,7 +161,10 @@ void Resources::LoadFromFile()
 	m_game_textures[Jumper3].loadFromFile("Jumper3.png");
 	m_game_textures[Jumper4].loadFromFile("Jumper4.png");
 	m_game_textures[Rectangle].loadFromFile("Rectangle.png");
-	m_game_textures[EnemySpriteSheet].loadFromFile("Enemy2SpriteSheet.png");
+	m_game_textures[Enemy1SpriteSheet].loadFromFile("Enemy1SpriteSheet.png");
+	m_game_textures[Enemy2SpriteSheet].loadFromFile("Enemy2SpriteSheet.png");
+	m_game_textures[Enemy1].loadFromFile("Enemy1.png");
+	m_game_textures[Enemy2].loadFromFile("Enemy2.png");
 
 	//game image
 	m_maps[Map1].loadFromFile("Map.png");

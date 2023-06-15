@@ -216,13 +216,25 @@ void Board::createLevel()
                 sf::Vector2f jumper1_location(50 * x + 25, 50 * y +13);
                 m_static_objects.push_back(std::make_unique<Jumper>(m_world, Jumper1, jumper1_location, true));
             }
-            else if ((source.getPixel(x, y) == ENEMY_COLOR))
+            else if ((source.getPixel(x, y) == ENEMY1_COLOR))
             {
-                m_moving_objects.push_back(std::make_unique<Enemy>(m_world, Spike1, location, false));
+                m_moving_objects.push_back(std::make_unique<Enemy>(m_world, Enemy1, location, false,
+                    Enemy1Animation, Enemy1SpriteSheet));
             }
-            else if ((source.getPixel(x, y) == ENEMY_UP_COLOR))
+            else if ((source.getPixel(x, y) == ENEMY1_UP_COLOR))
             {
-                m_moving_objects.push_back(std::make_unique<Enemy>(m_world, Spike1, location, true));
+                m_moving_objects.push_back(std::make_unique<Enemy>(m_world, Enemy1, location, true,
+                    Enemy1Animation, Enemy1SpriteSheet));
+            }
+            else if ((source.getPixel(x, y) == ENEMY2_COLOR))
+            {
+                m_moving_objects.push_back(std::make_unique<Enemy>(m_world, Enemy2, location, false,
+                    Enemy2Animation, Enemy2SpriteSheet));
+            }
+            else if ((source.getPixel(x, y) == ENEMY2_UP_COLOR))
+            {
+                m_moving_objects.push_back(std::make_unique<Enemy>(m_world, Enemy2, location, true,
+                    Enemy2Animation, Enemy2SpriteSheet));
             }
         }
     }

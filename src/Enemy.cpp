@@ -3,10 +3,15 @@
 
 #include "Enemy.h"
 
-Enemy::Enemy(b2World& world, GameTextures texture, sf::Vector2f location, bool up)
+Enemy::Enemy(b2World& world, GameTextures texture, sf::Vector2f location, bool up,
+	GameAnimations animation, GameTextures sprite_sheet)
 	:MovingObject(world, texture, location),
-	m_animation(Resources::instance().getAnimationData(EnemyAnimation), Right, m_object)
+
+	m_animation(Resources::instance().getAnimationData(animation), Right, m_object, sprite_sheet),
+	m_up(up)
 {
+	//for correcting first direction
+	swap();
 	if (up)
 	{
 		m_attach = -1.f;
@@ -36,10 +41,20 @@ void Enemy::swap()
 {
 	m_direction[Right] = !m_direction[Right];
 	m_direction[Left] = !m_direction[Left];
-	if(m_direction[Right])
-		m_animation.direction(Right);
+	if(m_up)
+	{
+		if (m_direction[Right])
+			m_animation.direction(Left);
+		else
+			m_animation.direction(Right);
+	}
 	else
-		m_animation.direction(Left);
+	{
+		if (m_direction[Right])
+			m_animation.direction(Right);
+		else
+			m_animation.direction(Left);
+	}
 
 }
 

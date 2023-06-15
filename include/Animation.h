@@ -7,7 +7,7 @@
 class Animation
 {
 public:
-    Animation(const AnimationData&, Direction, sf::Sprite&);
+    Animation(const AnimationData&, Direction, sf::Sprite&, GameTextures);
     void direction(Direction dir);
     void update(sf::Time delta);
 
