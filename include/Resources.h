@@ -3,7 +3,9 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <string.h>
-#include "AnimationData.h"
+//#include "AnimationData.h"
+#include <unordered_map>
+
 
 enum MenuTextures { Menu_Background, Title, Authors };
 enum MenuButtons { Play, Help, Box, Score_Table };

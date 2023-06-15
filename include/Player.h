@@ -37,5 +37,4 @@ private:
     void changeBodyAndSprite(GameTextures);
 
     b2Vec2 m_gravity;
-
 };

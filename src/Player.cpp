@@ -3,7 +3,7 @@
 #include "Player.h"
 
 
-Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures, sf::Vector2f location/*, b2Vec2& gravity*/)
+Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures, sf::Vector2f location)
     :MovingObject(world, textures.first, location),
     m_player_textures(textures),
     m_state(std::make_unique<BoxState>()),
@@ -11,7 +11,6 @@ Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures, s
     m_first_location(m_object_body->GetPosition()),
     m_gravity(world.GetGravity())
 {
-    //shipState();
 }
 
 void Player::move()
