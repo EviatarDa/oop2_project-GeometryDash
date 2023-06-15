@@ -7,9 +7,9 @@ namespace
 {
 	AnimationData enemyData()
 	{
-		const auto size = sf::Vector2i(60, 65);// (320, 260);
-		const auto initSpace = sf::Vector2i(1, 3);
-		const auto middleSpace = sf::Vector2i(1, 0);
+		const auto size = sf::Vector2i(53, 50);
+		const auto initSpace = sf::Vector2i(0, 0);
+		const auto middleSpace = sf::Vector2i(0, 0);
 
 		auto enemy = AnimationData{};
 		auto currentStart = initSpace;
@@ -27,8 +27,16 @@ namespace
 		enemy.m_data[Right].emplace_back(nextStart(), size);
 		enemy.m_data[Right].emplace_back(nextStart(), size);
 		enemy.m_data[Right].emplace_back(nextStart(), size);
+		enemy.m_data[Right].emplace_back(nextStart(), size);
+		enemy.m_data[Right].emplace_back(nextStart(), size);
+		enemy.m_data[Right].emplace_back(nextStart(), size);
+		enemy.m_data[Right].emplace_back(nextStart(), size);
 
-		enemy.m_data[Left].emplace_back(currentStart, size);
+		enemy.m_data[Left].emplace_back(nextStart(), size);
+		enemy.m_data[Left].emplace_back(nextStart(), size);
+		enemy.m_data[Left].emplace_back(nextStart(), size);
+		enemy.m_data[Left].emplace_back(nextStart(), size);
+		enemy.m_data[Left].emplace_back(nextStart(), size);
 		enemy.m_data[Left].emplace_back(nextStart(), size);
 		enemy.m_data[Left].emplace_back(nextStart(), size);
 		enemy.m_data[Left].emplace_back(nextStart(), size);
@@ -152,7 +160,7 @@ void Resources::LoadFromFile()
 	m_game_textures[Jumper3].loadFromFile("Jumper3.png");
 	m_game_textures[Jumper4].loadFromFile("Jumper4.png");
 	m_game_textures[Rectangle].loadFromFile("Rectangle.png");
-	m_game_textures[EnemySpriteSheet].loadFromFile("EnemiesSpritesheetttt.png");
+	m_game_textures[EnemySpriteSheet].loadFromFile("Enemy2SpriteSheet.png");
 
 	//game image
 	m_maps[Map1].loadFromFile("Map.png");
