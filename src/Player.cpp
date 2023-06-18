@@ -151,6 +151,16 @@ void Player::handleShipStateMarking()
     m_set_ship_state = false;
 }
 
+void Player::setWin()
+{
+    m_win = true;
+}
+
+bool Player::isWinner()
+{
+    return m_win;
+}
+
 
 
 void Player::changeBodyAndSprite(GameTextures game_texture)

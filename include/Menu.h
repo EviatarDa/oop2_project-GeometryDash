@@ -25,12 +25,14 @@ public:
 	std::pair<GameTextures, GameTextures> getPlayerTextures();
 	void chooseBoxShip(MenuBoxShips);
 
+	void drawLevelsPage();
+
 private:
 
 	sf::RenderWindow& m_window;
 	sf::Sprite m_background;
 	sf::Sprite m_title;
-	sf::Sprite m_Authors;
+	//sf::Sprite m_Authors;
 
 	ScoreTable m_score_teble;
 

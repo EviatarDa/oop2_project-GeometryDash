@@ -31,13 +31,15 @@ public:
 	bool isGravityMarked();
 
 	//TOCHECK
-	virtual void setBoxState() {};
+	//virtual void setBoxState() {};
 	virtual bool isBoxStateMarked() { return false; };
 	virtual void handleBoxStateMarking() {};
 
-	virtual void setShipState() {};
+	//virtual void setShipState() {};
 	virtual bool isShipStateMarked() { return false;};
 	virtual void handleShipStateMarking() {};
+	
+	virtual bool isWinner() { return false; };
 
 protected:
 	bool m_alive = true;

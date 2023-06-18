@@ -31,10 +31,11 @@ void playerGate(GameObject& player_object, GameObject& gate_object)
 	{
 		switch (gate.getType())
 		{
-		case Gate1:		player.setShipState();		break;
-		case Gate2:		player.setBoxState();		break;
+		case Gate1:		player.setShipState();									break;
+		case Gate2:		player.setBoxState();									break;
 		case Gate3:		player.setGravity();	player.reverseGravity();		break;
 		case Gate4:		player.setGravity();	player.reverseGravity();		break;
+		case Gate5:		player.setWin();										break;
 		}
 		gate.inactive();
 	}

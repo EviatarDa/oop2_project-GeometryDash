@@ -39,7 +39,7 @@ void Game::runMenu()
             case sf::Event::MouseMoved:
             {
                 auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
-                handleMenuMouseMoved(location);
+                handleMenuMouseMoved(location, Play, Score_Table);
             }
 
             }
@@ -51,9 +51,9 @@ void Game::runMenu()
     }
 }
 
-void Game::handleMenuMouseMoved(const sf::Vector2f location)
+void Game::handleMenuMouseMoved(const sf::Vector2f location, int first, int last)
 {
-    for (int button = Play; button <= Score_Table; button++)
+    for (int button = first; button <= last; button++)
     {
         if ((m_menu.getButton((MenuButtons)button).getGlobalBounds().contains(location)))
         {
@@ -85,7 +85,7 @@ void Game::handleMenuClick(const sf::Vector2f location)
 {
     if (m_menu.getButton(Play).getGlobalBounds().contains(location))
     {
-        startGame();
+        chooseLevel();
     }
     else if (m_menu.getButton(Help).getGlobalBounds().contains(location))
     {
@@ -111,6 +111,29 @@ void Game::handleBoxShipPageClick(const sf::Vector2f location)
         }
     }
 }
+
+void Game::handleLevelsPageClick(const sf::Vector2f location)
+{
+    if (m_menu.getButton(WithoutYou).getGlobalBounds().contains(location))
+    {
+        m_board.createLevel(Map1);
+    }
+    else if (m_menu.getButton(Greyhound).getGlobalBounds().contains(location))
+    {
+        m_board.createLevel(Map2);
+    }
+    else if (m_menu.getButton(OnlyTheHorses).getGlobalBounds().contains(location))
+    {
+        m_board.createLevel(Map1);
+    }
+    else if (m_menu.getButton(Spectre).getGlobalBounds().contains(location))
+    {
+        m_board.createLevel(Map1);
+    }
+    startGame();
+}
+
+
 
 void Game::startGame()
 {
@@ -248,6 +271,42 @@ void Game::chooseBoxShip()
             {
                 auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
                 handleBoxShipMouseMoved(location);
+                break;
+            }
+            case sf::Event::Closed:
+                m_window.close();
+                break;
+            }
+        }
+    }
+}
+
+void Game::chooseLevel()
+{
+    bool click = false;
+
+    while (m_window.isOpen() && !click)
+    {
+        m_window.clear();
+        m_menu.drawLevelsPage();
+        m_window.display();
+
+        if (auto event = sf::Event{}; m_window.waitEvent(event))
+        {
+            switch (event.type)
+            {
+            case sf::Event::MouseButtonReleased:
+            {
+                auto location = m_window.mapPixelToCoords(
+                    { event.mouseButton.x, event.mouseButton.y });
+                handleLevelsPageClick(location);
+                click = true;
+                break;
+            }
+            case sf::Event::MouseMoved:
+            {
+                auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
+                handleMenuMouseMoved(location, WithoutYou, Spectre);
                 break;
             }
             case sf::Event::Closed:

@@ -31,6 +31,7 @@ public:
     void spaceReleased();
     void changeBoxShip(std::pair<GameTextures, GameTextures>);
     void handleCollision();
+    void createLevel(const GameMaps);
 
 
 private:
@@ -48,7 +49,4 @@ private:
     int m_player_index;
     sf::Vector2f m_player_location;
     MyContactListener m_contact;
-
-    void createLevel();
-
 };

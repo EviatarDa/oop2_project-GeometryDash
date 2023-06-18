@@ -3,13 +3,12 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <string.h>
-//#include "AnimationData.h"
 #include <unordered_map>
 
 
-enum MenuTextures { Menu_Background, Title, Authors };
-enum MenuButtons { Play, Help, Box, Score_Table };
-enum MenuInstructions { OhNo, Instructions1, DropTheMic };
+enum MenuTextures { Menu_Background, Title };
+enum MenuButtons { Play, Help, Box, Score_Table, WithoutYou, Greyhound, OnlyTheHorses, Spectre };
+enum MenuInstructions { OhNo, Instructions1, Instructions2, Instructions3, DropTheMic };
 enum MenuBoxShips { BoxShip1, BoxShip2, BoxShip3, BoxShip4, BoxShip5, BoxShip6 };
 enum GameTextures {
     Floor, Level_Background, PlayerBox1, PlayerBox2, PlayerBox3, PlayerBox4, PlayerBox5, PlayerBox6,
@@ -17,18 +16,18 @@ enum GameTextures {
     Coin, Cube1, Cube2, CubeCube, Gate1, Gate2, Gate3, Gate4, Gate5, Jumper1, Jumper2, Jumper3, Jumper4, Rectangle,
     Enemy1SpriteSheet, Enemy2SpriteSheet, Enemy1, Enemy2
 };
-enum GameMaps { Map1 };
+enum GameMaps { Map1, Map2, Map3, Map4 };
 enum Direction { Right, Left, Up, Stay };
 enum GameAnimations { Enemy1Animation, Enemy2Animation };
 
 //arrays
-const int MENU_TEXTURES = 3;
-const int MENU_BUTTONS = 4;
-const int MENU_INSTRUCTIONS = 3;
+const int MENU_TEXTURES = 2;
+const int MENU_BUTTONS = 9;
+const int MENU_INSTRUCTIONS = 5;
 const int MENU_BOX_SHIPS = 6;
 
 const int GAME_TEXTURES = 35;
-const int GAME_MAPS = 3;
+const int GAME_MAPS = 4;
 
 const int GAME_ANIMATIONS = 2;
 
@@ -57,6 +56,7 @@ const sf::Color GATE1_COLOR = sf::Color(255, 127, 39);
 const sf::Color GATE2_COLOR = sf::Color(163, 73, 164);
 const sf::Color GATE3_COLOR = sf::Color(200, 191, 231);
 const sf::Color GATE4_COLOR = sf::Color(136, 0, 21);
+const sf::Color GATE5_COLOR = sf::Color(64, 128, 128);
 const sf::Color RECTANGLE_COLOR = sf::Color(153, 217, 234);
 const sf::Color SPIKES_COLOR = sf::Color(255, 174, 201);
 const sf::Color SPIKE2_COLOR = sf::Color(185, 122, 87);

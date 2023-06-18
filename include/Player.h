@@ -27,13 +27,17 @@ public:
     void collideBrick(GameTextures);
    // void handleMarking() override;
 
-    void setBoxState() override;
+    void setBoxState();
     bool isBoxStateMarked() override;
     void handleBoxStateMarking() override;
 
-    void setShipState() override;
+    void setShipState();
     bool isShipStateMarked() override;
     void handleShipStateMarking() override;
+
+    void setWin();
+    bool isWinner()override;
+
 
 private:
     bool m_direction[4] = { false, false, false, false };
@@ -47,4 +51,5 @@ private:
 
     bool m_set_box_state = false;
     bool m_set_ship_state = false;
+    bool m_win = false;
 };

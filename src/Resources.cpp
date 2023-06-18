@@ -110,15 +110,21 @@ void Resources::LoadFromFile()
 	m_menu_textures[Menu_Background].setSmooth(true);
 	m_menu_textures[Title].loadFromFile("Title.png");
 	m_menu_textures[Title].setSmooth(true);
-	m_menu_textures[Authors].loadFromFile("Authors.png");
 
+	//menu buttons
 	m_menu_buttons[Play].loadFromFile("Play.png");
 	m_menu_buttons[Help].loadFromFile("Help.png");
 	m_menu_buttons[Box].loadFromFile("Box.png");
 	m_menu_buttons[Score_Table].loadFromFile("Score_Table.png");
+	m_menu_buttons[WithoutYou].loadFromFile("WithoutYou.png");
+	m_menu_buttons[Greyhound].loadFromFile("Greyhound.png");
+	m_menu_buttons[OnlyTheHorses].loadFromFile("OnlyTheHorses.png");
+	m_menu_buttons[Spectre].loadFromFile("Spectre.png");
 
 	m_menu_instructions[OhNo].loadFromFile("OhNo.png");
 	m_menu_instructions[Instructions1].loadFromFile("Instructions1.png");
+	m_menu_instructions[Instructions2].loadFromFile("Instructions2.png");
+	m_menu_instructions[Instructions3].loadFromFile("Instructions3.png");
 	m_menu_instructions[DropTheMic].loadFromFile("DropTheMic.png");
 
 	m_menu_box_ships[BoxShip1].loadFromFile("BoxShip1.png");
@@ -167,7 +173,10 @@ void Resources::LoadFromFile()
 	m_game_textures[Enemy2].loadFromFile("Enemy2.png");
 
 	//game image
-	m_maps[Map1].loadFromFile("Map.png");
+	m_maps[Map1].loadFromFile("Map1.png");
+	m_maps[Map2].loadFromFile("Map2.png");
+	m_maps[Map3].loadFromFile("Map3.png");
+	m_maps[Map4].loadFromFile("Map4.png");
 
 	//font
 	m_font.loadFromFile("C:/Windows/Fonts/Arial.ttf");

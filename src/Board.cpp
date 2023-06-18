@@ -8,16 +8,9 @@ Board::Board(sf::RenderWindow& window, std::pair<GameTextures, GameTextures> pla
     m_background.setTexture(Resources::instance().getGameTexture(Level_Background));
     m_background.scale(1.6f, 1.6f);
 
-    createLevel();
+    //createLevel(Map1);
     m_world.SetContactListener(&m_contact);
 }
-
-//Board::~Board()
-//{
-//    for (auto& object : m_moving_objects)
-//        if (object->getBody() != nullptr)
-//            m_world.DestroyBody(object->getBody());
-//}
 
 
 void Board::drawBoard()
@@ -115,21 +108,8 @@ void Board::handleCollision()
     if (m_moving_objects[m_player_index]->isGravityMarked())
         swapGravity();
 
-    //for (auto& object : m_moving_objects)
-    //{
-    //    if (!object->isAlive())
-    //    {
-    //        object->kill();
-    //    }
-    //    if (object->isStateMarked())
-    //    {
-    //        object->handleMarking();
-    //    }
-    //    if (object->isGravityMarked())
-    //    {
-    //        swapGravity();
-    //    }
-    //}
+    //if (m_moving_objects[m_player_index]->isWinner())
+        
 
     for (auto& object : m_static_objects)
     {
@@ -142,9 +122,9 @@ void Board::handleCollision()
 }
 
 
-void Board::createLevel()
+void Board::createLevel(const GameMaps level)
 {
-    const sf::Image& source = Resources::instance().getGameMaps(Map1);
+    const sf::Image& source = Resources::instance().getGameMaps(level);
     for (size_t y = 0; y < source.getSize().y; ++y)
     {
         for (size_t x = 0; x < source.getSize().x; ++x)
@@ -152,6 +132,9 @@ void Board::createLevel()
             sf::Vector2f location(50 * x + 25, 50 * y + 25);
             if ((source.getPixel(x, y) == PLAYER_COLOR))
             {
+                ////Player *m_player;
+                //m_player = new Player(m_world, m_player_textures, location);
+                //m_moving_objects.push_back(std::unique_ptr<Player>(m_player));
                 m_moving_objects.push_back(std::make_unique<Player>(m_world, m_player_textures, location));
                 m_player_location = location;
                 m_player_index = m_moving_objects.size()-1;
@@ -191,6 +174,10 @@ void Board::createLevel()
             else if ((source.getPixel(x, y) == GATE4_COLOR))
             {
                 m_static_objects.push_back(std::make_unique<Gate>(m_world, Gate4, location));
+            }
+            else if ((source.getPixel(x, y) == GATE5_COLOR))
+            {
+                m_static_objects.push_back(std::make_unique<Gate>(m_world, Gate5, location));
             }
             else if ((source.getPixel(x, y) == RECTANGLE_COLOR))
             {
