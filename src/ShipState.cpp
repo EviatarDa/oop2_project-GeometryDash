@@ -1,6 +1,6 @@
 #include "ShipState.h"
 
-void ShipState::move(bool* direction, b2Body* body, bool&, b2Vec2 gravity)
+void ShipState::move(bool* direction, b2Body* body, bool&, b2Vec2 gravity, sf::Sprite& object)
 {
     if(direction[Up])
     {
@@ -16,6 +16,8 @@ void ShipState::move(bool* direction, b2Body* body, bool&, b2Vec2 gravity)
         float currentSpeed_y = body->GetLinearVelocity().y;
         body->SetLinearVelocity({ PLAYER_MOVEMENT_SPEED, currentSpeed_y });
     }
+    object.setPosition(SCALE * body->GetPosition().x, SCALE * body->GetPosition().y);
+
 }
 
 void ShipState::collideBrick(bool& touching_ground, bool& alive)

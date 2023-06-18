@@ -32,7 +32,6 @@ void Enemy::move()
 		m_object_body->SetLinearVelocity({ -ENEMY_MOVEMENT_SPEED, m_attach });
 
 	m_object.setPosition(SCALE * m_object_body->GetPosition().x, SCALE * m_object_body->GetPosition().y);
-	//m_object.setRotation(m_object_body->GetAngle() * 180 / b2_pi);//
 	const auto delta = m_clock.restart();
 	m_animation.update(delta);
 }

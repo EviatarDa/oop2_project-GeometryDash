@@ -9,7 +9,7 @@ class PlayerState
 {
 public:
     virtual ~PlayerState() = default;
-    virtual void move(bool*, b2Body*, bool&, b2Vec2) = 0;
+    virtual void move(bool*, b2Body*, bool&, b2Vec2, sf::Sprite&) = 0;
     virtual void collideBrick(bool&, bool&) = 0;
 
 private:

@@ -50,10 +50,10 @@ bool MovingObject::isAlive()
     return m_alive;
 }
 
-void MovingObject::setState()
-{
-    m_state_change = true;
-}
+//void MovingObject::setState()
+//{
+//    m_state_change = true;
+//}
 
 void MovingObject::setGravity()
 {
@@ -71,7 +71,7 @@ bool MovingObject::isGravityMarked()
         return m_gravity_changed;
 }
 
-bool MovingObject::isStateMarked()
-{
-    return m_state_change;
-}
+//bool MovingObject::isStateMarked()
+//{
+//    return m_state_change;
+//}

@@ -1,6 +1,6 @@
 #include "BoxState.h"
 
-void BoxState::move(bool* direction, b2Body* body, bool& touching_ground, b2Vec2 gravity)
+void BoxState::move(bool* direction, b2Body* body, bool& touching_ground, b2Vec2 gravity, sf::Sprite& object)
 {
     if(direction[Up])
     {
@@ -33,6 +33,10 @@ void BoxState::move(bool* direction, b2Body* body, bool& touching_ground, b2Vec2
         float currentSpeed_y = body->GetLinearVelocity().y;
         body->SetLinearVelocity({ 0, currentSpeed_y });
     }
+    
+    object.setPosition(SCALE * body->GetPosition().x, SCALE * body->GetPosition().y);
+    object.setRotation(body->GetAngle() * 180 / b2_pi);
+
 }
 
 void BoxState::collideBrick(bool& touching_ground, bool& alive)

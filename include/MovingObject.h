@@ -23,16 +23,27 @@ public:
 	bool isAlive();
 	virtual void kill() {};
 
-	void setState();
-	bool isStateMarked();
+	//void setState();
+	//bool isStateMarked();
 	virtual void handleMarking() {};
 
 	void setGravity();
 	bool isGravityMarked();
 
+	//TOCHECK
+	virtual void setBoxState() {};
+	virtual bool isBoxStateMarked() { return false; };
+	virtual void handleBoxStateMarking() {};
+
+	virtual void setShipState() {};
+	virtual bool isShipStateMarked() { return false;};
+	virtual void handleShipStateMarking() {};
+
 protected:
 	bool m_alive = true;
 	bool m_state_change = false;
 	bool m_gravity_changed = false;
+
+
 
 };

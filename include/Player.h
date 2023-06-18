@@ -25,7 +25,15 @@ public:
     void hop(float);
     void reverseGravity();
     void collideBrick(GameTextures);
-    void handleMarking() override;
+   // void handleMarking() override;
+
+    void setBoxState() override;
+    bool isBoxStateMarked() override;
+    void handleBoxStateMarking() override;
+
+    void setShipState() override;
+    bool isShipStateMarked() override;
+    void handleShipStateMarking() override;
 
 private:
     bool m_direction[4] = { false, false, false, false };
@@ -35,6 +43,8 @@ private:
     b2Vec2 m_first_location;
     bool m_touching_ground = false;
     void changeBodyAndSprite(GameTextures);
-
     b2Vec2 m_gravity;
+
+    bool m_set_box_state = false;
+    bool m_set_ship_state = false;
 };

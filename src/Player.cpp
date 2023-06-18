@@ -15,9 +15,7 @@ Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures, s
 
 void Player::move()
 {
-    m_state->move(m_direction, m_object_body, m_touching_ground, m_gravity);
-    m_object.setPosition(SCALE * m_object_body->GetPosition().x, SCALE * m_object_body->GetPosition().y);
-    m_object.setRotation(m_object_body->GetAngle() * 180 / b2_pi);
+    m_state->move(m_direction, m_object_body, m_touching_ground, m_gravity, m_object);
 }
 
 void Player::updateDirection()
@@ -43,6 +41,7 @@ void Player::shipState()
 {
     changeBodyAndSprite(m_player_textures.second);
     m_state.reset(new ShipState());
+    m_object.setRotation(0);
 }
 
 void Player::boxState()
@@ -58,10 +57,7 @@ void Player::increasePoints()
 
 void Player::kill()
 {
-    if (dynamic_cast<ShipState*>(m_state.get()) != nullptr)
-    {
-        boxState();
-    }
+    boxState();
     if (m_gravity.y < 0)
     {
         m_gravity_changed = true;
@@ -112,15 +108,47 @@ void Player::collideBrick(GameTextures brick_type)
         m_touching_ground = true;
 }
 
-void Player::handleMarking()
+//void Player::handleMarking()
+//{
+//    if (dynamic_cast<ShipState*>(m_state.get()) != nullptr)
+//    {
+//        boxState();
+//    }
+//    else
+//        shipState();
+//    m_state_change = false;
+//}
+
+void Player::setBoxState()
 {
-    if (dynamic_cast<ShipState*>(m_state.get()) != nullptr)
-    {
-        boxState();
-    }
-    else
-        shipState();
-    m_state_change = false;
+    m_set_box_state = true;
+}
+
+bool Player::isBoxStateMarked()
+{
+    return m_set_box_state;
+}
+
+void Player::handleBoxStateMarking()
+{
+    boxState();
+    m_set_box_state = false;
+}
+
+void Player::setShipState()
+{
+    m_set_ship_state = true;
+}
+
+bool Player::isShipStateMarked()
+{
+    return m_set_ship_state;
+}
+
+void Player::handleShipStateMarking()
+{
+    shipState();
+    m_set_ship_state = false;
 }
 
 

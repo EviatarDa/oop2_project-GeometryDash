@@ -103,21 +103,33 @@ void Board::handleCollision()
 {
     std::erase_if(m_static_objects, [](const auto& static_object) {return static_object->getDelete(); });
 
-    for (auto& object : m_moving_objects)
-    {
-        if (!object->isAlive())
-        {
-            object->kill();
-        }
-        if (object->isStateMarked())
-        {
-            object->handleMarking();
-        }
-        if (object->isGravityMarked())
-        {
-            swapGravity();
-        }
-    }
+    if (!m_moving_objects[m_player_index]->isAlive())
+        m_moving_objects[m_player_index]->kill();
+
+    if (m_moving_objects[m_player_index]->isBoxStateMarked())
+        m_moving_objects[m_player_index]->handleBoxStateMarking();
+
+    if (m_moving_objects[m_player_index]->isShipStateMarked())
+        m_moving_objects[m_player_index]->handleShipStateMarking();
+    
+    if (m_moving_objects[m_player_index]->isGravityMarked())
+        swapGravity();
+
+    //for (auto& object : m_moving_objects)
+    //{
+    //    if (!object->isAlive())
+    //    {
+    //        object->kill();
+    //    }
+    //    if (object->isStateMarked())
+    //    {
+    //        object->handleMarking();
+    //    }
+    //    if (object->isGravityMarked())
+    //    {
+    //        swapGravity();
+    //    }
+    //}
 
     for (auto& object : m_static_objects)
     {
