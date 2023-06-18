@@ -115,21 +115,19 @@ void Game::handleBoxShipPageClick(const sf::Vector2f location)
 void Game::handleLevelsPageClick(const sf::Vector2f location)
 {
     if (m_menu.getButton(WithoutYou).getGlobalBounds().contains(location))
-    {
         m_board.createLevel(Map1);
-    }
+
     else if (m_menu.getButton(Greyhound).getGlobalBounds().contains(location))
-    {
         m_board.createLevel(Map2);
-    }
+
     else if (m_menu.getButton(OnlyTheHorses).getGlobalBounds().contains(location))
-    {
         m_board.createLevel(Map1);
-    }
+
     else if (m_menu.getButton(Spectre).getGlobalBounds().contains(location))
-    {
         m_board.createLevel(Map1);
-    }
+
+    else
+        return;
     startGame();
 }
 

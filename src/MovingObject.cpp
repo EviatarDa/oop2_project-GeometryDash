@@ -40,36 +40,36 @@ b2Vec2 MovingObject::getPosition()
 }
 
 
-void MovingObject::setDead()
-{
-    m_alive = false;
-}
-
-bool MovingObject::isAlive()
-{
-    return m_alive;
-}
+//void MovingObject::setDead()
+//{
+//    m_alive = false;
+//}
+//
+//bool MovingObject::isAlive()
+//{
+//    return m_alive;
+//}
 
 //void MovingObject::setState()
 //{
 //    m_state_change = true;
 //}
 
-void MovingObject::setGravity()
-{
-    m_gravity_changed = true;
-}
-
-bool MovingObject::isGravityMarked()
-{
-    if (m_gravity_changed)
-    {
-        m_gravity_changed = false;
-        return true;
-    }
-    else
-        return m_gravity_changed;
-}
+//void MovingObject::setGravity()
+//{
+//    m_gravity_changed = true;
+//}
+//
+//bool MovingObject::isGravityMarked()
+//{
+//    if (m_gravity_changed)
+//    {
+//        m_gravity_changed = false;
+//        return true;
+//    }
+//    else
+//        return m_gravity_changed;
+//}
 
 //bool MovingObject::isStateMarked()
 //{

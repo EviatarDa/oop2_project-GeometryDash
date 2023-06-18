@@ -23,17 +23,6 @@ StaticObject::StaticObject(b2World& world, GameTextures texture, sf::Vector2f lo
     m_object_body->CreateFixture(&fixtureDef);
 }
 
-//StaticObject::StaticObject(GameTextures texture, sf::Vector2f location)
-//    :GameObject(texture, location),
-//    m_type(texture)
-//{
-//    //grafics
-//    m_object.setTexture(Resources::instance().getGameTexture(texture));
-//    sf::Vector2f sprite_size(m_object.getTextureRect().width, m_object.getTextureRect().height);
-//    m_object.setOrigin(sprite_size.x / 2, sprite_size.y / 2);
-//    m_object.setPosition(location);
-//}
-
 StaticObject::~StaticObject()
 {
     m_object_body->DestroyFixture(m_object_body->GetFixtureList());

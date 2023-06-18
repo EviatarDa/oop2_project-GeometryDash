@@ -108,16 +108,22 @@ void Player::collideBrick(GameTextures brick_type)
         m_touching_ground = true;
 }
 
-//void Player::handleMarking()
-//{
-//    if (dynamic_cast<ShipState*>(m_state.get()) != nullptr)
-//    {
-//        boxState();
-//    }
-//    else
-//        shipState();
-//    m_state_change = false;
-//}
+void Player::setGravity()
+{
+    m_gravity_changed = true;
+}
+
+bool Player::isGravityMarked()
+{
+    if (m_gravity_changed)
+    {
+        m_gravity_changed = false;
+        return true;
+    }
+    else
+        return m_gravity_changed;
+}
+
 
 void Player::setBoxState()
 {
@@ -159,6 +165,16 @@ void Player::setWin()
 bool Player::isWinner()
 {
     return m_win;
+}
+
+void Player::setDead()
+{
+    m_alive = false;
+}
+
+bool Player::isAlive()
+{
+    return m_alive;
 }
 
 

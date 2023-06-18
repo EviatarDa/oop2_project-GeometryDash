@@ -36,25 +36,33 @@ void Enemy::move()
 	m_animation.update(delta);
 }
 
+void Enemy::updateDirection()
+{
+	if(m_swap)
+	{
+		m_direction[Right] = !m_direction[Right];
+		m_direction[Left] = !m_direction[Left];
+		if (m_up)
+		{
+			if (m_direction[Right])
+				m_animation.direction(Left);
+			else
+				m_animation.direction(Right);
+		}
+		else
+		{
+			if (m_direction[Right])
+				m_animation.direction(Right);
+			else
+				m_animation.direction(Left);
+		}
+		m_swap = false;
+	}
+}
+
 void Enemy::swap()
 {
-	m_direction[Right] = !m_direction[Right];
-	m_direction[Left] = !m_direction[Left];
-	if(m_up)
-	{
-		if (m_direction[Right])
-			m_animation.direction(Left);
-		else
-			m_animation.direction(Right);
-	}
-	else
-	{
-		if (m_direction[Right])
-			m_animation.direction(Right);
-		else
-			m_animation.direction(Left);
-	}
-
+	m_swap = true;
 }
 
 

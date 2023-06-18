@@ -13,6 +13,7 @@ class Enemy : public MovingObject
 public:
     Enemy(b2World&, GameTextures, sf::Vector2f, bool, GameAnimations, GameTextures);
     void move()override;
+    void updateDirection() override;
     void swap();
 
 private:
@@ -21,5 +22,6 @@ private:
     float m_attach;
     Animation m_animation;
     bool m_up;
+    bool m_swap = false;
 
 };

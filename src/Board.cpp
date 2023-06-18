@@ -68,23 +68,23 @@ void Board::updateMovingDirections()
 
 void Board::rightReleased()
 {
-    m_moving_objects[m_player_index]->releaseRight();
+    m_player->releaseRight();
 }
 
 void Board::leftReleased()
 {
-    m_moving_objects[m_player_index]->releaseLeft();
+    m_player->releaseLeft();
 }
 
 void Board::spaceReleased()
 {
-    m_moving_objects[m_player_index]->releaseSpace();
+    m_player->releaseSpace();
 }
 
 void Board::changeBoxShip(std::pair<GameTextures, GameTextures> player_textures)
 {
     //delete the old player body
-    if (m_moving_objects[m_player_index]->getBody() != nullptr)
+    if (m_player->getBody() != nullptr)
         m_world.DestroyBody(m_moving_objects[m_player_index]->getBody());
 
     //create the new player
@@ -95,20 +95,21 @@ void Board::changeBoxShip(std::pair<GameTextures, GameTextures> player_textures)
 void Board::handleCollision()
 {
     std::erase_if(m_static_objects, [](const auto& static_object) {return static_object->getDelete(); });
+       
 
-    if (!m_moving_objects[m_player_index]->isAlive())
-        m_moving_objects[m_player_index]->kill();
+    if (!m_player->isAlive())
+        m_player->kill();
 
-    if (m_moving_objects[m_player_index]->isBoxStateMarked())
-        m_moving_objects[m_player_index]->handleBoxStateMarking();
+    if (m_player->isBoxStateMarked())
+        m_player->handleBoxStateMarking();
 
-    if (m_moving_objects[m_player_index]->isShipStateMarked())
-        m_moving_objects[m_player_index]->handleShipStateMarking();
+    if (m_player->isShipStateMarked())
+        m_player->handleShipStateMarking();
     
-    if (m_moving_objects[m_player_index]->isGravityMarked())
+    if (m_player->isGravityMarked())
         swapGravity();
 
-    //if (m_moving_objects[m_player_index]->isWinner())
+   // if (m_player->isWinner()) /// TOEND
         
 
     for (auto& object : m_static_objects)
@@ -132,10 +133,9 @@ void Board::createLevel(const GameMaps level)
             sf::Vector2f location(50 * x + 25, 50 * y + 25);
             if ((source.getPixel(x, y) == PLAYER_COLOR))
             {
-                ////Player *m_player;
-                //m_player = new Player(m_world, m_player_textures, location);
-                //m_moving_objects.push_back(std::unique_ptr<Player>(m_player));
-                m_moving_objects.push_back(std::make_unique<Player>(m_world, m_player_textures, location));
+                m_player = new Player(m_world, m_player_textures, location);
+                m_moving_objects.push_back(std::unique_ptr<Player>(m_player));
+                //m_moving_objects.push_back(std::make_unique<Player>(m_world, m_player_textures, location));
                 m_player_location = location;
                 m_player_index = m_moving_objects.size()-1;
             }

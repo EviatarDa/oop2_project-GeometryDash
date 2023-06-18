@@ -13,7 +13,7 @@ enum MenuBoxShips { BoxShip1, BoxShip2, BoxShip3, BoxShip4, BoxShip5, BoxShip6 }
 enum GameTextures {
     Floor, Level_Background, PlayerBox1, PlayerBox2, PlayerBox3, PlayerBox4, PlayerBox5, PlayerBox6,
     PlayerShip1, PlayerShip2, PlayerShip3, PlayerShip4, PlayerShip5, PlayerShip6, Spike1, Spike2, Spikes,
-    Coin, Cube1, Cube2, CubeCube, Gate1, Gate2, Gate3, Gate4, Gate5, Jumper1, Jumper2, Jumper3, Jumper4, Rectangle,
+    Coin, Cube1, Cube2, CubeCube, Gate1, Gate2, Gate3, Gate4, Gate5, Jumper1, Jumper2, Rectangle,
     Enemy1SpriteSheet, Enemy2SpriteSheet, Enemy1, Enemy2
 };
 enum GameMaps { Map1, Map2, Map3, Map4 };
@@ -26,7 +26,7 @@ const int MENU_BUTTONS = 9;
 const int MENU_INSTRUCTIONS = 5;
 const int MENU_BOX_SHIPS = 6;
 
-const int GAME_TEXTURES = 35;
+const int GAME_TEXTURES = 33;
 const int GAME_MAPS = 4;
 
 const int GAME_ANIMATIONS = 2;

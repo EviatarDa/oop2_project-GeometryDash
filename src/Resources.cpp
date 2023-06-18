@@ -164,8 +164,6 @@ void Resources::LoadFromFile()
 	m_game_textures[Gate5].loadFromFile("Gate5.png");
 	m_game_textures[Jumper1].loadFromFile("Jumper1.png");
 	m_game_textures[Jumper2].loadFromFile("Jumper2.png");
-	m_game_textures[Jumper3].loadFromFile("Jumper3.png");
-	m_game_textures[Jumper4].loadFromFile("Jumper4.png");
 	m_game_textures[Rectangle].loadFromFile("Rectangle.png");
 	m_game_textures[Enemy1SpriteSheet].loadFromFile("Enemy1SpriteSheet.png");
 	m_game_textures[Enemy2SpriteSheet].loadFromFile("Enemy2SpriteSheet.png");

@@ -12,32 +12,31 @@
 class Player : public MovingObject
 {
 public:
-    Player(b2World&, std::pair<GameTextures, GameTextures>, sf::Vector2f/*, b2Vec2&*/);
+    Player(b2World&, std::pair<GameTextures, GameTextures>, sf::Vector2f);
     void move();
-    void updateDirection();
+    void updateDirection()override;
     void shipState();
     void boxState();
     void increasePoints();
-    void kill()override;
-    void releaseRight()override;
-    void releaseLeft()override;
-    void releaseSpace()override;
+    void kill();
+    void releaseRight();
+    void releaseLeft();
+    void releaseSpace();
     void hop(float);
     void reverseGravity();
     void collideBrick(GameTextures);
-   // void handleMarking() override;
-
+    void setGravity();
+    bool isGravityMarked();
     void setBoxState();
-    bool isBoxStateMarked() override;
-    void handleBoxStateMarking() override;
-
+    bool isBoxStateMarked() ;
+    void handleBoxStateMarking() ;
     void setShipState();
-    bool isShipStateMarked() override;
-    void handleShipStateMarking() override;
-
+    bool isShipStateMarked() ;
+    void handleShipStateMarking() ;
     void setWin();
-    bool isWinner()override;
-
+    bool isWinner();
+    void setDead();
+    bool isAlive();
 
 private:
     bool m_direction[4] = { false, false, false, false };
@@ -52,4 +51,7 @@ private:
     bool m_set_box_state = false;
     bool m_set_ship_state = false;
     bool m_win = false;
+    bool m_alive = true;
+    bool m_state_change = false;
+    bool m_gravity_changed = false;
 };
