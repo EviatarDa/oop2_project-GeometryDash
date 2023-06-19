@@ -169,6 +169,7 @@ void Resources::LoadFromFile()
 	m_game_textures[Enemy2SpriteSheet].loadFromFile("Enemy2SpriteSheet.png");
 	m_game_textures[Enemy1].loadFromFile("Enemy1.png");
 	m_game_textures[Enemy2].loadFromFile("Enemy2.png");
+	m_game_textures[ScoreBoard].loadFromFile("ScoreBoard.png");
 
 	//game image
 	m_maps[Map1].loadFromFile("Map1.png");

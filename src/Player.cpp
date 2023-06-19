@@ -7,7 +7,7 @@ Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures, s
     :MovingObject(world, textures.first, location),
     m_player_textures(textures),
     m_state(std::make_unique<BoxState>()),
-    m_points(0),
+    m_coins(0),
     m_first_location(m_object_body->GetPosition()),
     m_gravity(world.GetGravity())
 {
@@ -52,7 +52,7 @@ void Player::boxState()
 
 void Player::increasePoints()
 {
-    m_points++;
+    m_coins++;
 }
 
 void Player::kill()
@@ -175,6 +175,11 @@ void Player::setDead()
 bool Player::isAlive()
 {
     return m_alive;
+}
+
+int Player::getCoins()
+{
+    return m_coins;
 }
 
 

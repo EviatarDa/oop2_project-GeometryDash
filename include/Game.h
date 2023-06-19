@@ -21,6 +21,8 @@ private:
 	Menu m_menu;
 	Board m_board;
 	sf::View m_gameView;
+	bool m_game_over = false;
+	sf::Clock m_game_clock;
 
 	//functions
 	void handleMenuMouseMoved(const sf::Vector2f, int , int);
@@ -34,4 +36,7 @@ private:
 	void scoreTable();
 	void chooseBoxShip();
 	void chooseLevel();
+	void winLoop();
+	void createScoreBoard(sf::Sprite&, sf::Sprite&, sf::Text&, sf::Text&);
+
 };

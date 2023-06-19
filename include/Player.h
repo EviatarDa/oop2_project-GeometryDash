@@ -37,12 +37,13 @@ public:
     bool isWinner();
     void setDead();
     bool isAlive();
+    int getCoins();
 
 private:
     bool m_direction[4] = { false, false, false, false };
     std::unique_ptr <PlayerState> m_state;
     std::pair<GameTextures, GameTextures> m_player_textures;
-    int m_points;
+    int m_coins;
     b2Vec2 m_first_location;
     bool m_touching_ground = false;
     void changeBodyAndSprite(GameTextures);

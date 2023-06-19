@@ -19,7 +19,6 @@ class Board
 {
 public:
     Board(sf::RenderWindow&, std::pair<GameTextures, GameTextures>);
-    //~Board();
     void drawBoard();
     void moveObjects();
     b2Vec2 getPlayerPosition();
@@ -32,6 +31,8 @@ public:
     void changeBoxShip(std::pair<GameTextures, GameTextures>);
     void handleCollision();
     void createLevel(const GameMaps);
+    bool isWin();
+    int getCoins();
 
 
 private:
@@ -45,9 +46,8 @@ private:
     std::vector < std::unique_ptr< StaticObject>>  m_static_objects;
 
     sf::Sprite m_background;
-
-    int m_player_index;
+    Player* m_player = nullptr;
     sf::Vector2f m_player_location;
     MyContactListener m_contact;
-    Player* m_player;
+    bool m_win = false;
 };

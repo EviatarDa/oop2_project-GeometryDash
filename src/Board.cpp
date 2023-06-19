@@ -7,8 +7,6 @@ Board::Board(sf::RenderWindow& window, std::pair<GameTextures, GameTextures> pla
 {
     m_background.setTexture(Resources::instance().getGameTexture(Level_Background));
     m_background.scale(1.6f, 1.6f);
-
-    //createLevel(Map1);
     m_world.SetContactListener(&m_contact);
 }
 
@@ -43,7 +41,7 @@ void Board::moveObjects()
 
 b2Vec2 Board::getPlayerPosition()
 {
-    return m_moving_objects[m_player_index]->getPosition();
+    return m_player->getPosition();
 }
 
 void Board::viewBackground(float addition)
@@ -83,20 +81,13 @@ void Board::spaceReleased()
 
 void Board::changeBoxShip(std::pair<GameTextures, GameTextures> player_textures)
 {
-    //delete the old player body
-    if (m_player->getBody() != nullptr)
-        m_world.DestroyBody(m_moving_objects[m_player_index]->getBody());
-
-    //create the new player
     m_player_textures = player_textures;
-    m_moving_objects[m_player_index] = std::make_unique<Player>(m_world, m_player_textures, m_player_location);
 }
 
 void Board::handleCollision()
 {
     std::erase_if(m_static_objects, [](const auto& static_object) {return static_object->getDelete(); });
        
-
     if (!m_player->isAlive())
         m_player->kill();
 
@@ -109,7 +100,8 @@ void Board::handleCollision()
     if (m_player->isGravityMarked())
         swapGravity();
 
-   // if (m_player->isWinner()) /// TOEND
+    if (m_player->isWinner())
+        m_win = true;
         
 
     for (auto& object : m_static_objects)
@@ -135,9 +127,7 @@ void Board::createLevel(const GameMaps level)
             {
                 m_player = new Player(m_world, m_player_textures, location);
                 m_moving_objects.push_back(std::unique_ptr<Player>(m_player));
-                //m_moving_objects.push_back(std::make_unique<Player>(m_world, m_player_textures, location));
                 m_player_location = location;
-                m_player_index = m_moving_objects.size()-1;
             }
             else if ((source.getPixel(x, y) == FLOOR_COLOR))
             {
@@ -237,6 +227,16 @@ void Board::createLevel(const GameMaps level)
             }
         }
     }
+}
+
+bool Board::isWin()
+{
+    return m_win;
+}
+
+int Board::getCoins()
+{
+    return m_player->getCoins();
 }
 
 
