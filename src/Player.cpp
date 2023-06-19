@@ -41,7 +41,10 @@ void Player::shipState()
 {
     changeBodyAndSprite(m_player_textures.second);
     m_state.reset(new ShipState());
+    //if (m_gravity.y > 0)
     m_object.setRotation(0);
+    //else
+      //  m_object.setRotation(180);
 }
 
 void Player::boxState()

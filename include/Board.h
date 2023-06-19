@@ -30,7 +30,7 @@ public:
     void spaceReleased();
     void changeBoxShip(std::pair<GameTextures, GameTextures>);
     void handleCollision();
-    void createLevel(const GameMaps);
+    void createLevel(const GameMaps, const GameSounds);
     bool isWin();
     int getCoins();
     void resetBoard();
@@ -51,4 +51,5 @@ private:
     sf::Vector2f m_player_location;
     MyContactListener m_contact;
     bool m_win = false;
+    sf::Sound m_game_song;
 };

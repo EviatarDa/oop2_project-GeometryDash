@@ -29,7 +29,7 @@ void playerGate(GameObject& player_object, GameObject& gate_object)
 	Gate& gate = dynamic_cast<Gate&>(gate_object);
  	if(gate.isActive())
 	{
-		switch (gate.getType())
+	 	switch (gate.getType())
 		{
 		case Gate1:		player.setShipState();									break;
 		case Gate2:		player.setBoxState();									break;

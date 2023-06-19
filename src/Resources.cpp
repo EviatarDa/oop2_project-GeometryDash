@@ -102,6 +102,11 @@ const AnimationData& Resources::getAnimationData(GameAnimations animation) const
 	return m_animation_data[animation];
 }
 
+const sf::SoundBuffer& Resources::getGameSounds(const GameSounds sounsd) const
+{
+	return m_game_sounds[sounsd];
+}
+
 
 void Resources::LoadFromFile()
 {
@@ -176,6 +181,13 @@ void Resources::LoadFromFile()
 	m_maps[Map2].loadFromFile("Map2.png");
 	m_maps[Map3].loadFromFile("Map3.png");
 	m_maps[Map4].loadFromFile("Map4.png");
+
+	//game sounds
+	m_game_sounds[Echo_Song].loadFromFile("Echo.ogg");
+	m_game_sounds[Greyhound_Song].loadFromFile("Greyhound.ogg");
+	m_game_sounds[OnlyTheHorses_Song].loadFromFile("OnlyTheHorses.ogg");
+	m_game_sounds[Spectre_Song].loadFromFile("Spectre.ogg");
+	m_game_sounds[WithoutYou_Song].loadFromFile("WithoutYou.ogg");
 
 	//font
 	m_font.loadFromFile("C:/Windows/Fonts/Arial.ttf");

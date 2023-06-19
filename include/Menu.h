@@ -27,16 +27,18 @@ public:
 
 	void drawLevelsPage();
 
-	void updateScoreTable(int);
+	void updateScoreTable(int, std::string);
+
+	void playSong();
+	void stopSong();
 
 private:
 
 	sf::RenderWindow& m_window;
 	sf::Sprite m_background;
 	sf::Sprite m_title;
-	//sf::Sprite m_Authors;
-
 	ScoreTable m_score_teble;
+
 
 	sf::Sprite m_buttons[MENU_BUTTONS];
 	sf::Sprite m_back_buttons[MENU_BUTTONS];
@@ -44,8 +46,8 @@ private:
 	sf::Sprite m_box_ships[MENU_BOX_SHIPS];
 	sf::RectangleShape m_box_ships_rect[MENU_BOX_SHIPS];
 	sf::Text m_box_ship_text;
-
 	MenuBoxShips m_box_ship;
+	sf::Sound m_menu_sound;
 
 	void locateObjects();
 

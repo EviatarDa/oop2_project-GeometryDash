@@ -19,6 +19,8 @@ enum GameTextures {
 enum GameMaps { Map1, Map2, Map3, Map4 };
 enum Direction { Right, Left, Up, Stay };
 enum GameAnimations { Enemy1Animation, Enemy2Animation };
+enum GameSounds { Echo_Song, Greyhound_Song, OnlyTheHorses_Song, Spectre_Song, WithoutYou_Song };
+
 
 //arrays
 const int MENU_TEXTURES = 2;
@@ -30,6 +32,8 @@ const int GAME_TEXTURES = 34;
 const int GAME_MAPS = 4;
 
 const int GAME_ANIMATIONS = 2;
+
+const int GAME_SOUNDS = 5;
 
 //window
 const int WINDOW_HEIGHT = 800;
@@ -97,6 +101,7 @@ public:
 
     const AnimationData& getAnimationData(GameAnimations)const;
 
+    const sf::SoundBuffer& getGameSounds(const GameSounds)const;
 
 private:
 
@@ -112,6 +117,8 @@ private:
     sf::Image m_maps[GAME_MAPS];
 
     std::vector<AnimationData> m_animation_data;
+
+    sf::SoundBuffer m_game_sounds[GAME_SOUNDS];
 
     void LoadFromFile();
 

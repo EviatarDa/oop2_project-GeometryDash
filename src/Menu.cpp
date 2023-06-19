@@ -41,7 +41,8 @@ Menu::Menu(sf::RenderWindow& window)
 	m_box_ship_text.setOutlineColor(sf::Color::Red);
 	m_box_ship_text.setString("Choose Your Player:");
 	
-
+	m_menu_sound.setBuffer(Resources::instance().getGameSounds(Echo_Song));
+	m_menu_sound.setLoop(true);
 
 	locateObjects();
 }
@@ -155,9 +156,20 @@ void Menu::drawLevelsPage()
 	}
 }
 
-void Menu::updateScoreTable(int score)
+void Menu::updateScoreTable(int score, std::string player_name)
 {
-	//m_score_teble.addScore();
+	m_score_teble.addScore(player_name + " * * * * * * * * " + std::to_string(score));
+}
+
+void Menu::playSong()
+{
+	stopSong();
+	m_menu_sound.play();
+}
+
+void Menu::stopSong()
+{
+	m_menu_sound.stop();
 }
 
 void Menu::locateObjects()

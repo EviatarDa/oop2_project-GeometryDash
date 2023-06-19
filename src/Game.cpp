@@ -14,6 +14,7 @@ Game::Game()
 
 void Game::runMenu()
 {
+    m_menu.playSong();
     while (m_window.isOpen())
     {
         m_window.clear(sf::Color::Color(0, 0, 0));
@@ -115,28 +116,30 @@ void Game::handleBoxShipPageClick(const sf::Vector2f location)
 void Game::handleLevelsPageClick(const sf::Vector2f location)
 {
     if (m_menu.getButton(WithoutYou).getGlobalBounds().contains(location))
-        m_board.createLevel(Map1);
+        m_board.createLevel(Map1, WithoutYou_Song);
 
     else if (m_menu.getButton(Greyhound).getGlobalBounds().contains(location))
-        m_board.createLevel(Map2);
+        m_board.createLevel(Map2, Greyhound_Song);
 
     else if (m_menu.getButton(OnlyTheHorses).getGlobalBounds().contains(location))
-        m_board.createLevel(Map1);
+        m_board.createLevel(Map3, OnlyTheHorses_Song );
 
     else if (m_menu.getButton(Spectre).getGlobalBounds().contains(location))
-        m_board.createLevel(Map1);
+        m_board.createLevel(Map4, Spectre_Song);
 
     else
         return;
+    m_menu.stopSong();
     startGame();
+    m_menu.playSong();
 }
-
 
 
 void Game::startGame()
 {
     m_game_clock.restart();
     m_game_over = false;
+
     while (m_window.isOpen() && !m_game_over)
     {
         m_window.clear(sf::Color::Color(0, 102, 102));
@@ -180,13 +183,17 @@ void Game::startGame()
         m_board.handleCollision();
         setView();
 
-
         if (m_board.isWin())
         {
             m_gameView.setCenter(WINDOW_WIDTH/2,WINDOW_HEIGHT/2);
             m_window.setView(m_gameView);
             winLoop();
-            break;
+        }
+        if (m_game_over)
+        {
+            m_board.resetBoard();
+            m_gameView.setCenter(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+            m_window.setView(m_gameView);
         }
     }
 }
@@ -332,42 +339,91 @@ void Game::chooseLevel()
 void Game::winLoop() 
 {
     m_game_over = true;
-    bool click = false;
+    bool done = false;
     sf::Sprite score_board, background;
     sf::Text time_score, coin_score;
     int score = 0;
-    createScoreBoard(score_board, background, time_score, coin_score, score);
-    m_menu.updateScoreTable(score);
-    while (!click)
+    sf::Text name;
+    sf::RectangleShape input_rectangle;
+    sf::RectangleShape cursor;
+    sf::Clock cursor_clock;
+    std::string player_name;
+    bool show_cursor = true;
+    sf::Text enter_name;
+    int char_counter = 0;
+
+    createScoreBoard(score_board, background, time_score, coin_score,
+        score, name, enter_name, input_rectangle, cursor);
+
+    while (!done)
     {
         m_window.clear();
         m_window.draw(background);
         m_window.draw(score_board);
         m_window.draw(time_score);
         m_window.draw(coin_score);
+        m_window.draw(input_rectangle);
+        m_window.draw(name);
+        m_window.draw(enter_name);
+
+        if (show_cursor)
+        {
+            m_window.draw(cursor);
+        }
+
         m_window.display();
 
-        if (auto event = sf::Event{}; m_window.waitEvent(event))
+        sf::Event event;
+        while (m_window.pollEvent(event))
         {
             switch (event.type)
             {
-            case sf::Event::MouseButtonReleased:
-            {
-                click = true;
-                break;
-            }
+
             case sf::Event::Closed:
                 m_window.close();
                 break;
-            }
 
+            case sf::Event::TextEntered:
+            {
+                if (event.text.unicode < 128)
+                {
+                    if (event.text.unicode == '\b' && !player_name.empty())
+                    {
+                        player_name.pop_back();
+                        char_counter--;
+                    }
+                    else if (event.text.unicode != '\b' && char_counter < 20)
+                    {
+                        player_name += static_cast<char>(event.text.unicode);
+                        char_counter++;
+                    }
+
+                    name.setString(player_name);
+                    cursor_clock.restart();
+                }
+            }
+            case sf::Event::KeyPressed:
+            {
+                if (event.key.code == sf::Keyboard::Enter)
+                {
+                    done = true;
+                    m_menu.updateScoreTable(score, player_name);
+
+                }
+            }
+        }
+        }
+
+        if (cursor_clock.getElapsedTime().asSeconds() >= 0.5f)
+        {
+            show_cursor = !show_cursor;
+            cursor_clock.restart();
         }
     }
-
-    m_board.resetBoard();
 }
 
-void Game::createScoreBoard(sf::Sprite& score_board, sf::Sprite& background, sf::Text& time_score, sf::Text& coin_score, int& score)
+void Game::createScoreBoard(sf::Sprite& score_board, sf::Sprite& background, sf::Text& time_score, sf::Text& coin_score, int& score,
+    sf::Text& name, sf::Text& enter_name, sf::RectangleShape& input_rectangle, sf::RectangleShape& cursor)
 {
     score_board.setTexture(Resources::instance().getGameTexture(ScoreBoard));
     background.setTexture(Resources::instance().getGameTexture(Level_Background));
@@ -381,21 +437,48 @@ void Game::createScoreBoard(sf::Sprite& score_board, sf::Sprite& background, sf:
     coin_score.setOutlineColor(sf::Color::Black);
     coin_score.setOutlineThickness(1.f);
 
-    int gameElapsedTime = m_game_clock.getElapsedTime().asSeconds();
+    int game_elapsed_time = m_game_clock.getElapsedTime().asSeconds();
 
-    score = 10000 - gameElapsedTime + m_board.getCoins() * 5;
+    score = 10000 - (game_elapsed_time * 2) + m_board.getCoins() * 5;
 
     time_score.setString(std::to_string(score));
     coin_score.setString(std::to_string(m_board.getCoins()));
 
     score_board.setPosition(sf::Vector2f((WINDOW_WIDTH - score_board.getTextureRect().width) * 0.5,
-        (WINDOW_HEIGHT - score_board.getTextureRect().height) * 0.5));
+        (WINDOW_HEIGHT - score_board.getTextureRect().height) * 0.3));
 
     time_score.setPosition(sf::Vector2f(score_board.getPosition().x + score_board.getTextureRect().width / 2.5,
         score_board.getPosition().y + score_board.getTextureRect().height / 2.2));
 
     coin_score.setPosition(sf::Vector2f(score_board.getPosition().x + score_board.getTextureRect().width / 2.4,
         score_board.getPosition().y + score_board.getTextureRect().height / 1.4));
+    
+    enter_name.setString("Enter your name:");
+    enter_name.setFont(Resources::instance().getFont());
+    enter_name.setCharacterSize(35);
+    enter_name.setFillColor(sf::Color::White);
+    enter_name.setOutlineColor(sf::Color::Black);
+    enter_name.setOutlineThickness(2.f);
+    enter_name.setPosition(sf::Vector2f((WINDOW_WIDTH - enter_name.getLocalBounds().width) * 0.5,
+        (WINDOW_HEIGHT - enter_name.getLocalBounds().height) * 0.52));
+
+    input_rectangle.setSize(sf::Vector2f(300, 30));
+    input_rectangle.setFillColor(sf::Color::White);
+    input_rectangle.setPosition(sf::Vector2f((WINDOW_WIDTH - input_rectangle.getLocalBounds().width) * 0.5,
+        (WINDOW_HEIGHT - input_rectangle.getLocalBounds().height) * 0.6));
+
+    name.setFont(Resources::instance().getFont());
+    name.setCharacterSize(24);
+    name.setFillColor(sf::Color::Black);
+    name.setPosition(sf::Vector2f((WINDOW_WIDTH - input_rectangle.getLocalBounds().width) * 0.5,
+        (WINDOW_HEIGHT - input_rectangle.getLocalBounds().height) * 0.6));
+
+    cursor.setSize(sf::Vector2f(2, 24));
+    cursor.setFillColor(sf::Color::Black);
+    cursor.setPosition(sf::Vector2f((WINDOW_WIDTH - input_rectangle.getLocalBounds().width) * 0.5 + 4,
+        (WINDOW_HEIGHT - input_rectangle.getLocalBounds().height) * 0.6 + 4));
+
+    
 }
 
 
