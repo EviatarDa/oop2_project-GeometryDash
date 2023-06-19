@@ -136,6 +136,7 @@ void Game::handleLevelsPageClick(const sf::Vector2f location)
 void Game::startGame()
 {
     m_game_clock.restart();
+    m_game_over = false;
     while (m_window.isOpen() && !m_game_over)
     {
         m_window.clear(sf::Color::Color(0, 102, 102));
@@ -185,7 +186,6 @@ void Game::startGame()
             m_gameView.setCenter(WINDOW_WIDTH/2,WINDOW_HEIGHT/2);
             m_window.setView(m_gameView);
             winLoop();
-            //updateScoreTable();
             break;
         }
     }
@@ -333,12 +333,11 @@ void Game::winLoop()
 {
     m_game_over = true;
     bool click = false;
-
-
     sf::Sprite score_board, background;
     sf::Text time_score, coin_score;
-    createScoreBoard(score_board, background, time_score, coin_score);
-
+    int score = 0;
+    createScoreBoard(score_board, background, time_score, coin_score, score);
+    m_menu.updateScoreTable(score);
     while (!click)
     {
         m_window.clear();
@@ -365,9 +364,10 @@ void Game::winLoop()
         }
     }
 
+    m_board.resetBoard();
 }
 
-void Game::createScoreBoard(sf::Sprite& score_board, sf::Sprite& background, sf::Text& time_score, sf::Text& coin_score)
+void Game::createScoreBoard(sf::Sprite& score_board, sf::Sprite& background, sf::Text& time_score, sf::Text& coin_score, int& score)
 {
     score_board.setTexture(Resources::instance().getGameTexture(ScoreBoard));
     background.setTexture(Resources::instance().getGameTexture(Level_Background));
@@ -383,7 +383,7 @@ void Game::createScoreBoard(sf::Sprite& score_board, sf::Sprite& background, sf:
 
     int gameElapsedTime = m_game_clock.getElapsedTime().asSeconds();
 
-    int score = 10000 - gameElapsedTime + m_board.getCoins() * 5;
+    score = 10000 - gameElapsedTime + m_board.getCoins() * 5;
 
     time_score.setString(std::to_string(score));
     coin_score.setString(std::to_string(m_board.getCoins()));

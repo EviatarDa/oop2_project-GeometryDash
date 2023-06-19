@@ -155,6 +155,11 @@ void Menu::drawLevelsPage()
 	}
 }
 
+void Menu::updateScoreTable(int score)
+{
+	//m_score_teble.addScore();
+}
+
 void Menu::locateObjects()
 {
 	m_buttons[Play].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[Play].getTextureRect().width) * 0.5,

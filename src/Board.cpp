@@ -239,4 +239,33 @@ int Board::getCoins()
     return m_player->getCoins();
 }
 
+void Board::resetBoard()
+{
+    m_static_objects.clear();
+    m_moving_objects.clear();
+    m_player = nullptr;
+    m_win = false;
+    m_background.setPosition(0, 0);
+
+    // Destroy all fixtures
+    b2Body* body = m_world.GetBodyList();
+    while (body) {
+        b2Fixture* fixture = body->GetFixtureList();
+        while (fixture) {
+            b2Fixture* nextFixture = fixture->GetNext();
+            body->DestroyFixture(fixture);
+            fixture = nextFixture;
+        }
+        body = body->GetNext();
+    }
+
+    // Destroy all bodies
+    body = m_world.GetBodyList();
+    while (body) {
+        b2Body* nextBody = body->GetNext();
+        m_world.DestroyBody(body);
+        body = nextBody;
+    }
+}
+
 

@@ -33,6 +33,7 @@ public:
     void createLevel(const GameMaps);
     bool isWin();
     int getCoins();
+    void resetBoard();
 
 
 private:

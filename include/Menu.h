@@ -27,6 +27,8 @@ public:
 
 	void drawLevelsPage();
 
+	void updateScoreTable(int);
+
 private:
 
 	sf::RenderWindow& m_window;

@@ -37,6 +37,6 @@ private:
 	void chooseBoxShip();
 	void chooseLevel();
 	void winLoop();
-	void createScoreBoard(sf::Sprite&, sf::Sprite&, sf::Text&, sf::Text&);
+	void createScoreBoard(sf::Sprite&, sf::Sprite&, sf::Text&, sf::Text&, int&);
 
 };
