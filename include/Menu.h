@@ -37,7 +37,7 @@ private:
 	sf::RenderWindow& m_window;
 	sf::Sprite m_background;
 	sf::Sprite m_title;
-	ScoreTable m_score_teble;
+	ScoreTable m_score_table;
 
 
 	sf::Sprite m_buttons[MENU_BUTTONS];

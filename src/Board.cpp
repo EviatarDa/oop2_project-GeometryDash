@@ -7,6 +7,7 @@ Board::Board(sf::RenderWindow& window, std::pair<GameTextures, GameTextures> pla
 {
     m_background.setTexture(Resources::instance().getGameTexture(Level_Background));
     m_background.scale(1.6f, 1.6f);
+    m_background.setColor(sf::Color::White);
     m_world.SetContactListener(&m_contact);
 }
 

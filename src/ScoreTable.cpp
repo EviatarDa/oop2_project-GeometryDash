@@ -26,11 +26,19 @@ ScoreTable::ScoreTable(sf::RenderWindow& window)
 void ScoreTable::draw()
 {
     m_window.draw(m_background);
-    //m_window.draw(m_table);
     m_window.draw(m_title);
-    for (const auto& score : m_scores)
+    for (int index = 0 ; index < m_scores.size(); index++)
     {
-        m_window.draw(score);
+        sf::Text text;
+        text.setFont(Resources::instance().getFont());
+        text.setString(m_scores[index].second + "-----------------------------------------------" +
+            std::to_string(m_scores[index].first));
+        text.setCharacterSize(30);
+        text.setFillColor(sf::Color::White);
+        text.setOutlineColor(sf::Color::Black);
+        text.setOutlineThickness(2.f);
+        text.setPosition(m_table.x + 20.f, index * 40.f + 250.f);
+        m_window.draw(text);
     }
 }
 
@@ -41,24 +49,22 @@ void ScoreTable::saveScoresToFile()
     {
         for (const auto& score : m_scores)
         {
-            file << score.getString().toAnsiString() << std::endl;
+            file << score.first << " " << score.second << "\n";
         }
         file.close();
     }
-
 }
 
-void ScoreTable::addScore(const std::string& scoreText)
+void ScoreTable::addScore(const std::string& name, const int score)
 {
-    sf::Text score;
-    score.setFont(Resources::instance().getFont());
-    score.setString(scoreText);
-    score.setCharacterSize(30);
-    score.setFillColor(sf::Color::White);
-    score.setOutlineColor(sf::Color::Black);
-    score.setOutlineThickness(2.f);
-    score.setPosition(m_table.x + 20.f, m_scores.size() * 40.f + 250.f);
-    m_scores.push_back(score);
+    m_scores.push_back(std::pair<int, std::string>(score, name));
+    std::sort(m_scores.begin(), m_scores.end(),
+        [](const std::pair<int, std::string>& obj1, const std::pair<int, std::string>& obj2) {return obj1.first > obj2.first; });
+
+    if (m_scores.size() > 40)
+    {
+        m_scores.pop_back();
+    }
 }
 
 void ScoreTable::loadScoresFromFile()
@@ -69,15 +75,12 @@ void ScoreTable::loadScoresFromFile()
         std::string line;
         while (std::getline(file, line))
         {
-            sf::Text score;
-            score.setFont(Resources::instance().getFont());
-            score.setString(line);
-            score.setCharacterSize(30);
-            score.setFillColor(sf::Color::White);
-            score.setOutlineColor(sf::Color::Black);
-            score.setOutlineThickness(2.f);
-            score.setPosition(m_table.x + 20.f, m_scores.size() * 40.f + 100.f);
-            m_scores.push_back(score);
+            std::stringstream ss(line);
+            int number = 0;
+            std::string name;
+            ss >> number;
+            ss >> name;
+            m_scores.push_back(std::pair<int, std::string>(number, name));
         }
         file.close();
     }

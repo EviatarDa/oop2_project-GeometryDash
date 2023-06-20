@@ -3,7 +3,7 @@
 #include "Menu.h"
 
 Menu::Menu(sf::RenderWindow& window)
-	:m_window(window), m_score_teble(window), m_box_ship(BoxShip1)
+	:m_window(window), m_score_table(window), m_box_ship(BoxShip1)
 {
 	m_background.setTexture(Resources::instance().getMenuTexture(Menu_Background));
 	m_background.scale(1.6f, 1.6f);
@@ -96,7 +96,7 @@ void Menu::drawInstructions(const MenuInstructions page) const
 
 void Menu::drawScoreTable()
 {
-	m_score_teble.draw();
+	m_score_table.draw();
 }
 
 void Menu::drawBoxShips()
@@ -158,7 +158,8 @@ void Menu::drawLevelsPage()
 
 void Menu::updateScoreTable(int score, std::string player_name)
 {
-	m_score_teble.addScore(player_name + " * * * * * * * * " + std::to_string(score));
+	m_score_table.addScore(player_name, score);
+	m_score_table.saveScoresToFile();
 }
 
 void Menu::playSong()
