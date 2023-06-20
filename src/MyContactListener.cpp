@@ -184,8 +184,6 @@ namespace // anonymous namespace — the standard way to make function "static"
 		phm[Key(typeid(Enemy), typeid(Player))] = &enemyPlayer;
 		phm[Key(typeid(Enemy), typeid(Enemy))] = &enemyEnemy;
 
-
-
 		//...
 		return phm;
 	}
@@ -209,8 +207,7 @@ void processCollision(GameObject& object1, GameObject& object2)
 	auto phf = lookup(typeid(object1), typeid(object2));
 	if (!phf)
 	{
-		//throw std::runtime_error(std::string("Unknown collision of ") + typeid(object1).name()//////TODO fix
-		//	+ " and " + typeid(object2).name());
+		return;
 	}
 	else
 		phf(object1, object2);

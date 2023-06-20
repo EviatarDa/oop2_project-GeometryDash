@@ -1,8 +1,17 @@
 #include "Game.h"
+#include <iostream>
+
 
 int main()
 {
-    Game game;
-    game.runMenu();
+    try
+    {
+        Game game;
+        game.runMenu();
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what()<< "\n";
+    }
 }
 

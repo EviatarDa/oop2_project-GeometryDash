@@ -84,4 +84,6 @@ void ScoreTable::loadScoresFromFile()
         }
         file.close();
     }
+    else
+        throw std::invalid_argument("cannot open scores.txt file");
 }
