@@ -89,19 +89,34 @@ void Board::handleCollision()
     std::erase_if(m_static_objects, [](const auto& static_object) {return static_object->getDelete(); });
        
     if (!m_player->isAlive())
+    {
         m_player->kill();
+        m_background.setColor(sf::Color::White);
+    }
 
     if (m_player->isBoxStateMarked())
+    {
         m_player->handleBoxStateMarking();
+        m_background.setColor(sf::Color(rand(), rand(), rand()));
+    }
 
     if (m_player->isShipStateMarked())
+    {
         m_player->handleShipStateMarking();
+        m_background.setColor(sf::Color(rand(), rand(), rand()));
+    }
     
     if (m_player->isGravityMarked())
+    {
         swapGravity();
+        m_background.setColor(sf::Color(rand(), rand(), rand()));
+    }
 
     if (m_player->isWinner())
+    {
         m_win = true;
+        m_background.setColor(sf::Color::White);
+    }
         
 
     for (auto& object : m_static_objects)

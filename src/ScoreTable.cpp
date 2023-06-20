@@ -3,22 +3,21 @@
 ScoreTable::ScoreTable(sf::RenderWindow& window) 
     :m_window(window)
 {
-    // Set up table properties
-    m_table.setSize(sf::Vector2f(400.f, 300.f));
-    m_table.setPosition(m_window.getSize().x / 2.f - m_table.getSize().x / 2.f,
-        m_window.getSize().y / 2.f - m_table.getSize().y / 2.f);
-    m_table.setFillColor(sf::Color::White);
-    m_table.setOutlineColor(sf::Color::Black);
-    m_table.setOutlineThickness(2.f);
+    m_background.setTexture(Resources::instance().getGameTexture(Level_Background));
+    m_background.scale(1.6, 1.6);
+
+    m_table = (sf::Vector2f(WINDOW_HEIGHT / 2.f, WINDOW_WIDTH / 2.f));
 
     // Set up title
     m_title.setFont(Resources::instance().getFont());
     m_title.setString("Score Table");
-    m_title.setCharacterSize(24);
-    m_title.setFillColor(sf::Color::Black);
+    m_title.setCharacterSize(50);
+    m_title.setFillColor(sf::Color::White);
+    m_title.setOutlineThickness(2.f);
+    m_title.setOutlineColor(sf::Color::Black);
     m_title.setStyle(sf::Text::Bold);
-    m_title.setPosition(m_table.getPosition().x + m_table.getSize().x / 2.f - m_title.getLocalBounds().width / 2.f,
-        m_table.getPosition().y + 20.f);
+    m_title.setPosition(sf::Vector2f((WINDOW_WIDTH - m_title.getGlobalBounds().width) * 0.5,
+        (WINDOW_HEIGHT - m_title.getGlobalBounds().height) * 0.2));
 
     // Set up scores
     loadScoresFromFile(); // Load scores from file
@@ -26,7 +25,8 @@ ScoreTable::ScoreTable(sf::RenderWindow& window)
 
 void ScoreTable::draw()
 {
-    m_window.draw(m_table);
+    m_window.draw(m_background);
+    //m_window.draw(m_table);
     m_window.draw(m_title);
     for (const auto& score : m_scores)
     {
@@ -53,9 +53,11 @@ void ScoreTable::addScore(const std::string& scoreText)
     sf::Text score;
     score.setFont(Resources::instance().getFont());
     score.setString(scoreText);
-    score.setCharacterSize(18);
-    score.setFillColor(sf::Color::Black);
-    score.setPosition(m_table.getPosition().x + 20.f, m_scores.size() * 30.f + 100.f);
+    score.setCharacterSize(30);
+    score.setFillColor(sf::Color::White);
+    score.setOutlineColor(sf::Color::Black);
+    score.setOutlineThickness(2.f);
+    score.setPosition(m_table.x + 20.f, m_scores.size() * 40.f + 250.f);
     m_scores.push_back(score);
 }
 
@@ -70,9 +72,11 @@ void ScoreTable::loadScoresFromFile()
             sf::Text score;
             score.setFont(Resources::instance().getFont());
             score.setString(line);
-            score.setCharacterSize(18);
-            score.setFillColor(sf::Color::Black);
-            score.setPosition(m_table.getPosition().x + 20.f, m_scores.size() * 30.f + 100.f);
+            score.setCharacterSize(30);
+            score.setFillColor(sf::Color::White);
+            score.setOutlineColor(sf::Color::Black);
+            score.setOutlineThickness(2.f);
+            score.setPosition(m_table.x + 20.f, m_scores.size() * 40.f + 100.f);
             m_scores.push_back(score);
         }
         file.close();
