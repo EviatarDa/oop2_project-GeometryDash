@@ -24,6 +24,8 @@ private:
 	bool m_game_over = false;
 	sf::Clock m_game_clock;
 
+	//std::unique_ptr<ScreenMenager>;
+
 	//functions
 	void handleMenuMouseMoved(const sf::Vector2f, int , int);
 	void handleBoxShipMouseMoved(const sf::Vector2f);

@@ -152,14 +152,14 @@ void Board::createLevel(const GameMaps level, const GameSounds sound)
                 m_moving_objects.push_back(std::unique_ptr<Player>(m_player));
                 m_player_location = location;
             }
-            else if (Factory::isExistStatic(source.getPixel(x, y)))
+            else if (Factory<StaticObject>::isExist(source.getPixel(x, y)))
             {
-                m_static_objects.push_back(Factory::createStatic(source.getPixel(x, y),
+                m_static_objects.push_back(Factory<StaticObject>::createObject(source.getPixel(x, y),
                     m_world, location));
             }
-            else if (Factory::isExistMove(source.getPixel(x, y)))
+            else if (Factory<MovingObject>::isExist(source.getPixel(x, y)))
             {
-                m_moving_objects.push_back(Factory::createMoving(source.getPixel(x, y),
+                m_moving_objects.push_back(Factory<MovingObject>::createObject(source.getPixel(x, y),
                     m_world, location));
             }
 

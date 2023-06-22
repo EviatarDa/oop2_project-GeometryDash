@@ -6,10 +6,13 @@ Game::Game()
     :m_window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Geometry Dash"),
     m_menu(m_window),
     m_board(m_window, m_menu.getPlayerTextures())
+    //m_screen_menager(std::make_unique<MenuState>())
 {
     m_window.setFramerateLimit(120);
     m_gameView.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     m_gameView.setCenter(WINDOW_WIDTH / 2, WINDOW_HEIGHT/2);
+
+
 }
 
 void Game::runMenu()

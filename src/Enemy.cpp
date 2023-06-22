@@ -68,25 +68,25 @@ void Enemy::swap()
 
 
 
-bool Enemy::m_registerit1 =  Factory::registerMovingObject(ENEMY1_COLOR,
+bool Enemy::m_registerit1 = Factory<MovingObject>::registerObject(ENEMY1_COLOR,
 	[](b2World& world, sf::Vector2f location) -> std::unique_ptr<MovingObject> {
 		return std::make_unique<Enemy>(world, Enemy1, location, false,
 		Enemy1Animation, Enemy1SpriteSheet); }
 );
 
-bool Enemy::m_registerit2 = Factory::registerMovingObject(ENEMY1_UP_COLOR,
+bool Enemy::m_registerit2 = Factory<MovingObject>::registerObject(ENEMY1_UP_COLOR,
 	[](b2World& world, sf::Vector2f location) -> std::unique_ptr<MovingObject> {
 		return std::make_unique<Enemy>(world, Enemy1, location, true,
 		Enemy1Animation, Enemy1SpriteSheet); }
 );
 
-bool Enemy::m_registerit3 = Factory::registerMovingObject(ENEMY2_COLOR,
+bool Enemy::m_registerit3 = Factory<MovingObject>::registerObject(ENEMY2_COLOR,
 	[](b2World& world, sf::Vector2f location) -> std::unique_ptr<MovingObject> {
 		return std::make_unique<Enemy>(world, Enemy2, location, false,
 		Enemy2Animation, Enemy2SpriteSheet); }
 );
 
-bool Enemy::m_registerit4 = Factory::registerMovingObject(ENEMY2_UP_COLOR,
+bool Enemy::m_registerit4 = Factory<MovingObject>::registerObject(ENEMY2_UP_COLOR,
 	[](b2World& world, sf::Vector2f location) -> std::unique_ptr<MovingObject> {
 		return std::make_unique<Enemy>(world, Enemy2, location, true,
 		Enemy2Animation, Enemy2SpriteSheet); }
