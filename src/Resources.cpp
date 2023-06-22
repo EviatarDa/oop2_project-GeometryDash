@@ -130,6 +130,7 @@ void Resources::LoadFromFile()
 	m_menu_instructions[Instructions1].loadFromFile("Instructions1.png");
 	m_menu_instructions[Instructions2].loadFromFile("Instructions2.png");
 	m_menu_instructions[Instructions3].loadFromFile("Instructions3.png");
+	m_menu_instructions[Instructions4].loadFromFile("Instructions4.png");
 	m_menu_instructions[DropTheMic].loadFromFile("DropTheMic.png");
 
 	m_menu_box_ships[BoxShip1].loadFromFile("BoxShip1.png");

@@ -8,7 +8,7 @@
 
 enum MenuTextures { Menu_Background, Title };
 enum MenuButtons { Play, Help, Box, Score_Table, WithoutYou, Greyhound, OnlyTheHorses, Spectre };
-enum MenuInstructions { OhNo, Instructions1, Instructions2, Instructions3, DropTheMic };
+enum MenuInstructions { OhNo, Instructions1, Instructions2, Instructions3, Instructions4, DropTheMic };
 enum MenuBoxShips { BoxShip1, BoxShip2, BoxShip3, BoxShip4, BoxShip5, BoxShip6 };
 enum GameTextures {
     Floor, Level_Background, PlayerBox1, PlayerBox2, PlayerBox3, PlayerBox4, PlayerBox5, PlayerBox6,
@@ -25,7 +25,7 @@ enum GameSounds { Echo_Song, Greyhound_Song, OnlyTheHorses_Song, Spectre_Song, W
 //arrays
 const int MENU_TEXTURES = 2;
 const int MENU_BUTTONS = 9;
-const int MENU_INSTRUCTIONS = 5;
+const int MENU_INSTRUCTIONS = 6;
 const int MENU_BOX_SHIPS = 6;
 
 const int GAME_TEXTURES = 34;
@@ -49,7 +49,7 @@ const float ENEMY_MOVEMENT_SPEED = 3;
 
 
 //game object by color
-const sf::Color FLOOR_COLOR = sf::Color::Black;
+const sf::Color FLOOR_COLOR = sf::Color(0, 0, 0);
 const sf::Color CUBE_CUBE_COLOR = sf::Color(112, 146, 190);
 const sf::Color SPIKE1_COLOR = sf::Color(237, 28, 36);
 const sf::Color SPIKE1_UP_COLOR = sf::Color(239, 228, 176);

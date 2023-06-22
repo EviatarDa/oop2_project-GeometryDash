@@ -141,6 +141,7 @@ void Board::createLevel(const GameMaps level, const GameSounds sound)
     {
         for (size_t x = 0; x < source.getSize().x; ++x)
         {
+            
             sf::Vector2f location(50 * x + 25, 50 * y + 25);
 
             if (source.getPixel(x, y) == sf::Color::White)
@@ -151,7 +152,20 @@ void Board::createLevel(const GameMaps level, const GameSounds sound)
                 m_moving_objects.push_back(std::unique_ptr<Player>(m_player));
                 m_player_location = location;
             }
-            else if ((source.getPixel(x, y) == FLOOR_COLOR))
+            else if (Factory::isExistStatic(source.getPixel(x, y)))
+            {
+                m_static_objects.push_back(Factory::createStatic(source.getPixel(x, y),
+                    m_world, location));
+            }
+            else if (Factory::isExistMove(source.getPixel(x, y)))
+            {
+                m_moving_objects.push_back(Factory::createMoving(source.getPixel(x, y),
+                    m_world, location));
+            }
+
+
+
+            /*else if ((source.getPixel(x, y) == FLOOR_COLOR))
             {
                 m_static_objects.push_back(std::make_unique<Brick>(m_world, Floor, location));
             }
@@ -246,7 +260,7 @@ void Board::createLevel(const GameMaps level, const GameSounds sound)
             {
                 m_moving_objects.push_back(std::make_unique<Enemy>(m_world, Enemy2, location, true,
                     Enemy2Animation, Enemy2SpriteSheet));
-            }
+            }*/
         }
     }
 }

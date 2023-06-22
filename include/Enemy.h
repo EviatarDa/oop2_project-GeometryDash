@@ -6,6 +6,7 @@
 #include "Resources.h"
 #include "MovingObject.h"
 #include "Animation.h"
+#include "Factory.h"
 
 
 class Enemy : public MovingObject
@@ -23,5 +24,10 @@ private:
     Animation m_animation;
     bool m_up;
     bool m_swap = false;
+
+    static bool m_registerit1;
+    static bool m_registerit2;
+    static bool m_registerit3;
+    static bool m_registerit4;
 
 };
