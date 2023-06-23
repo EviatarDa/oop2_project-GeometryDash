@@ -31,8 +31,7 @@ void ScoreTable::draw()
     {
         sf::Text text;
         text.setFont(Resources::instance().getFont());
-        text.setString(m_scores[index].second + "-----------------------------------------------" +
-            std::to_string(m_scores[index].first));
+        text.setString(m_scores[index].second + "   " + std::to_string(m_scores[index].first));
         text.setCharacterSize(30);
         text.setFillColor(sf::Color::White);
         text.setOutlineColor(sf::Color::Black);
@@ -61,7 +60,7 @@ void ScoreTable::addScore(const std::string& name, const int score)
     std::sort(m_scores.begin(), m_scores.end(),
         [](const std::pair<int, std::string>& obj1, const std::pair<int, std::string>& obj2) {return obj1.first > obj2.first; });
 
-    if (m_scores.size() > 40)
+    if (m_scores.size() > 10)
     {
         m_scores.pop_back();
     }

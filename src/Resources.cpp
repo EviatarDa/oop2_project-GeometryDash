@@ -82,6 +82,11 @@ const sf::Texture& Resources::getMenuBoxShips(const MenuBoxShips box_ship) const
 	return m_menu_box_ships[box_ship];
 }
 
+const sf::Texture& Resources::getLevelsMenuButtons(const LevelsMenuButtons button) const
+{
+	return m_level_menu_buttons[button];
+}
+
 const sf::Texture& Resources::getGameTexture(const GameTextures texture) const
 {
 	return m_game_textures[texture];
@@ -121,10 +126,12 @@ void Resources::LoadFromFile()
 	m_menu_buttons[Help].loadFromFile("Help.png");
 	m_menu_buttons[Box].loadFromFile("Box.png");
 	m_menu_buttons[Score_Table].loadFromFile("Score_Table.png");
-	m_menu_buttons[WithoutYou].loadFromFile("WithoutYou.png");
-	m_menu_buttons[Greyhound].loadFromFile("Greyhound.png");
-	m_menu_buttons[OnlyTheHorses].loadFromFile("OnlyTheHorses.png");
-	m_menu_buttons[Spectre].loadFromFile("Spectre.png");
+
+	//level menu buttons
+	m_level_menu_buttons[WithoutYou].loadFromFile("WithoutYou.png");
+	m_level_menu_buttons[Greyhound].loadFromFile("Greyhound.png");
+	m_level_menu_buttons[OnlyTheHorses].loadFromFile("OnlyTheHorses.png");
+	m_level_menu_buttons[Spectre].loadFromFile("Spectre.png");
 
 	m_menu_instructions[OhNo].loadFromFile("OhNo.png");
 	m_menu_instructions[Instructions1].loadFromFile("Instructions1.png");

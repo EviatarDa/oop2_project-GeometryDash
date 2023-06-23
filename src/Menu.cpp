@@ -47,10 +47,12 @@ Menu::Menu(sf::RenderWindow& window)
 	locateObjects();
 }
 
+
+
 void Menu::drawMenu() const
 {
 	m_window.draw(m_background);
-	for (int button = Play; button <= Score_Table; button++)
+	for (int button = 0; button < m_options.size(); button++)
 	{
 		m_window.draw(m_back_buttons[button]);
 		m_window.draw(m_buttons[button]);
@@ -58,9 +60,59 @@ void Menu::drawMenu() const
 	m_window.draw(m_title);
 }
 
-sf::Sprite Menu::getButton(const MenuButtons button) const
+//void Menu::show()
+//{
+//	m_window.draw(m_background);
+//	for (int button = 0; button < m_options.size(); button++)
+//	{
+//		m_window.draw(m_back_buttons[button]);
+//		m_window.draw(m_buttons[button]);
+//	}
+//	m_window.draw(m_title);
+//}
+
+int Menu::getOptionFromUser(sf::Vector2f location)
 {
-	return m_buttons[button];
+	for (int button = Play; button < m_options.size(); button++)
+	{
+		if (m_options[button].first.getGlobalBounds().contains(location))
+		{
+			return button;
+		}
+	}
+	return m_options.size() + 1;
+}
+
+void Menu::performAction(int action)
+{
+	if (action > m_options.size())
+		return;
+	m_options[action].second->execute();
+}
+
+void Menu::add(MenuButtons button, std::unique_ptr<Command> command)
+{
+	m_options.emplace_back(option(m_buttons[button], move(command)));
+}
+
+//sf::Sprite Menu::getButton(const MenuButtons button) const
+//{
+//	return m_buttons[button];
+//}
+
+void Menu::handleMenuMouseMoved(sf::Vector2f location)
+{
+	for (int button = Play; button < m_options.size(); button++)
+	{
+		if (m_options[button].first.getGlobalBounds().contains(location))
+		{
+			ButtonPress(MenuButtons(button));
+		}
+		else
+		{
+			ButtonRelease(MenuButtons(button));
+		}
+	}
 }
 
 sf::Sprite Menu::getBoxShip(const MenuBoxShips box_ship) const
@@ -158,6 +210,8 @@ void Menu::drawLevelsPage()
 
 void Menu::updateScoreTable(int score, std::string player_name)
 {
+	if (player_name == "")
+		player_name = "Unknown Player";
 	m_score_table.addScore(player_name, score);
 	m_score_table.saveScoresToFile();
 }
@@ -202,31 +256,31 @@ void Menu::locateObjects()
 		WINDOW_HEIGHT - m_back_buttons[Score_Table].getTextureRect().height * 2));
 
 
-	//level buttons
-	m_buttons[WithoutYou].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[WithoutYou].getTextureRect().width) * 0.25,
-		(WINDOW_HEIGHT - m_buttons[WithoutYou].getTextureRect().height ) * 0.25));
+	////level buttons
+	//m_buttons[WithoutYou].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[WithoutYou].getTextureRect().width) * 0.25,
+	//	(WINDOW_HEIGHT - m_buttons[WithoutYou].getTextureRect().height ) * 0.25));
 
-	m_buttons[Greyhound].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[Greyhound].getTextureRect().width) * 0.75,
-		(WINDOW_HEIGHT - m_buttons[Greyhound].getTextureRect().height) * 0.25));
+	//m_buttons[Greyhound].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[Greyhound].getTextureRect().width) * 0.75,
+	//	(WINDOW_HEIGHT - m_buttons[Greyhound].getTextureRect().height) * 0.25));
 
-	m_buttons[OnlyTheHorses].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[OnlyTheHorses].getTextureRect().width) * 0.25,
-		(WINDOW_HEIGHT - m_buttons[OnlyTheHorses].getTextureRect().height) * 0.75));
+	//m_buttons[OnlyTheHorses].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[OnlyTheHorses].getTextureRect().width) * 0.25,
+	//	(WINDOW_HEIGHT - m_buttons[OnlyTheHorses].getTextureRect().height) * 0.75));
 
-	m_buttons[Spectre].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[Spectre].getTextureRect().width) * 0.75,
-		(WINDOW_HEIGHT - m_buttons[Spectre].getTextureRect().height) * 0.75));
+	//m_buttons[Spectre].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[Spectre].getTextureRect().width) * 0.75,
+	//	(WINDOW_HEIGHT - m_buttons[Spectre].getTextureRect().height) * 0.75));
 
-	//backbuttons
-	m_back_buttons[WithoutYou].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[WithoutYou].getTextureRect().width) * 0.25,
-		(WINDOW_HEIGHT - m_buttons[WithoutYou].getTextureRect().height) * 0.25));
+	////backbuttons
+	//m_back_buttons[WithoutYou].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[WithoutYou].getTextureRect().width) * 0.25,
+	//	(WINDOW_HEIGHT - m_buttons[WithoutYou].getTextureRect().height) * 0.25));
 
-	m_back_buttons[Greyhound].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[Greyhound].getTextureRect().width) * 0.75,
-		(WINDOW_HEIGHT - m_buttons[Greyhound].getTextureRect().height) * 0.25));
+	//m_back_buttons[Greyhound].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[Greyhound].getTextureRect().width) * 0.75,
+	//	(WINDOW_HEIGHT - m_buttons[Greyhound].getTextureRect().height) * 0.25));
 
-	m_back_buttons[OnlyTheHorses].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[OnlyTheHorses].getTextureRect().width) * 0.25,
-		(WINDOW_HEIGHT - m_buttons[OnlyTheHorses].getTextureRect().height) * 0.75));
+	//m_back_buttons[OnlyTheHorses].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[OnlyTheHorses].getTextureRect().width) * 0.25,
+	//	(WINDOW_HEIGHT - m_buttons[OnlyTheHorses].getTextureRect().height) * 0.75));
 
-	m_back_buttons[Spectre].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[Spectre].getTextureRect().width) * 0.75,
-		(WINDOW_HEIGHT - m_buttons[Spectre].getTextureRect().height) * 0.75));
+	//m_back_buttons[Spectre].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[Spectre].getTextureRect().width) * 0.75,
+	//	(WINDOW_HEIGHT - m_buttons[Spectre].getTextureRect().height) * 0.75));
 
 
 

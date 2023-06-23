@@ -2,17 +2,20 @@
 
 #include "Game.h"
 
+
 Game::Game()
     :m_window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Geometry Dash"),
     m_menu(m_window),
     m_board(m_window, m_menu.getPlayerTextures())
-    //m_screen_menager(std::make_unique<MenuState>())
 {
     m_window.setFramerateLimit(120);
     m_gameView.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     m_gameView.setCenter(WINDOW_WIDTH / 2, WINDOW_HEIGHT/2);
 
-
+    m_menu.add(Play, std::make_unique<PlayButton>(this, m_window));
+    m_menu.add(Help, std::make_unique<HelpButton>(this));
+    m_menu.add(Box, std::make_unique<BoxButton>(this));
+    m_menu.add(Score_Table, std::make_unique<ScoreTableButton>(this)); 
 }
 
 void Game::runMenu()
@@ -36,39 +39,43 @@ void Game::runMenu()
             {
                 auto location = m_window.mapPixelToCoords(
                     { event.mouseButton.x, event.mouseButton.y });
-                handleMenuClick(location);
+                //handleMenuClick(location);
+                int button = m_menu.getOptionFromUser(location);
+                m_menu.performAction(button);
                 break;
             }
 
             case sf::Event::MouseMoved:
             {
                 auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
-                handleMenuMouseMoved(location, Play, Score_Table);
+               // handleMenuMouseMoved(location, Play, Score_Table);
+                m_menu.handleMenuMouseMoved(location);
+                break;
             }
 
             }
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-        {
-            m_window.close();
-        }
+        //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+        //{
+        //    m_window.close();
+        //}
     }
 }
 
-void Game::handleMenuMouseMoved(const sf::Vector2f location, int first, int last)
-{
-    for (int button = first; button <= last; button++)
-    {
-        if ((m_menu.getButton((MenuButtons)button).getGlobalBounds().contains(location)))
-        {
-            m_menu.ButtonPress((MenuButtons)button);
-        }
-        else
-        {
-            m_menu.ButtonRelease((MenuButtons)button);
-        }
-    }
-}
+//void Game::handleMenuMouseMoved(const sf::Vector2f location, int first, int last)
+//{
+//    for (int button = first; button <= last; button++)
+//    {
+//        if ((m_menu.getButton((MenuButtons)button).getGlobalBounds().contains(location)))
+//        {
+//            m_menu.ButtonPress((MenuButtons)button);
+//        }
+//        else
+//        {
+//            m_menu.ButtonRelease((MenuButtons)button);
+//        }
+//    }
+//}
 
 void Game::handleBoxShipMouseMoved(const sf::Vector2f location)
 {
@@ -85,25 +92,26 @@ void Game::handleBoxShipMouseMoved(const sf::Vector2f location)
     }
 }
 
-void Game::handleMenuClick(const sf::Vector2f location)
-{
-    if (m_menu.getButton(Play).getGlobalBounds().contains(location))
-    {
-        chooseLevel();
-    }
-    else if (m_menu.getButton(Help).getGlobalBounds().contains(location))
-    {
-        instructions();
-    }
-    else if (m_menu.getButton(Box).getGlobalBounds().contains(location))
-    {
-        chooseBoxShip();
-    }
-    else if (m_menu.getButton(Score_Table).getGlobalBounds().contains(location))
-    {
-        scoreTable();
-    }
-}
+
+//void Game::handleMenuClick(const sf::Vector2f location)
+//{
+//    if (m_menu.getButton(Play).getGlobalBounds().contains(location))
+//    {
+//        chooseLevel();
+//    }
+//    else if (m_menu.getButton(Help).getGlobalBounds().contains(location))
+//    {
+//        instructions();
+//    }
+//    else if (m_menu.getButton(Box).getGlobalBounds().contains(location))
+//    {
+//        chooseBoxShip();
+//    }
+//    else if (m_menu.getButton(Score_Table).getGlobalBounds().contains(location))
+//    {
+//        scoreTable();
+//    }
+//}
 
 void Game::handleBoxShipPageClick(const sf::Vector2f location)
 {
@@ -116,26 +124,26 @@ void Game::handleBoxShipPageClick(const sf::Vector2f location)
     }
 }
 
-void Game::handleLevelsPageClick(const sf::Vector2f location)
-{
-    if (m_menu.getButton(WithoutYou).getGlobalBounds().contains(location))
-        m_board.createLevel(Map1, WithoutYou_Song);
-
-    else if (m_menu.getButton(Greyhound).getGlobalBounds().contains(location))
-        m_board.createLevel(Map2, Greyhound_Song);
-
-    else if (m_menu.getButton(OnlyTheHorses).getGlobalBounds().contains(location))
-        m_board.createLevel(Map3, OnlyTheHorses_Song );
-
-    else if (m_menu.getButton(Spectre).getGlobalBounds().contains(location))
-        m_board.createLevel(Map4, Spectre_Song);
-
-    else
-        return;
-    m_menu.stopSong();
-    startGame();
-    m_menu.playSong();
-}
+//void Game::handleLevelsPageClick(const sf::Vector2f location)
+//{
+//    if (m_menu.getButton(WithoutYou).getGlobalBounds().contains(location))
+//        m_board.createLevel(Map1, WithoutYou_Song);
+//
+//    else if (m_menu.getButton(Greyhound).getGlobalBounds().contains(location))
+//        m_board.createLevel(Map2, Greyhound_Song);
+//
+//    else if (m_menu.getButton(OnlyTheHorses).getGlobalBounds().contains(location))
+//        m_board.createLevel(Map3, OnlyTheHorses_Song );
+//
+//    else if (m_menu.getButton(Spectre).getGlobalBounds().contains(location))
+//        m_board.createLevel(Map4, Spectre_Song);
+//
+//    else
+//        return;
+//    m_menu.stopSong();
+//    startGame();
+//    m_menu.playSong();
+//}
 
 
 void Game::startGame()
@@ -203,11 +211,15 @@ void Game::startGame()
 
 void Game::setView()
 {
+
     float last_pos = m_gameView.getCenter().x;
     b2Vec2 playerPosition = m_board.getPlayerPosition();
     float playerX = playerPosition.x * SCALE;
-    m_gameView.setCenter( playerX , WINDOW_HEIGHT / 2);
+    //if(playerX > WINDOW_WIDTH/2)
+    //{
+    m_gameView.setCenter(playerX, WINDOW_HEIGHT / 2);
     m_board.viewBackground(playerX - last_pos); //make the background move with the view
+    //}
 }
 
 void Game::instructions()
@@ -233,7 +245,10 @@ void Game::instructions()
                 m_window.close();
                 break;
             }
-
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+        {
+            break;
         }
     }
 }
@@ -263,7 +278,21 @@ void Game::scoreTable()
             }
 
         }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+        {
+            break;
+        }
     }
+}
+
+Board& Game::getBoard()
+{
+    return m_board;
+}
+
+Menu& Game::getMenu()
+{
+    return m_menu;
 }
 
 void Game::chooseBoxShip()
@@ -300,44 +329,48 @@ void Game::chooseBoxShip()
                 break;
             }
         }
-    }
-}
-
-void Game::chooseLevel()
-{
-    bool click = false;
-
-    while (m_window.isOpen() && !click)
-    {
-        m_window.clear();
-        m_menu.drawLevelsPage();
-        m_window.display();
-
-        if (auto event = sf::Event{}; m_window.waitEvent(event))
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
         {
-            switch (event.type)
-            {
-            case sf::Event::MouseButtonReleased:
-            {
-                auto location = m_window.mapPixelToCoords(
-                    { event.mouseButton.x, event.mouseButton.y });
-                handleLevelsPageClick(location);
-                click = true;
-                break;
-            }
-            case sf::Event::MouseMoved:
-            {
-                auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
-                handleMenuMouseMoved(location, WithoutYou, Spectre);
-                break;
-            }
-            case sf::Event::Closed:
-                m_window.close();
-                break;
-            }
+            break;
         }
     }
 }
+
+//void Game::chooseLevel()
+//{
+//    bool click = false;
+//
+//    while (m_window.isOpen() && !click)
+//    {
+//        m_window.clear();
+//        m_menu.drawLevelsPage();
+//        m_window.display();
+//
+//        if (auto event = sf::Event{}; m_window.waitEvent(event))
+//        {
+//            switch (event.type)
+//            {
+//            case sf::Event::MouseButtonReleased:
+//            {
+//                auto location = m_window.mapPixelToCoords(
+//                    { event.mouseButton.x, event.mouseButton.y });
+//                handleLevelsPageClick(location);
+//                click = true;
+//                break;
+//            }
+//            case sf::Event::MouseMoved:
+//            {
+//                auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
+//                handleMenuMouseMoved(location, WithoutYou, Spectre);
+//                break;
+//            }
+//            case sf::Event::Closed:
+//                m_window.close();
+//                break;
+//            }
+//        }
+//    }
+//}
 
 void Game::winLoop() 
 {
@@ -404,15 +437,17 @@ void Game::winLoop()
                     name.setString(player_name);
                     cursor_clock.restart();
                 }
+                break;
             }
             case sf::Event::KeyPressed:
             {
-                if (event.key.code == sf::Keyboard::Enter)
+                if (event.key.code == sf::Keyboard::Enter )
                 {
                     done = true;
                     m_menu.updateScoreTable(score, player_name);
 
                 }
+                break;
             }
         }
         }

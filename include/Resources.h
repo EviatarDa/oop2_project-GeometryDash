@@ -7,15 +7,19 @@
 
 
 enum MenuTextures { Menu_Background, Title };
-enum MenuButtons { Play, Help, Box, Score_Table, WithoutYou, Greyhound, OnlyTheHorses, Spectre };
+enum MenuButtons { Play, Help, Box, Score_Table };
 enum MenuInstructions { OhNo, Instructions1, Instructions2, Instructions3, Instructions4, DropTheMic };
 enum MenuBoxShips { BoxShip1, BoxShip2, BoxShip3, BoxShip4, BoxShip5, BoxShip6 };
+enum LevelsMenuButtons { WithoutYou, Greyhound, OnlyTheHorses, Spectre };
+
+
 enum GameTextures {
     Floor, Level_Background, PlayerBox1, PlayerBox2, PlayerBox3, PlayerBox4, PlayerBox5, PlayerBox6,
     PlayerShip1, PlayerShip2, PlayerShip3, PlayerShip4, PlayerShip5, PlayerShip6, Spike1, Spike2, Spikes,
     Coin, Cube1, Cube2, CubeCube, Gate1, Gate2, Gate3, Gate4, Gate5, Jumper1, Jumper2, Rectangle,
     Enemy1SpriteSheet, Enemy2SpriteSheet, Enemy1, Enemy2, ScoreBoard
 };
+
 enum GameMaps { Map1, Map2, Map3, Map4 };
 enum Direction { Right, Left, Up, Stay };
 enum GameAnimations { Enemy1Animation, Enemy2Animation };
@@ -24,7 +28,10 @@ enum GameSounds { Echo_Song, Greyhound_Song, OnlyTheHorses_Song, Spectre_Song, W
 
 //arrays
 const int MENU_TEXTURES = 2;
-const int MENU_BUTTONS = 9;
+const int MENU_BUTTONS = 5; //was 9
+
+const int LEVEL_MENU_BUTTONS = 4; // New
+
 const int MENU_INSTRUCTIONS = 6;
 const int MENU_BOX_SHIPS = 6;
 
@@ -92,6 +99,7 @@ public:
     const sf::Texture& getMenuButtons(const MenuButtons)const;
     const sf::Texture& getMenuInstructions(const MenuInstructions)const;
     const sf::Texture& getMenuBoxShips(const MenuBoxShips)const;
+    const sf::Texture& getLevelsMenuButtons(const LevelsMenuButtons)const;
 
     const sf::Texture& getGameTexture(const GameTextures)const;
 
@@ -109,6 +117,7 @@ private:
     sf::Texture m_menu_buttons[MENU_BUTTONS];
     sf::Texture m_menu_instructions[MENU_INSTRUCTIONS];
     sf::Texture m_menu_box_ships[MENU_BOX_SHIPS];
+    sf::Texture m_level_menu_buttons[LEVEL_MENU_BUTTONS];
     
     sf::Texture m_game_textures[GAME_TEXTURES];
 

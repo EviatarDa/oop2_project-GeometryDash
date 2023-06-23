@@ -7,6 +7,11 @@
 #include "Board.h"
 #include "Menu.h"
 #include "ScoreTable.h"
+#include "HelpButton.h"
+#include "PlayButton.h"
+#include "BoxButton.h"
+#include "ScoreTableButton.h"
+
 
 
 class Game
@@ -14,6 +19,13 @@ class Game
 public:
 	Game();
 	void runMenu();
+	void startGame();
+	void instructions();
+	void chooseBoxShip();
+	void scoreTable();
+	Board& getBoard();
+	Menu& getMenu();
+
 
 private:
 	sf::RenderWindow m_window;
@@ -24,20 +36,15 @@ private:
 	bool m_game_over = false;
 	sf::Clock m_game_clock;
 
-	//std::unique_ptr<ScreenMenager>;
 
 	//functions
-	void handleMenuMouseMoved(const sf::Vector2f, int , int);
+	//void handleMenuMouseMoved(const sf::Vector2f, int , int);
 	void handleBoxShipMouseMoved(const sf::Vector2f);
-	void handleMenuClick(const sf::Vector2f);
+	//void handleMenuClick(const sf::Vector2f);
 	void handleBoxShipPageClick(const sf::Vector2f);
-	void handleLevelsPageClick(const sf::Vector2f);
-	void startGame();
+	//void handleLevelsPageClick(const sf::Vector2f);
 	void setView();
-	void instructions();
-	void scoreTable();
-	void chooseBoxShip();
-	void chooseLevel();
+	//void chooseLevel();
 	void winLoop();
 	void createScoreBoard(sf::Sprite&, sf::Sprite&, sf::Text&, sf::Text&, int&,
 		sf::Text&, sf::Text&, sf::RectangleShape&, sf::RectangleShape&);

@@ -5,12 +5,23 @@
 #include <Resources.h>
 #include "ScoreTable.h"
 
+#include "Command.h"
+
 class Menu
 {
 public:
 	Menu(sf::RenderWindow&);
 	void drawMenu()const;
-	sf::Sprite getButton(const MenuButtons) const;
+	void drawInstructions(const MenuInstructions) const;
+	void drawScoreTable();
+	void drawBoxShips();
+	void drawLevelsPage();
+
+	int getOptionFromUser(sf::Vector2f);
+	void performAction(int);
+	void add(MenuButtons, std::unique_ptr<Command>);
+
+	void handleMenuMouseMoved(sf::Vector2f);
 	void ButtonPress(const MenuButtons);
 	void ButtonRelease(const MenuButtons);
 
@@ -18,19 +29,19 @@ public:
 	void boxShipPress(const MenuBoxShips);
 	void boxShipRelease(const MenuBoxShips);
 
-	void drawInstructions(const MenuInstructions) const;
-	void drawScoreTable();
-	void drawBoxShips();
+
 
 	std::pair<GameTextures, GameTextures> getPlayerTextures();
 	void chooseBoxShip(MenuBoxShips);
 
-	void drawLevelsPage();
 
 	void updateScoreTable(int, std::string);
 
 	void playSong();
 	void stopSong();
+
+	//sf::Sprite getButton(const MenuButtons) const;
+
 
 private:
 
@@ -51,4 +62,7 @@ private:
 
 	void locateObjects();
 
+	//from here
+	typedef std::pair<sf::Sprite, std::unique_ptr<Command>> option;
+	std::vector<option> m_options;
 };
