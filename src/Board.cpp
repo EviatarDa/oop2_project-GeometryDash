@@ -282,6 +282,9 @@ void Board::resetBoard()
     m_player = nullptr;
     m_win = false;
     m_background.setPosition(0, 0);
+    m_background.setColor(sf::Color::White);
+    if (m_gravity.y < 0)
+        swapGravity();
 
     // Destroy all fixtures
     b2Body* body = m_world.GetBodyList();

@@ -67,6 +67,7 @@ void Player::kill()
         m_gravity = -m_gravity;
     }
     m_object_body->SetTransform(m_first_location, m_object_body->GetAngle());
+    m_object_body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
     m_alive = true;
 }
 

@@ -196,6 +196,7 @@ void Game::startGame()
 
         if (m_board.isWin())
         {
+            m_game_over = true;
             m_gameView.setCenter(WINDOW_WIDTH/2,WINDOW_HEIGHT/2);
             m_window.setView(m_gameView);
             winLoop();
@@ -374,7 +375,6 @@ void Game::chooseBoxShip()
 
 void Game::winLoop() 
 {
-    m_game_over = true;
     bool done = false;
     sf::Sprite score_board, background;
     sf::Text time_score, coin_score;

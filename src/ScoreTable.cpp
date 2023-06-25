@@ -78,7 +78,7 @@ void ScoreTable::loadScoresFromFile()
             int number = 0;
             std::string name;
             ss >> number;
-            ss >> name;
+            std::getline(ss,name);
             m_scores.push_back(std::pair<int, std::string>(number, name));
         }
         file.close();
