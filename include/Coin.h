@@ -11,8 +11,8 @@
 class Coin : public StaticObject
 {
 public:
-	Coin(b2World& world, GameTextures texture, sf::Vector2f location,
-		bool , GameAnimations , GameTextures );
+	Coin(b2World& world, const GameTextures texture, const sf::Vector2f location,
+		const bool , const GameAnimations , const GameTextures );
 
 private:
 	static bool m_registerit1;

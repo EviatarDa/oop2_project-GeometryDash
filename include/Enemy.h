@@ -12,7 +12,8 @@
 class Enemy : public MovingObject
 {
 public:
-    Enemy(b2World&, GameTextures, sf::Vector2f, bool, GameAnimations, GameTextures);
+    Enemy(b2World&, const GameTextures, const sf::Vector2f, const bool,
+        const GameAnimations, const GameTextures);
     void move()override;
     void updateDirection() override;
     void swap();

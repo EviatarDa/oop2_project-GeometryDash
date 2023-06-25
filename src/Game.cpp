@@ -39,7 +39,6 @@ void Game::runMenu()
             {
                 auto location = m_window.mapPixelToCoords(
                     { event.mouseButton.x, event.mouseButton.y });
-                //handleMenuClick(location);
                 int button = m_menu.getOptionFromUser(location);
                 m_menu.performAction(button);
                 break;
@@ -48,34 +47,14 @@ void Game::runMenu()
             case sf::Event::MouseMoved:
             {
                 auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
-                //handleMenuMouseMoved(location, Play, Score_Table);
                 m_menu.handleMenuMouseMoved(location);
                 break;
             }
 
             }
         }
-        //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-        //{
-        //    m_window.close();
-        //}
     }
 }
-
-//void Game::handleMenuMouseMoved(const sf::Vector2f location, int first, int last)
-//{
-//    for (int button = first; button <= last; button++)
-//    {
-//        if ((m_menu.getButton((MenuButtons)button).getGlobalBounds().contains(location)))
-//        {
-//            m_menu.ButtonPress((MenuButtons)button);
-//        }
-//        else
-//        {
-//            m_menu.ButtonRelease((MenuButtons)button);
-//        }
-//    }
-//}
 
 void Game::handleBoxShipMouseMoved(const sf::Vector2f location)
 {
@@ -92,27 +71,6 @@ void Game::handleBoxShipMouseMoved(const sf::Vector2f location)
     }
 }
 
-
-//void Game::handleMenuClick(const sf::Vector2f location)
-//{
-//    if (m_menu.getButton(Play).getGlobalBounds().contains(location))
-//    {
-//        chooseLevel();
-//    }
-//    else if (m_menu.getButton(Help).getGlobalBounds().contains(location))
-//    {
-//        instructions();
-//    }
-//    else if (m_menu.getButton(Box).getGlobalBounds().contains(location))
-//    {
-//        chooseBoxShip();
-//    }
-//    else if (m_menu.getButton(Score_Table).getGlobalBounds().contains(location))
-//    {
-//        scoreTable();
-//    }
-//}
-
 void Game::handleBoxShipPageClick(const sf::Vector2f location)
 {
     for (int box_ship = BoxShip1; box_ship < MENU_BOX_SHIPS; box_ship++)
@@ -123,27 +81,6 @@ void Game::handleBoxShipPageClick(const sf::Vector2f location)
         }
     }
 }
-
-//void Game::handleLevelsPageClick(const sf::Vector2f location)
-//{
-//    if (m_menu.getButton(WithoutYou).getGlobalBounds().contains(location))
-//        m_board.createLevel(Map1, WithoutYou_Song);
-//
-//    else if (m_menu.getButton(Greyhound).getGlobalBounds().contains(location))
-//        m_board.createLevel(Map2, Greyhound_Song);
-//
-//    else if (m_menu.getButton(OnlyTheHorses).getGlobalBounds().contains(location))
-//        m_board.createLevel(Map3, OnlyTheHorses_Song );
-//
-//    else if (m_menu.getButton(Spectre).getGlobalBounds().contains(location))
-//        m_board.createLevel(Map4, Spectre_Song);
-//
-//    else
-//        return;
-//    m_menu.stopSong();
-//    startGame();
-//    m_menu.playSong();
-//}
 
 
 void Game::startGame()
@@ -186,7 +123,6 @@ void Game::startGame()
                 break;
             }
             }
-
         }
 
         m_board.updateMovingDirections();
@@ -212,79 +148,12 @@ void Game::startGame()
 
 void Game::setView()
 {
-
     float last_pos = m_gameView.getCenter().x;
     b2Vec2 playerPosition = m_board.getPlayerPosition();
     float playerX = playerPosition.x * SCALE;
-    //if(playerX > WINDOW_WIDTH/2)
-    //{
     m_gameView.setCenter(playerX, WINDOW_HEIGHT / 2);
     m_board.viewBackground(playerX - last_pos); //make the background move with the view
-    //}
 }
-
-//void Game::instructions()
-//{
-//    int page = OhNo;
-//
-//    while (m_window.isOpen() && page <= DropTheMic)
-//    {
-//        m_window.clear();
-//        m_menu.drawInstructions((MenuInstructions)page);
-//        m_window.display();
-//
-//        if (auto event = sf::Event{}; m_window.waitEvent(event))
-//        {
-//            switch (event.type)
-//            {
-//            case sf::Event::MouseButtonReleased:
-//            {
-//                page++;
-//                break;
-//            }
-//            case sf::Event::Closed:
-//                m_window.close();
-//                break;
-//            }
-//        }
-//        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-//        {
-//            break;
-//        }
-//    }
-//}
-//
-//void Game::scoreTable()
-//{
-//    bool click = false;
-//
-//    while (m_window.isOpen() && !click)
-//    {
-//        m_window.clear();
-//        m_menu.drawScoreTable();
-//        m_window.display();
-//
-//        if (auto event = sf::Event{}; m_window.waitEvent(event))
-//        {
-//            switch (event.type)
-//            {
-//            case sf::Event::MouseButtonReleased:
-//            {
-//                click = true;
-//                break;
-//            }
-//            case sf::Event::Closed:
-//                m_window.close();
-//                break;
-//            }
-//
-//        }
-//        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-//        {
-//            break;
-//        }
-//    }
-//}
 
 Board& Game::getBoard()
 {
@@ -323,8 +192,6 @@ void Game::chooseBoxShip()
             {
                 auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
                 handleBoxShipMouseMoved(location);
-                //m_menu.handleBoxShipMouseMoved(location);//new
-
                 break;
             }
             case sf::Event::Closed:
@@ -338,42 +205,6 @@ void Game::chooseBoxShip()
         }
     }
 }
-
-//void Game::chooseLevel()
-//{
-//    bool click = false;
-//
-//    while (m_window.isOpen() && !click)
-//    {
-//        m_window.clear();
-//        m_menu.drawLevelsPage();
-//        m_window.display();
-//
-//        if (auto event = sf::Event{}; m_window.waitEvent(event))
-//        {
-//            switch (event.type)
-//            {
-//            case sf::Event::MouseButtonReleased:
-//            {
-//                auto location = m_window.mapPixelToCoords(
-//                    { event.mouseButton.x, event.mouseButton.y });
-//                handleLevelsPageClick(location);
-//                click = true;
-//                break;
-//            }
-//            case sf::Event::MouseMoved:
-//            {
-//                auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
-//                handleMenuMouseMoved(location, WithoutYou, Spectre);
-//                break;
-//            }
-//            case sf::Event::Closed:
-//                m_window.close();
-//                break;
-//            }
-//        }
-//    }
-//}
 
 void Game::winLoop() 
 {

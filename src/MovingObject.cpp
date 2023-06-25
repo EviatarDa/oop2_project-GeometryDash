@@ -2,7 +2,7 @@
 
 #include "MovingObject.h"
 
-MovingObject::MovingObject(b2World& world, GameTextures texture, sf::Vector2f location)
+MovingObject::MovingObject( b2World& world, const GameTextures texture, const sf::Vector2f location)
     :GameObject(texture, location)
 {
     sf::Vector2f sprite_size(m_object.getTextureRect().width, m_object.getTextureRect().height);
@@ -26,7 +26,7 @@ MovingObject::MovingObject(b2World& world, GameTextures texture, sf::Vector2f lo
 }
 
 
-b2Vec2 MovingObject::getPosition()
+const b2Vec2 MovingObject::getPosition()const
 {
     return m_object_body->GetPosition();
 }

@@ -60,18 +60,7 @@ void Menu::drawMenu() const
 	m_window.draw(m_title);
 }
 
-//void Menu::show()
-//{
-//	m_window.draw(m_background);
-//	for (int button = 0; button < m_options.size(); button++)
-//	{
-//		m_window.draw(m_back_buttons[button]);
-//		m_window.draw(m_buttons[button]);
-//	}
-//	m_window.draw(m_title);
-//}
-
-int Menu::getOptionFromUser(sf::Vector2f location)
+const int Menu::getOptionFromUser(const sf::Vector2f location)
 {
 	for (int button = Play; button < m_options.size(); button++)
 	{
@@ -83,24 +72,19 @@ int Menu::getOptionFromUser(sf::Vector2f location)
 	return m_options.size() + 1;
 }
 
-void Menu::performAction(int action)
+void Menu::performAction(const int action)const
 {
 	if (action > m_options.size())
 		return;
 	m_options[action].second->execute();
 }
 
-void Menu::add(MenuButtons button, std::unique_ptr<Command> command)
+void Menu::add(const MenuButtons button, std::unique_ptr<Command> command)
 {
 	m_options.emplace_back(option(m_buttons[button], move(command)));
 }
 
-//sf::Sprite Menu::getButton(const MenuButtons button) const
-//{
-//	return m_buttons[button];
-//}
-
-void Menu::handleMenuMouseMoved(sf::Vector2f location)
+void Menu::handleMenuMouseMoved(const sf::Vector2f location)
 {
 	for (int button = Play; button < m_options.size(); button++)
 	{
@@ -115,22 +99,7 @@ void Menu::handleMenuMouseMoved(sf::Vector2f location)
 	}
 }
 
-//void Menu::handleBoxShipMouseMoved(sf::Vector2f location)
-//{
-//	for (int button = BoxShip1; button <= BoxShip6; button++)
-//	{
-//		if (m_options[button].first.getGlobalBounds().contains(location))
-//		{
-//			boxShipPress(MenuBoxShips(button));
-//		}
-//		else
-//		{
-//			boxShipRelease(MenuBoxShips(button));
-//		}
-//	}
-//}
-
-sf::Sprite Menu::getBoxShip(const MenuBoxShips box_ship) const
+const sf::Sprite Menu::getBoxShip(const MenuBoxShips box_ship) const
 {
 	return m_box_ships[box_ship];
 }
@@ -161,12 +130,12 @@ void Menu::drawInstructions(const MenuInstructions page) const
 	m_window.draw(m_instructions[page]);
 }
 
-void Menu::drawScoreTable()
+void Menu::drawScoreTable()const
 {
 	m_score_table.draw();
 }
 
-void Menu::drawBoxShips()
+void Menu::drawBoxShips()const
 {
 	m_window.draw(m_background);
 	for (int box_ship = BoxShip1; box_ship <= BoxShip6; box_ship++)
@@ -208,12 +177,12 @@ std::pair<GameTextures, GameTextures> Menu::getPlayerTextures()
 	}
 }
 
-void Menu::chooseBoxShip(MenuBoxShips box_ship)
+void Menu::chooseBoxShip(const MenuBoxShips box_ship)
 {
 	m_box_ship = box_ship;
 }
 
-void Menu::drawLevelsPage()
+void Menu::drawLevelsPage()const
 {
 	m_window.draw(m_background);
 	for (int button = WithoutYou; button <= Spectre; button++)
@@ -223,7 +192,7 @@ void Menu::drawLevelsPage()
 	}
 }
 
-void Menu::updateScoreTable(int score, std::string player_name)
+void Menu::updateScoreTable(const int score, std::string player_name)
 {
 	if (player_name == "")
 		player_name = "Unknown Player";
@@ -244,6 +213,7 @@ void Menu::stopSong()
 
 void Menu::locateObjects()
 {
+	//buttons
 	m_buttons[Play].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[Play].getTextureRect().width) * 0.5,
 		WINDOW_HEIGHT - m_buttons[Help].getTextureRect().height * 4));
 
@@ -270,35 +240,7 @@ void Menu::locateObjects()
 	m_back_buttons[Score_Table].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[Score_Table].getTextureRect().width) * 0.5,
 		WINDOW_HEIGHT - m_back_buttons[Score_Table].getTextureRect().height * 2));
 
-
-	////level buttons
-	//m_buttons[WithoutYou].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[WithoutYou].getTextureRect().width) * 0.25,
-	//	(WINDOW_HEIGHT - m_buttons[WithoutYou].getTextureRect().height ) * 0.25));
-
-	//m_buttons[Greyhound].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[Greyhound].getTextureRect().width) * 0.75,
-	//	(WINDOW_HEIGHT - m_buttons[Greyhound].getTextureRect().height) * 0.25));
-
-	//m_buttons[OnlyTheHorses].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[OnlyTheHorses].getTextureRect().width) * 0.25,
-	//	(WINDOW_HEIGHT - m_buttons[OnlyTheHorses].getTextureRect().height) * 0.75));
-
-	//m_buttons[Spectre].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[Spectre].getTextureRect().width) * 0.75,
-	//	(WINDOW_HEIGHT - m_buttons[Spectre].getTextureRect().height) * 0.75));
-
-	////backbuttons
-	//m_back_buttons[WithoutYou].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[WithoutYou].getTextureRect().width) * 0.25,
-	//	(WINDOW_HEIGHT - m_buttons[WithoutYou].getTextureRect().height) * 0.25));
-
-	//m_back_buttons[Greyhound].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[Greyhound].getTextureRect().width) * 0.75,
-	//	(WINDOW_HEIGHT - m_buttons[Greyhound].getTextureRect().height) * 0.25));
-
-	//m_back_buttons[OnlyTheHorses].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[OnlyTheHorses].getTextureRect().width) * 0.25,
-	//	(WINDOW_HEIGHT - m_buttons[OnlyTheHorses].getTextureRect().height) * 0.75));
-
-	//m_back_buttons[Spectre].setPosition(sf::Vector2f((WINDOW_WIDTH - m_buttons[Spectre].getTextureRect().width) * 0.75,
-	//	(WINDOW_HEIGHT - m_buttons[Spectre].getTextureRect().height) * 0.75));
-
-
-
+	//title
 	m_title.setPosition(sf::Vector2f((WINDOW_WIDTH - m_title.getTextureRect().width) * 0.5,
 		WINDOW_HEIGHT * 0.15));
 
@@ -310,13 +252,14 @@ void Menu::locateObjects()
 	m_box_ships[BoxShip5].setPosition(sf::Vector2f(WINDOW_WIDTH * 0.4f, WINDOW_HEIGHT * 3.f / 4.f));
 	m_box_ships[BoxShip6].setPosition(sf::Vector2f(WINDOW_WIDTH * 0.7f, WINDOW_HEIGHT * 3.f / 4.f));
 
-
+	//rectangles
 	for (int box_ship = BoxShip1; box_ship <= BoxShip6; box_ship++)
 	{
 		m_box_ships_rect[box_ship].setPosition(sf::Vector2f(m_box_ships[box_ship].getGlobalBounds().left,
 			m_box_ships[box_ship].getGlobalBounds().top));
 	}
 
+	//choose player text
 	m_box_ship_text.setPosition(sf::Vector2f(WINDOW_WIDTH/2 - m_box_ship_text.getLocalBounds().width/2,
 		WINDOW_HEIGHT*0.15));
 }

@@ -23,7 +23,7 @@ ScoreTable::ScoreTable(sf::RenderWindow& window)
     loadScoresFromFile(); // Load scores from file
 }
 
-void ScoreTable::draw()
+void ScoreTable::draw()const
 {
     m_window.draw(m_background);
     m_window.draw(m_title);

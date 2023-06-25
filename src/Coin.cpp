@@ -4,9 +4,8 @@
 
 
 
-Coin::Coin(b2World& world, GameTextures texture, sf::Vector2f location,
-	bool , GameAnimations , GameTextures )
-
+Coin::Coin(b2World& world, const GameTextures texture, const sf::Vector2f location,
+	const bool , const GameAnimations , const GameTextures )
 	:StaticObject(world, texture, location)
 {
 }

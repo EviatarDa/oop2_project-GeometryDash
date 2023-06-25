@@ -10,8 +10,8 @@
 class Spike : public StaticObject
 {
 public:
-	Spike(b2World& world, GameTextures texture, sf::Vector2f location, bool up,
-		GameAnimations, GameTextures);
+	Spike(b2World& world, const GameTextures texture, const sf::Vector2f location, const bool up,
+		const GameAnimations, const GameTextures);
 
 private:
 	static bool m_registerit1;

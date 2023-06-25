@@ -5,13 +5,13 @@
 const auto AnimationTime = sf::seconds(0.07f);
 
 Animation::Animation(const AnimationData& data, Direction dir, sf::Sprite& sprite, GameTextures sprite_sheet)
-    : m_data(data), m_dir(dir), m_sprite(sprite)
+    : m_data(data), m_dir(dir), m_sprite(sprite), m_elapsed(sf::Time::Zero)
 {
     m_sprite.setTexture(Resources::instance().getGameTexture(sprite_sheet));
     update();
 }
 
-void Animation::direction(Direction dir)
+void Animation::direction(const Direction dir)
 {
     if (m_dir == dir || dir == Direction::Stay)
     {
@@ -22,7 +22,7 @@ void Animation::direction(Direction dir)
     update();
 }
 
-void Animation::update(sf::Time delta)
+void Animation::update(const sf::Time delta)
 {
     m_elapsed += delta;
     if (m_elapsed >= AnimationTime)

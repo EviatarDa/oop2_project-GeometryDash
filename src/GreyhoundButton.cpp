@@ -8,7 +8,7 @@ GreyhoundButton::GreyhoundButton(Game* game, sf::RenderWindow& window)
 {
 }
 
-void GreyhoundButton::execute()
+void GreyhoundButton::execute() 
 {
 	m_game->getMenu().stopSong();
 	m_game->getBoard().createLevel(Map2, Greyhound_Song);

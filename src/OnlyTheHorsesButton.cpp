@@ -8,7 +8,7 @@ OnlyTheHorsesButton::OnlyTheHorsesButton(Game* game, sf::RenderWindow& window)
 {
 }
 
-void OnlyTheHorsesButton::execute()
+void OnlyTheHorsesButton::execute() 
 {
 	m_game->getMenu().stopSong();
 	m_game->getBoard().createLevel(Map3, OnlyTheHorses_Song	);

@@ -11,8 +11,8 @@
 class Brick : public StaticObject
 {
 public:
-	Brick(b2World& world, GameTextures texture, sf::Vector2f location,
-		bool, GameAnimations, GameTextures);
+	Brick(b2World& world, const GameTextures texture, const sf::Vector2f location,
+		const bool, const GameAnimations, const GameTextures);
 
 private:
 

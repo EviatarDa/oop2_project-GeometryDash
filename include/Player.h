@@ -12,7 +12,7 @@
 class Player : public MovingObject
 {
 public:
-    Player(b2World&, std::pair<GameTextures, GameTextures>, sf::Vector2f);
+    Player(b2World&, const std::pair<GameTextures, GameTextures>, const sf::Vector2f);
     void move();
     void updateDirection()override;
     void shipState();
@@ -22,22 +22,28 @@ public:
     void releaseRight();
     void releaseLeft();
     void releaseSpace();
-    void hop(float);
+    void hop(const float);
     void reverseGravity();
-    void collideBrick(GameTextures);
+    void collideBrick(const GameTextures);
+
     void setGravity();
-    bool isGravityMarked();
+    const bool isGravityMarked();
+
     void setBoxState();
-    bool isBoxStateMarked() ;
+    const bool isBoxStateMarked() const;
     void handleBoxStateMarking() ;
+
     void setShipState();
-    bool isShipStateMarked() ;
-    void handleShipStateMarking() ;
+    const bool isShipStateMarked() const;
+    void handleShipStateMarking();
+
     void setWin();
-    bool isWinner();
+    const bool isWinner();
+
     void setDead();
-    bool isAlive();
-    int getCoins();
+    const bool isAlive();
+
+    const int getCoins();
 
 private:
     bool m_direction[4] = { false, false, false, false };

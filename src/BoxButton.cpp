@@ -11,7 +11,6 @@ BoxButton::BoxButton(Game* game, sf::RenderWindow& window)
 
 void BoxButton::execute()
 {
-	//m_game->chooseBoxShip();
     bool click = false;
 
     while (m_window.isOpen() && !click)

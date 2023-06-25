@@ -3,7 +3,7 @@
 #include "Player.h"
 
 
-Player::Player(b2World& world, std::pair<GameTextures, GameTextures> textures, sf::Vector2f location)
+Player::Player(b2World& world, const std::pair<GameTextures, GameTextures> textures, const sf::Vector2f location)
     :MovingObject(world, textures.first, location),
     m_player_textures(textures),
     m_state(std::make_unique<BoxState>()),
@@ -89,7 +89,7 @@ void Player::releaseSpace()
     m_direction[Stay] = true;
 }
 
-void Player::hop(float hop_force)
+void Player::hop(const float hop_force)
 {
     //to avoid "icetower" jumps
     m_object_body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
@@ -104,7 +104,7 @@ void Player::reverseGravity()
     m_gravity = -m_gravity;
 }
 
-void Player::collideBrick(GameTextures brick_type)
+void Player::collideBrick(const GameTextures brick_type)
 {
     if (brick_type != Floor)
         m_state->collideBrick(m_touching_ground, m_alive);
@@ -117,7 +117,7 @@ void Player::setGravity()
     m_gravity_changed = true;
 }
 
-bool Player::isGravityMarked()
+const bool Player::isGravityMarked()
 {
     if (m_gravity_changed)
     {
@@ -134,7 +134,7 @@ void Player::setBoxState()
     m_set_box_state = true;
 }
 
-bool Player::isBoxStateMarked()
+const bool Player::isBoxStateMarked()const
 {
     return m_set_box_state;
 }
@@ -150,7 +150,7 @@ void Player::setShipState()
     m_set_ship_state = true;
 }
 
-bool Player::isShipStateMarked()
+const bool Player::isShipStateMarked()const
 {
     return m_set_ship_state;
 }
@@ -166,7 +166,7 @@ void Player::setWin()
     m_win = true;
 }
 
-bool Player::isWinner()
+const bool Player::isWinner()
 {
     return m_win;
 }
@@ -176,12 +176,12 @@ void Player::setDead()
     m_alive = false;
 }
 
-bool Player::isAlive()
+const bool Player::isAlive()
 {
     return m_alive;
 }
 
-int Player::getCoins()
+const int Player::getCoins()
 {
     return m_coins;
 }

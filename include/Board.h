@@ -18,21 +18,21 @@
 class Board
 {
 public:
-    Board(sf::RenderWindow&, std::pair<GameTextures, GameTextures>);
-    void drawBoard();
+    Board(sf::RenderWindow&, const std::pair<GameTextures,GameTextures>);
+    void drawBoard() const;
     void moveObjects();
-    b2Vec2 getPlayerPosition();
-    void viewBackground(float addition);
+    const b2Vec2 getPlayerPosition() const;
+    void viewBackground(const float addition);
     void swapGravity();
     void updateMovingDirections();
-    void rightReleased();
-    void leftReleased();
-    void spaceReleased();
-    void changeBoxShip(std::pair<GameTextures, GameTextures>);
+    void rightReleased() const;
+    void leftReleased() const;
+    void spaceReleased() const;
+    void changeBoxShip(const std::pair<GameTextures, GameTextures>);
     void handleCollision();
     void createLevel(const GameMaps, const GameSounds);
-    bool isWin();
-    int getCoins();
+    const bool isWin() const;
+    const int getCoins() const;
     void resetBoard();
 
 

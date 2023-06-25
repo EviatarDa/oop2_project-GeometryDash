@@ -15,9 +15,7 @@
 #include "Jumper.h"
 #include "Enemy.h"
 
-
 #include <functional>
-//#include <iostream>
 #include <map>
 #include <string>
 #include <typeinfo>

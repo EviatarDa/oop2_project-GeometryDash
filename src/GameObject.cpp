@@ -2,7 +2,7 @@
 
 #include "GameObject.h"
 
-GameObject::GameObject(GameTextures texture, sf::Vector2f location)
+GameObject::GameObject(const GameTextures texture, const sf::Vector2f location)
     :m_object_body(nullptr)
 {
     m_object.setTexture(Resources::instance().getGameTexture(texture));
@@ -17,12 +17,12 @@ GameObject::~GameObject()
     m_object_body = nullptr;
 }
 
-void GameObject::draw(sf::RenderWindow& window)
+void GameObject::draw(sf::RenderWindow& window) const
 {
     window.draw(m_object);
 }
 
-b2Body* GameObject::getBody() const
+const b2Body* GameObject::getBody() const
 {
     return m_object_body;
 }

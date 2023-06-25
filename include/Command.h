@@ -8,8 +8,8 @@ class Game;
 
 class Command {
 public:
-	Command(Game*, sf::RenderWindow&);
-	virtual void execute() = 0;
+	Command( Game*, sf::RenderWindow&);
+	virtual void execute() = 0 ;
 	virtual ~Command() = default;
 
 protected:

@@ -1,6 +1,6 @@
 #include "BoxState.h"
 
-void BoxState::move(bool* direction, b2Body* body, bool& touching_ground, b2Vec2 gravity, sf::Sprite& object)
+void BoxState::move(bool* direction, b2Body* body, bool& touching_ground, const b2Vec2 gravity, sf::Sprite& object)
 {
     if(direction[Up])
     {

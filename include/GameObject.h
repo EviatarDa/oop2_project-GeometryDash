@@ -8,10 +8,10 @@
 class GameObject
 {
 public:
-	GameObject(GameTextures, sf::Vector2f);
+	GameObject(const GameTextures, const sf::Vector2f);
 	virtual ~GameObject();
-	void draw(sf::RenderWindow&);
-	b2Body* getBody()const;
+	void draw(sf::RenderWindow&) const;
+	const b2Body* getBody()const;
 
 protected:
 	sf::Sprite m_object;

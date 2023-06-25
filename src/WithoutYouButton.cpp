@@ -8,7 +8,7 @@ WithoutYouButton::WithoutYouButton(Game* game, sf::RenderWindow& window)
 {
 }
 
-void WithoutYouButton::execute()
+void WithoutYouButton::execute() 
 {
 	m_game->getMenu().stopSong();
 	m_game->getBoard().createLevel(Map1, WithoutYou_Song);

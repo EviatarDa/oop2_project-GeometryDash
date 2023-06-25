@@ -13,35 +13,29 @@ public:
 	Menu(sf::RenderWindow&);
 	void drawMenu()const;
 	void drawInstructions(const MenuInstructions) const;
-	void drawScoreTable();
-	void drawBoxShips();
-	void drawLevelsPage();
+	void drawScoreTable()const;
+	void drawBoxShips()const;
+	void drawLevelsPage()const;
 
-	int getOptionFromUser(sf::Vector2f);
-	void performAction(int);
-	void add(MenuButtons, std::unique_ptr<Command>);
+	const int getOptionFromUser(const sf::Vector2f);
+	void performAction(const int)const;
+	void add(const MenuButtons, std::unique_ptr<Command>);
 
-	void handleMenuMouseMoved(sf::Vector2f);
-	//void handleBoxShipMouseMoved(sf::Vector2f);
+	void handleMenuMouseMoved(const sf::Vector2f);
 	void ButtonPress(const MenuButtons);
 	void ButtonRelease(const MenuButtons);
 
-	sf::Sprite getBoxShip(const MenuBoxShips) const;
+	const sf::Sprite getBoxShip(const MenuBoxShips) const;
 	void boxShipPress(const MenuBoxShips);
 	void boxShipRelease(const MenuBoxShips);
 
-
-
 	std::pair<GameTextures, GameTextures> getPlayerTextures();
-	void chooseBoxShip(MenuBoxShips);
+	void chooseBoxShip(const MenuBoxShips);
 
-
-	void updateScoreTable(int, std::string);
+	void updateScoreTable(const int, std::string);
 
 	void playSong();
 	void stopSong();
-
-	//sf::Sprite getButton(const MenuButtons) const;
 
 
 private:
@@ -63,7 +57,6 @@ private:
 
 	void locateObjects();
 
-	//from here
-	typedef std::pair<sf::Sprite, std::unique_ptr<Command>> option;
+	typedef std::pair<const sf::Sprite, std::unique_ptr<Command>> option;
 	std::vector<option> m_options;
 };

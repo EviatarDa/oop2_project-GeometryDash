@@ -10,10 +10,10 @@ class LevelsMenu
 public:
 	LevelsMenu(Game*, sf::RenderWindow&);
 	void drawLevelsMenu()const;
-	int getOptionFromUser(sf::Vector2f);
-	void performAction(int);
-	void add(LevelsMenuButtons, std::unique_ptr<Command>);
-	void handleLevelMenuMouseMoved(sf::Vector2f);
+	const int getOptionFromUser(const sf::Vector2f)const;
+	void performAction(const int) const;
+	void add(const LevelsMenuButtons, std::unique_ptr<Command>);
+	void handleLevelMenuMouseMoved(const sf::Vector2f);
 	void ButtonPress(const LevelsMenuButtons);
 	void ButtonRelease(const LevelsMenuButtons);
 
@@ -25,7 +25,7 @@ private:
 	sf::Sprite m_buttons[MENU_BUTTONS];
 	sf::Sprite m_back_buttons[MENU_BUTTONS];
 
-	typedef std::pair<sf::Sprite, std::unique_ptr<Command>> option;
+	typedef std::pair<const sf::Sprite, std::unique_ptr<Command>> option;
 	std::vector<option> m_options;
 
 	void locateObjects();

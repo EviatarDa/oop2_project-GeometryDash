@@ -10,7 +10,6 @@ ScoreTableButton::ScoreTableButton(Game* game, sf::RenderWindow& window)
 
 void ScoreTableButton::execute()
 {
-	//m_game->scoreTable();
     bool click = false;
 
     while (m_window.isOpen() && !click)

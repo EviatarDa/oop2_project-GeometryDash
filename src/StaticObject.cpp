@@ -2,9 +2,8 @@
 
 #include "StaticObject.h"
 
-StaticObject::StaticObject(b2World& world, GameTextures texture, sf::Vector2f location)
-    :GameObject(texture, location),
-    m_type(texture)
+StaticObject::StaticObject(b2World& world, const GameTextures texture, const sf::Vector2f location)
+    :GameObject(texture, location), m_type(texture)
 {
 
     sf::Vector2f sprite_size(m_object.getTextureRect().width, m_object.getTextureRect().height);
@@ -27,10 +26,9 @@ StaticObject::~StaticObject()
 {
     m_object_body->DestroyFixture(m_object_body->GetFixtureList());
     m_object_body = nullptr;
-
 }
 
-GameTextures StaticObject::getType()
+const GameTextures StaticObject::getType() const
 {
     return m_type;
 }
@@ -40,12 +38,12 @@ void StaticObject::setDelete()
     m_delete = true;
 }
 
-bool StaticObject::getDelete()
+const bool StaticObject::getDelete()const
 {
     return m_delete;
 }
 
-bool StaticObject::isActive()
+const bool StaticObject::isActive()const
 {
     return m_active;
 }

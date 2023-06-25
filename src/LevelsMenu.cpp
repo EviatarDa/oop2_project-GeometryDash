@@ -2,21 +2,6 @@
 
 #include "LevelsMenu.h"
 
-//LevelsMenu::LevelsMenu(Game* game, sf::RenderWindow& window)
-//	:m_game(game), m_window(window)
-//{
-//	m_background.setTexture(Resources::instance().getMenuTexture(Menu_Background));
-//	m_background.scale(1.6f, 1.6f);
-//
-//	for (int button = WithoutYou; button <= Spectre; button++)
-//	{
-//		m_buttons[button].setTexture(Resources::instance().getLevelsMenuButtons((LevelsMenuButtons)button));
-//		m_back_buttons[button].setTexture(Resources::instance().getLevelsMenuButtons((LevelsMenuButtons)button));
-//		m_back_buttons[button].setColor(sf::Color::Green);
-//	}
-//	locateObjects();
-//}
-
 LevelsMenu::LevelsMenu(Game* game, sf::RenderWindow& window)
 	: m_game(game), m_window(window)
 {
@@ -43,7 +28,7 @@ void LevelsMenu::drawLevelsMenu() const
 	}
 }
 
-int LevelsMenu::getOptionFromUser(sf::Vector2f location)
+const int LevelsMenu::getOptionFromUser(const sf::Vector2f location)const
 {
 	for (int button = WithoutYou; button < m_options.size(); button++)
 	{
@@ -55,20 +40,20 @@ int LevelsMenu::getOptionFromUser(sf::Vector2f location)
 	return m_options.size() + 1;
 }
 
-void LevelsMenu::performAction(int action)
+void LevelsMenu::performAction(const int action)const
 {
 	if (action > m_options.size())
 		return;
 	m_options[action].second->execute();
 }
 
-void LevelsMenu::add(LevelsMenuButtons button, std::unique_ptr<Command> command)
+void LevelsMenu::add(const LevelsMenuButtons button, std::unique_ptr<Command> command)
 {
 	m_options.emplace_back(option(m_buttons[button], move(command)));
 }
 
 
-void LevelsMenu::handleLevelMenuMouseMoved(sf::Vector2f location)
+void LevelsMenu::handleLevelMenuMouseMoved(const sf::Vector2f location)
 {
 	for (int button = WithoutYou; button < m_options.size(); button++)
 	{

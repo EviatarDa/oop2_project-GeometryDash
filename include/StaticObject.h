@@ -9,14 +9,14 @@
 class StaticObject : public GameObject
 {
 public:
-	StaticObject(b2World&, GameTextures, sf::Vector2f);
+	StaticObject(b2World&, const GameTextures, const sf::Vector2f);
 	virtual ~StaticObject();
-	GameTextures getType();
+	const GameTextures getType()const;
 
 	void setDelete();
-	bool getDelete();
+	const bool getDelete()const;
 
-	bool isActive();
+	const bool isActive()const;
 	void inactive();
 	void shutDown();
 	void restart();

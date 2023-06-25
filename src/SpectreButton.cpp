@@ -8,7 +8,7 @@ SpectreButton::SpectreButton(Game* game, sf::RenderWindow& window)
 {
 }
 
-void SpectreButton::execute()
+void SpectreButton::execute() 
 {
 	m_game->getMenu().stopSong();
 	m_game->getBoard().createLevel(Map4, Spectre_Song);

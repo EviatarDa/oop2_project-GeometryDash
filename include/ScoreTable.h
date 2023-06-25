@@ -11,7 +11,7 @@ class ScoreTable
 public:
     ScoreTable(sf::RenderWindow& window);
 
-    void draw();
+    void draw()const;
     void saveScoresToFile();
     void addScore(const std::string& scoreText, const int);
 

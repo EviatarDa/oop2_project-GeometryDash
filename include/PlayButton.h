@@ -12,6 +12,5 @@ public:
 	virtual void execute() override;
 
 private:
-	//sf::RenderWindow& m_window;
 	LevelsMenu m_levels_menu;
 };
