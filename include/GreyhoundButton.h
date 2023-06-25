@@ -7,7 +7,7 @@ class Game;
 class GreyhoundButton : public Command
 {
 public:
-	GreyhoundButton(Game*);
+	GreyhoundButton(Game*, sf::RenderWindow&);
 	virtual void execute() override;
 
 private:

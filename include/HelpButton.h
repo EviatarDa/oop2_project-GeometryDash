@@ -8,7 +8,7 @@ class Game;
 
 class HelpButton : public Command {
 public:
-	HelpButton(Game*);
+	HelpButton(Game*, sf::RenderWindow&);
 	virtual void execute() override;
 
 private:

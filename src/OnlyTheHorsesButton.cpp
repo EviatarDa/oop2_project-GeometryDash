@@ -3,8 +3,8 @@
 #include "OnlyTheHorsesButton.h"
 #include "Game.h"
 
-OnlyTheHorsesButton::OnlyTheHorsesButton(Game* game)
-	:Command(game)
+OnlyTheHorsesButton::OnlyTheHorsesButton(Game* game, sf::RenderWindow& window)
+	:Command(game, window)
 {
 }
 

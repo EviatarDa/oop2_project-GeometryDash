@@ -2,7 +2,7 @@
 
 #include "Command.h"
 
-Command::Command(Game*game)
-	:m_game(game)
+Command::Command(Game*game, sf::RenderWindow& window)
+	:m_game(game), m_window(window)
 {
 }

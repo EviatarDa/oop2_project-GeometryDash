@@ -3,8 +3,8 @@
 #include "WithoutYouButton.h"
 #include "Game.h"
 
-WithoutYouButton::WithoutYouButton(Game* game)
-	:Command(game)
+WithoutYouButton::WithoutYouButton(Game* game, sf::RenderWindow& window)
+	:Command(game, window)
 {
 }
 

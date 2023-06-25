@@ -115,6 +115,21 @@ void Menu::handleMenuMouseMoved(sf::Vector2f location)
 	}
 }
 
+//void Menu::handleBoxShipMouseMoved(sf::Vector2f location)
+//{
+//	for (int button = BoxShip1; button <= BoxShip6; button++)
+//	{
+//		if (m_options[button].first.getGlobalBounds().contains(location))
+//		{
+//			boxShipPress(MenuBoxShips(button));
+//		}
+//		else
+//		{
+//			boxShipRelease(MenuBoxShips(button));
+//		}
+//	}
+//}
+
 sf::Sprite Menu::getBoxShip(const MenuBoxShips box_ship) const
 {
 	return m_box_ships[box_ship];

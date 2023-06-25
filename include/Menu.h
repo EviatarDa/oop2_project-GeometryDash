@@ -22,6 +22,7 @@ public:
 	void add(MenuButtons, std::unique_ptr<Command>);
 
 	void handleMenuMouseMoved(sf::Vector2f);
+	//void handleBoxShipMouseMoved(sf::Vector2f);
 	void ButtonPress(const MenuButtons);
 	void ButtonRelease(const MenuButtons);
 

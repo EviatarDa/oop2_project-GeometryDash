@@ -20,11 +20,14 @@ public:
 	Game();
 	void runMenu();
 	void startGame();
-	void instructions();
+	//void instructions();
 	void chooseBoxShip();
-	void scoreTable();
+	//void scoreTable();
 	Board& getBoard();
 	Menu& getMenu();
+	void handleBoxShipPageClick(const sf::Vector2f);
+	void handleBoxShipMouseMoved(const sf::Vector2f);
+
 
 
 private:
@@ -39,10 +42,9 @@ private:
 
 	//functions
 	//void handleMenuMouseMoved(const sf::Vector2f, int , int);
-	void handleBoxShipMouseMoved(const sf::Vector2f);
 	//void handleMenuClick(const sf::Vector2f);
-	void handleBoxShipPageClick(const sf::Vector2f);
 	//void handleLevelsPageClick(const sf::Vector2f);
+	//void handleBoxShipPageClick(const sf::Vector2f);
 	void setView();
 	//void chooseLevel();
 	void winLoop();

@@ -7,7 +7,7 @@ class Game;
 class SpectreButton : public Command
 {
 public:
-	SpectreButton(Game*);
+	SpectreButton(Game*, sf::RenderWindow&);
 	virtual void execute() override;
 
 private:

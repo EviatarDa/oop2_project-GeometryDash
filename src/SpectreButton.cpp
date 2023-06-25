@@ -3,8 +3,8 @@
 #include "SpectreButton.h"
 #include "Game.h"
 
-SpectreButton::SpectreButton(Game* game)
-	:Command(game)
+SpectreButton::SpectreButton(Game* game, sf::RenderWindow& window)
+	:Command(game, window)
 {
 }
 

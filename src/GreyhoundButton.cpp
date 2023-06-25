@@ -3,8 +3,8 @@
 #include "GreyhoundButton.h"
 #include "Game.h"
 
-GreyhoundButton::GreyhoundButton(Game* game)
-	:Command(game)
+GreyhoundButton::GreyhoundButton(Game* game, sf::RenderWindow& window)
+	:Command(game, window)
 {
 }
 

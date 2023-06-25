@@ -13,9 +13,9 @@ Game::Game()
     m_gameView.setCenter(WINDOW_WIDTH / 2, WINDOW_HEIGHT/2);
 
     m_menu.add(Play, std::make_unique<PlayButton>(this, m_window));
-    m_menu.add(Help, std::make_unique<HelpButton>(this));
-    m_menu.add(Box, std::make_unique<BoxButton>(this));
-    m_menu.add(Score_Table, std::make_unique<ScoreTableButton>(this)); 
+    m_menu.add(Help, std::make_unique<HelpButton>(this, m_window));
+    m_menu.add(Box, std::make_unique<BoxButton>(this, m_window));
+    m_menu.add(Score_Table, std::make_unique<ScoreTableButton>(this, m_window));
 }
 
 void Game::runMenu()
@@ -48,7 +48,7 @@ void Game::runMenu()
             case sf::Event::MouseMoved:
             {
                 auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
-               // handleMenuMouseMoved(location, Play, Score_Table);
+                //handleMenuMouseMoved(location, Play, Score_Table);
                 m_menu.handleMenuMouseMoved(location);
                 break;
             }
@@ -223,68 +223,68 @@ void Game::setView()
     //}
 }
 
-void Game::instructions()
-{
-    int page = OhNo;
-
-    while (m_window.isOpen() && page <= DropTheMic)
-    {
-        m_window.clear();
-        m_menu.drawInstructions((MenuInstructions)page);
-        m_window.display();
-
-        if (auto event = sf::Event{}; m_window.waitEvent(event))
-        {
-            switch (event.type)
-            {
-            case sf::Event::MouseButtonReleased:
-            {
-                page++;
-                break;
-            }
-            case sf::Event::Closed:
-                m_window.close();
-                break;
-            }
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-        {
-            break;
-        }
-    }
-}
-
-void Game::scoreTable()
-{
-    bool click = false;
-
-    while (m_window.isOpen() && !click)
-    {
-        m_window.clear();
-        m_menu.drawScoreTable();
-        m_window.display();
-
-        if (auto event = sf::Event{}; m_window.waitEvent(event))
-        {
-            switch (event.type)
-            {
-            case sf::Event::MouseButtonReleased:
-            {
-                click = true;
-                break;
-            }
-            case sf::Event::Closed:
-                m_window.close();
-                break;
-            }
-
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-        {
-            break;
-        }
-    }
-}
+//void Game::instructions()
+//{
+//    int page = OhNo;
+//
+//    while (m_window.isOpen() && page <= DropTheMic)
+//    {
+//        m_window.clear();
+//        m_menu.drawInstructions((MenuInstructions)page);
+//        m_window.display();
+//
+//        if (auto event = sf::Event{}; m_window.waitEvent(event))
+//        {
+//            switch (event.type)
+//            {
+//            case sf::Event::MouseButtonReleased:
+//            {
+//                page++;
+//                break;
+//            }
+//            case sf::Event::Closed:
+//                m_window.close();
+//                break;
+//            }
+//        }
+//        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+//        {
+//            break;
+//        }
+//    }
+//}
+//
+//void Game::scoreTable()
+//{
+//    bool click = false;
+//
+//    while (m_window.isOpen() && !click)
+//    {
+//        m_window.clear();
+//        m_menu.drawScoreTable();
+//        m_window.display();
+//
+//        if (auto event = sf::Event{}; m_window.waitEvent(event))
+//        {
+//            switch (event.type)
+//            {
+//            case sf::Event::MouseButtonReleased:
+//            {
+//                click = true;
+//                break;
+//            }
+//            case sf::Event::Closed:
+//                m_window.close();
+//                break;
+//            }
+//
+//        }
+//        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+//        {
+//            break;
+//        }
+//    }
+//}
 
 Board& Game::getBoard()
 {
@@ -323,6 +323,8 @@ void Game::chooseBoxShip()
             {
                 auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
                 handleBoxShipMouseMoved(location);
+                //m_menu.handleBoxShipMouseMoved(location);//new
+
                 break;
             }
             case sf::Event::Closed:

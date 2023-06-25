@@ -7,7 +7,7 @@ class Game;
 class OnlyTheHorsesButton : public Command
 {
 public:
-	OnlyTheHorsesButton(Game*);
+	OnlyTheHorsesButton(Game*, sf::RenderWindow&);
 	virtual void execute() override;
 
 private:

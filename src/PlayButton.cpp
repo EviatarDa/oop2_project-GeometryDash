@@ -9,12 +9,12 @@
 
 
 PlayButton::PlayButton(Game* game,  sf::RenderWindow& window)
-	:Command(game), m_levels_menu(m_game, m_window), m_window(window)
+	:Command(game, window), m_levels_menu(m_game, m_window)
 {
-	m_levels_menu.add(WithoutYou, std::make_unique<WithoutYouButton>(m_game));
-	m_levels_menu.add(Greyhound, std::make_unique<GreyhoundButton>(m_game));
-	m_levels_menu.add(OnlyTheHorses, std::make_unique<OnlyTheHorsesButton>(m_game));
-	m_levels_menu.add(Spectre, std::make_unique<SpectreButton>(m_game));
+	m_levels_menu.add(WithoutYou, std::make_unique<WithoutYouButton>(m_game, m_window));
+	m_levels_menu.add(Greyhound, std::make_unique<GreyhoundButton>(m_game, m_window));
+	m_levels_menu.add(OnlyTheHorses, std::make_unique<OnlyTheHorsesButton>(m_game, m_window));
+	m_levels_menu.add(Spectre, std::make_unique<SpectreButton>(m_game, m_window));
 }
 
 void PlayButton::execute()

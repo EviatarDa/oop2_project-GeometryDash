@@ -6,7 +6,7 @@ class Game;
 
 class BoxButton : public Command {
 public:
-	BoxButton(Game*);
+	BoxButton(Game*, sf::RenderWindow&);
 	virtual void execute() override;
 
 private:

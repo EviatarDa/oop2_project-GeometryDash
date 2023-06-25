@@ -4,9 +4,10 @@
 
 class Game;
 
-class ScoreTableButton : public Command {
+class ScoreTableButton : public Command
+{
 public:
-	ScoreTableButton(Game*);
+	ScoreTableButton(Game*, sf::RenderWindow&);
 	virtual void execute() override;
 
 private:
