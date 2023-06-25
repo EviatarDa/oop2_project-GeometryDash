@@ -5,7 +5,7 @@
 MovingObject::MovingObject( b2World& world, const GameTextures texture, const sf::Vector2f location)
     :GameObject(texture, location)
 {
-    sf::Vector2f sprite_size(m_object.getTextureRect().width, m_object.getTextureRect().height);
+    const sf::Vector2f sprite_size(m_object.getTextureRect().width, m_object.getTextureRect().height);
 
     //physics
     b2BodyDef bodyDef;

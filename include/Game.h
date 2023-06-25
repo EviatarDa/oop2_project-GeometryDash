@@ -38,6 +38,6 @@ private:
 	void setView();
 	void winLoop();
 	void createScoreBoard(sf::Sprite&, sf::Sprite&, sf::Text&, sf::Text&, int&,
-		sf::Text&, sf::Text&, sf::RectangleShape&, sf::RectangleShape&);
+		sf::Text&, sf::Text&, sf::RectangleShape&, sf::RectangleShape&) const;
 
 };

@@ -60,7 +60,7 @@ void Menu::drawMenu() const
 	m_window.draw(m_title);
 }
 
-const int Menu::getOptionFromUser(const sf::Vector2f location)
+const int Menu::getOptionFromUser(const sf::Vector2f location) const
 {
 	for (int button = Play; button < m_options.size(); button++)
 	{

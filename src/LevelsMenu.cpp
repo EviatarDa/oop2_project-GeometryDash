@@ -28,7 +28,7 @@ void LevelsMenu::drawLevelsMenu() const
 	}
 }
 
-const int LevelsMenu::getOptionFromUser(const sf::Vector2f location)const
+const int LevelsMenu::getOptionFromUser(const sf::Vector2f location) const
 {
 	for (int button = WithoutYou; button < m_options.size(); button++)
 	{

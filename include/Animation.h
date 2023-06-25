@@ -12,9 +12,9 @@ public:
 
 private:
     const AnimationData& m_data;
-    sf::Time m_elapsed;// = {};
+    sf::Time m_elapsed;
     Direction m_dir = Direction::Right;
     int m_index = 0;
     sf::Sprite& m_sprite;
-    void update();
+    void update()const;
 };

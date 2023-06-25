@@ -24,7 +24,7 @@ public:
     const b2Vec2 getPlayerPosition() const;
     void viewBackground(const float addition);
     void swapGravity();
-    void updateMovingDirections();
+    void updateMovingDirections()const;
     void rightReleased() const;
     void leftReleased() const;
     void spaceReleased() const;

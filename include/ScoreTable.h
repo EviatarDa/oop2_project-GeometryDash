@@ -12,7 +12,7 @@ public:
     ScoreTable(sf::RenderWindow& window);
 
     void draw()const;
-    void saveScoresToFile();
+    void saveScoresToFile()const;
     void addScore(const std::string& scoreText, const int);
 
 private:

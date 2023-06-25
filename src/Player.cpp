@@ -89,7 +89,7 @@ void Player::releaseSpace()
     m_direction[Stay] = true;
 }
 
-void Player::hop(const float hop_force)
+void Player::hop(const float hop_force) const
 {
     //to avoid "icetower" jumps
     m_object_body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
@@ -166,7 +166,7 @@ void Player::setWin()
     m_win = true;
 }
 
-const bool Player::isWinner()
+const bool Player::isWinner() const
 {
     return m_win;
 }
@@ -176,27 +176,27 @@ void Player::setDead()
     m_alive = false;
 }
 
-const bool Player::isAlive()
+const bool Player::isAlive()const
 {
     return m_alive;
 }
 
-const int Player::getCoins()
+const int Player::getCoins()const
 {
     return m_coins;
 }
 
 
 
-void Player::changeBodyAndSprite(GameTextures game_texture)
+void Player::changeBodyAndSprite(const GameTextures game_texture)
 {
     m_object.setTexture(Resources::instance().getGameTexture(game_texture), true);
-    sf::Vector2f spriteSize(m_object.getTextureRect().width, m_object.getTextureRect().height);
+    const sf::Vector2f spriteSize(m_object.getTextureRect().width, m_object.getTextureRect().height);
     m_object.setOrigin(spriteSize.x / 2, spriteSize.y / 2);
 
     //create new shape
     b2PolygonShape shape;
-    sf::Vector2u boxSize = Resources::instance().getGameTexture(game_texture).getSize();
+    const sf::Vector2u boxSize = Resources::instance().getGameTexture(game_texture).getSize();
     shape.SetAsBox(boxSize.x / 2.0f / SCALE, boxSize.y / 2.0f / SCALE);
 
     //distroy the old fixture

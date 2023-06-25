@@ -6,7 +6,7 @@ StaticObject::StaticObject(b2World& world, const GameTextures texture, const sf:
     :GameObject(texture, location), m_type(texture)
 {
 
-    sf::Vector2f sprite_size(m_object.getTextureRect().width, m_object.getTextureRect().height);
+    const sf::Vector2f sprite_size(m_object.getTextureRect().width, m_object.getTextureRect().height);
 
     //physics
     b2BodyDef bodyDef;
@@ -64,14 +64,14 @@ void StaticObject::shutDown()
 
 void StaticObject::restart()
 {
-    sf::Time elapsed = m_clock.getElapsedTime() - m_inactive_timer;
+    const sf::Time elapsed = m_clock.getElapsedTime() - m_inactive_timer;
     if (elapsed >= sf::seconds(5.0f)) {
         if (m_fixture_destroyed) {
 
             m_object.setColor(sf::Color(255,255,255));
 
             //physics
-            sf::Vector2f sprite_size(m_object.getTextureRect().width, m_object.getTextureRect().height);
+            const sf::Vector2f sprite_size(m_object.getTextureRect().width, m_object.getTextureRect().height);
             b2PolygonShape shape;
             shape.SetAsBox(sprite_size.x / 2.0f / SCALE, sprite_size.y / 2.0f / SCALE);
             b2FixtureDef fixtureDef;

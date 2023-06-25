@@ -25,7 +25,7 @@ void BoxButton::execute()
             {
             case sf::Event::MouseButtonReleased:
             {
-                auto location = m_window.mapPixelToCoords(
+                const auto location = m_window.mapPixelToCoords(
                     { event.mouseButton.x, event.mouseButton.y });
                 m_game->handleBoxShipPageClick(location);
                 m_game->getBoard().changeBoxShip(m_game->getMenu().getPlayerTextures());
@@ -34,10 +34,8 @@ void BoxButton::execute()
             }
             case sf::Event::MouseMoved:
             {
-                auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
+                const auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
                 m_game->handleBoxShipMouseMoved(location);
-                //m_menu.handleBoxShipMouseMoved(location);//new
-
                 break;
             }
             case sf::Event::Closed:

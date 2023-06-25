@@ -17,7 +17,7 @@ public:
 	void drawBoxShips()const;
 	void drawLevelsPage()const;
 
-	const int getOptionFromUser(const sf::Vector2f);
+	const int getOptionFromUser(const sf::Vector2f)const;
 	void performAction(const int)const;
 	void add(const MenuButtons, std::unique_ptr<Command>);
 

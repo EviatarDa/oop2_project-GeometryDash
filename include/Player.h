@@ -22,7 +22,7 @@ public:
     void releaseRight();
     void releaseLeft();
     void releaseSpace();
-    void hop(const float);
+    void hop(const float) const;
     void reverseGravity();
     void collideBrick(const GameTextures);
 
@@ -38,12 +38,12 @@ public:
     void handleShipStateMarking();
 
     void setWin();
-    const bool isWinner();
+    const bool isWinner() const;
 
     void setDead();
-    const bool isAlive();
+    const bool isAlive()const;
 
-    const int getCoins();
+    const int getCoins()const;
 
 private:
     bool m_direction[4] = { false, false, false, false };
@@ -52,7 +52,6 @@ private:
     int m_coins;
     b2Vec2 m_first_location;
     bool m_touching_ground = false;
-    void changeBodyAndSprite(GameTextures);
     b2Vec2 m_gravity;
 
     bool m_set_box_state = false;
@@ -61,4 +60,7 @@ private:
     bool m_alive = true;
     bool m_state_change = false;
     bool m_gravity_changed = false;
+
+    void changeBodyAndSprite(const GameTextures);
+
 };

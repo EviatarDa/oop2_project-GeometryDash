@@ -56,7 +56,7 @@ void Board::swapGravity()
     m_world.SetGravity(m_gravity);
 }
 
-void Board::updateMovingDirections()
+void Board::updateMovingDirections()const
 {
     //update each moving object direction 
     for (int object = 0; object < m_moving_objects.size(); ++object)
@@ -120,7 +120,7 @@ void Board::handleCollision()
     }
         
 
-    for (auto& object : m_static_objects)
+    for (const auto& object : m_static_objects)
     {
         if (!object->isActive())
         {
@@ -141,7 +141,7 @@ void Board::createLevel(const GameMaps level, const GameSounds sound)
     {
         for (size_t x = 0; x < source.getSize().x; ++x)
         {
-            sf::Vector2f location(50 * x + 25, 50 * y + 25);
+            const sf::Vector2f location(50 * x + 25, 50 * y + 25);
 
             if (source.getPixel(x, y) == sf::Color::White)
                 continue;
@@ -166,7 +166,7 @@ void Board::createLevel(const GameMaps level, const GameSounds sound)
     }
 }
 
-const bool Board::isWin()const
+const bool Board::isWin() const
 {
     return m_win;
 }

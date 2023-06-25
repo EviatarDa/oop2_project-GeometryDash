@@ -37,16 +37,16 @@ void Game::runMenu()
 
             case sf::Event::MouseButtonReleased:
             {
-                auto location = m_window.mapPixelToCoords(
+                const auto location = m_window.mapPixelToCoords(
                     { event.mouseButton.x, event.mouseButton.y });
-                int button = m_menu.getOptionFromUser(location);
+                const int button = m_menu.getOptionFromUser(location);
                 m_menu.performAction(button);
                 break;
             }
 
             case sf::Event::MouseMoved:
             {
-                auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
+                const auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
                 m_menu.handleMenuMouseMoved(location);
                 break;
             }
@@ -148,9 +148,9 @@ void Game::startGame()
 
 void Game::setView()
 {
-    float last_pos = m_gameView.getCenter().x;
-    b2Vec2 playerPosition = m_board.getPlayerPosition();
-    float playerX = playerPosition.x * SCALE;
+    const float last_pos = m_gameView.getCenter().x;
+    const b2Vec2 playerPosition = m_board.getPlayerPosition();
+    const float playerX = playerPosition.x * SCALE;
     m_gameView.setCenter(playerX, WINDOW_HEIGHT / 2);
     m_board.viewBackground(playerX - last_pos); //make the background move with the view
 }
@@ -181,7 +181,7 @@ void Game::chooseBoxShip()
             {
             case sf::Event::MouseButtonReleased:
             {
-                auto location = m_window.mapPixelToCoords(
+                const auto location = m_window.mapPixelToCoords(
                     { event.mouseButton.x, event.mouseButton.y });
                 handleBoxShipPageClick(location);
                 m_board.changeBoxShip(m_menu.getPlayerTextures());
@@ -190,7 +190,7 @@ void Game::chooseBoxShip()
             }
             case sf::Event::MouseMoved:
             {
-                auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
+                const auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
                 handleBoxShipMouseMoved(location);
                 break;
             }
@@ -294,7 +294,7 @@ void Game::winLoop()
 }
 
 void Game::createScoreBoard(sf::Sprite& score_board, sf::Sprite& background, sf::Text& time_score, sf::Text& coin_score, int& score,
-    sf::Text& name, sf::Text& enter_name, sf::RectangleShape& input_rectangle, sf::RectangleShape& cursor)
+    sf::Text& name, sf::Text& enter_name, sf::RectangleShape& input_rectangle, sf::RectangleShape& cursor) const
 {
     score_board.setTexture(Resources::instance().getGameTexture(ScoreBoard));
     background.setTexture(Resources::instance().getGameTexture(Level_Background));
@@ -308,7 +308,7 @@ void Game::createScoreBoard(sf::Sprite& score_board, sf::Sprite& background, sf:
     coin_score.setOutlineColor(sf::Color::Black);
     coin_score.setOutlineThickness(1.f);
 
-    int game_elapsed_time = m_game_clock.getElapsedTime().asSeconds();
+    const int game_elapsed_time = m_game_clock.getElapsedTime().asSeconds();
 
     score = 10000 - (game_elapsed_time * 2) + m_board.getCoins() * 5;
 

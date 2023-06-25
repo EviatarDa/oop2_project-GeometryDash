@@ -5,7 +5,7 @@
 
 namespace 
 {
-	AnimationData enemyData(sf::Vector2i enemy_size)
+	AnimationData enemyData(const sf::Vector2i enemy_size)
 	{
 		const auto size = enemy_size;
 		const auto initSpace = sf::Vector2i(0, 0);
@@ -107,16 +107,16 @@ const AnimationData& Resources::getAnimationData(GameAnimations animation) const
 	return m_animation_data[animation];
 }
 
-const sf::SoundBuffer& Resources::getGameSounds(const GameSounds sounsd) const
+const sf::SoundBuffer& Resources::getGameSounds(const GameSounds sound) const
 {
-	return m_game_sounds[sounsd];
+	return m_game_sounds[sound];
 }
 
 
 void Resources::LoadFromFile()
 {
 	//menu textures
-	m_menu_textures[Menu_Background].loadFromFile("Menu_Backgound.png");
+	m_menu_textures[Menu_Background].loadFromFile("Menu_Background.png");
 	m_menu_textures[Menu_Background].setSmooth(true);
 	m_menu_textures[Title].loadFromFile("Title.png");
 	m_menu_textures[Title].setSmooth(true);

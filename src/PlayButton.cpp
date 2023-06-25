@@ -32,16 +32,16 @@ void PlayButton::execute()
             {
             case sf::Event::MouseButtonReleased:
             {
-                auto location = m_window.mapPixelToCoords(
+                const auto location = m_window.mapPixelToCoords(
                     { event.mouseButton.x, event.mouseButton.y });
-                int button = m_levels_menu.getOptionFromUser(location);
+                const int button = m_levels_menu.getOptionFromUser(location);
                 m_levels_menu.performAction(button);
                 click = true;
                 break;
             }
             case sf::Event::MouseMoved:
             {
-                auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
+                const auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
                 m_levels_menu.handleLevelMenuMouseMoved(location);
                 break;
             }

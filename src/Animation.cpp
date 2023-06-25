@@ -34,7 +34,7 @@ void Animation::update(const sf::Time delta)
     }
 }
 
-void Animation::update()
+void Animation::update() const
 {
     m_sprite.setTextureRect(m_data.m_data.find(m_dir)->second[m_index]);
 }

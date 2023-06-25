@@ -41,7 +41,7 @@ void ScoreTable::draw()const
     }
 }
 
-void ScoreTable::saveScoresToFile()
+void ScoreTable::saveScoresToFile()const
 {
     std::ofstream file("scores.txt");
     if (file.is_open())
