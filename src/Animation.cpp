@@ -13,6 +13,7 @@ Animation::Animation(const AnimationData& data, Direction dir, sf::Sprite& sprit
 
 void Animation::direction(const Direction dir)
 {
+    //if dir changed
     if (m_dir == dir || dir == Direction::Stay)
     {
         return;
@@ -24,6 +25,7 @@ void Animation::direction(const Direction dir)
 
 void Animation::update(const sf::Time delta)
 {
+    //change the sprites' texture acording to time
     m_elapsed += delta;
     if (m_elapsed >= AnimationTime)
     {
