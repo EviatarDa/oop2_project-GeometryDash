@@ -31,6 +31,7 @@ void playerGate(GameObject& player_object, GameObject& gate_object)
 {
 	Player& player = dynamic_cast<Player&>(player_object);
 	Gate& gate = dynamic_cast<Gate&>(gate_object);
+
  	if(gate.isActive())
 	{
 	 	switch (gate.getType())
@@ -55,7 +56,6 @@ void gatePlayer(GameObject& gate, GameObject& player)
 void playerSpike(GameObject& player_object, GameObject& spike_object)
 {
 	Player& player = dynamic_cast<Player&>(player_object);
-	//Spike& spike= dynamic_cast<Spike&>(spike_object);
 
 	player.setDead();
 }
@@ -70,6 +70,8 @@ void playerBrick(GameObject& player_object, GameObject& brick_object)
 {
 	Player& player = dynamic_cast<Player&>(player_object);
 	Brick& brick = dynamic_cast<Brick&>(brick_object);
+
+	//rectangle bricks will disapear for 5 sec
 	if (brick.getType() == Rectangle)
 	{
 		brick.inactive();
@@ -105,9 +107,8 @@ void jumperPlayer(GameObject& jumper, GameObject& player)
 
 void enemySpike(GameObject& enemy_object, GameObject& spike_object)
 {
-	//Spike& spike = dynamic_cast<Spike&>(spike_object);
-
 	Enemy& enemy = dynamic_cast<Enemy&>(enemy_object);
+	//change enemy direction
 	enemy.swap();
 
 }
@@ -147,11 +148,15 @@ void enemyEnemy(GameObject& enemy1_object, GameObject& enemy2_object)
 
 void MyContactListener::BeginContact(b2Contact* contact)
 {
+	//getting the fixture from the contact
 	b2Fixture* fixtureA = contact->GetFixtureA();
 	b2Fixture* fixtureB = contact->GetFixtureB();
+
+	//getting the body from the fuxture
 	b2Body* bodyA = fixtureA->GetBody();
 	b2Body* bodyB = fixtureB->GetBody();
 
+	//definding GameObject to process collision with
 	GameObject* objectA = reinterpret_cast<GameObject*>(bodyA->GetUserData().pointer);
 	GameObject* objectB = reinterpret_cast<GameObject*>(bodyB->GetUserData().pointer);
 
@@ -168,7 +173,7 @@ namespace // anonymous namespace — the standard way to make function "static"
 	using HitMap = std::map<Key, HitFunctionPtr>;
 
 
-
+	//define the collision map
 	HitMap initializeCollisionMap()
 	{
 		HitMap phm;
@@ -192,7 +197,7 @@ namespace // anonymous namespace — the standard way to make function "static"
 		return phm;
 	}
 
-
+	//sercing for the collision
 	HitFunctionPtr lookup(const std::type_index& class1, const std::type_index& class2)
 	{
 		static HitMap collisionMap = initializeCollisionMap();
@@ -201,6 +206,7 @@ namespace // anonymous namespace — the standard way to make function "static"
 		{
 			return nullptr;
 		}
+		//the collision function
 		return mapEntry->second;
 	}
 
@@ -208,6 +214,7 @@ namespace // anonymous namespace — the standard way to make function "static"
 
 void processCollision(GameObject& object1, GameObject& object2)
 {
+	//look for the collision and preform it accordingly to the types
 	auto phf = lookup(typeid(object1), typeid(object2));
 	if (!phf)
 	{

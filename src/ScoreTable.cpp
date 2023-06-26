@@ -27,6 +27,8 @@ void ScoreTable::draw()const
 {
     m_window.draw(m_background);
     m_window.draw(m_title);
+
+    //print all scores and names
     for (int index = 0 ; index < m_scores.size(); index++)
     {
         sf::Text text;
@@ -36,7 +38,7 @@ void ScoreTable::draw()const
         text.setFillColor(sf::Color::White);
         text.setOutlineColor(sf::Color::Black);
         text.setOutlineThickness(2.f);
-        text.setPosition(m_table.x + 20.f, index * 40.f + 250.f);
+        text.setPosition(m_table.x + 20.f, index * 40.f + 250.f); 
         m_window.draw(text);
     }
 }
@@ -58,8 +60,12 @@ void ScoreTable::addScore(const std::string& name, const int score)
 {
     m_scores.push_back(std::pair<int, std::string>(score, name));
     std::sort(m_scores.begin(), m_scores.end(),
-        [](const std::pair<int, std::string>& obj1, const std::pair<int, std::string>& obj2) {return obj1.first > obj2.first; });
+        [](const std::pair<int, std::string>& obj1, const std::pair<int, std::string>& obj2)
+        {
+            return obj1.first > obj2.first; 
+        });
 
+    //take out the last score
     if (m_scores.size() > 10)
     {
         m_scores.pop_back();

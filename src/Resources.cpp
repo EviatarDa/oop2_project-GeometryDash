@@ -21,6 +21,7 @@ namespace
 			return currentStart;
 		};
 
+		//push the right texture to the vector according to the direction
 		enemy.m_data[Right].emplace_back(currentStart, size);
 		enemy.m_data[Right].emplace_back(nextStart(), size);
 		enemy.m_data[Right].emplace_back(nextStart(), size);
@@ -52,7 +53,7 @@ Resources::Resources()
 	:m_animation_data(GAME_ANIMATIONS)
 {
 	LoadFromFile();
-	m_animation_data[Enemy1Animation] = enemyData(sf::Vector2i(62, 50));
+	m_animation_data[Enemy1Animation] = enemyData(sf::Vector2i(62, 50)); 
 	m_animation_data[Enemy2Animation] = enemyData(sf::Vector2i(53, 50));
 }
 

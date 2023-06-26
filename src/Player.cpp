@@ -15,6 +15,7 @@ Player::Player(b2World& world, const std::pair<GameTextures, GameTextures> textu
 
 void Player::move()
 {
+    //moving according to the state
     m_state->move(m_direction, m_object_body, m_touching_ground, m_gravity, m_object);
 }
 
@@ -39,17 +40,22 @@ void Player::updateDirection()
 
 void Player::shipState()
 {
+    //changed the player body
     changeBodyAndSprite(m_player_textures.second);
+    //changed the pointer
     m_state.reset(new ShipState());
-    //if (m_gravity.y > 0)
+
+    //make the ship look straight
     m_object.setRotation(0);
-    //else
-      //  m_object.setRotation(180);
+
 }
 
 void Player::boxState()
 {
+    //changed the player body
     changeBodyAndSprite(m_player_textures.first);
+    //changed the pointer
+
     m_state.reset(new BoxState());
 }
 
@@ -60,12 +66,15 @@ void Player::increasePoints()
 
 void Player::kill()
 {
+    //reset state and gravity
     boxState();
     if (m_gravity.y < 0)
     {
         m_gravity_changed = true;
         m_gravity = -m_gravity;
     }
+
+    //reset to fist location
     m_object_body->SetTransform(m_first_location, m_object_body->GetAngle());
     m_object_body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
     m_alive = true;
@@ -93,6 +102,8 @@ void Player::hop(const float hop_force) const
 {
     //to avoid "icetower" jumps
     m_object_body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));
+
+    //make the player jump according to the gravity
     if(m_gravity.y>0)
         m_object_body->ApplyLinearImpulseToCenter(b2Vec2(0.0f, -hop_force), true);
     else
@@ -107,6 +118,7 @@ void Player::reverseGravity()
 void Player::collideBrick(const GameTextures brick_type)
 {
     if (brick_type != Floor)
+        //the ship will die, the player wont
         m_state->collideBrick(m_touching_ground, m_alive);
     else
         m_touching_ground = true;
@@ -190,6 +202,7 @@ const int Player::getCoins()const
 
 void Player::changeBodyAndSprite(const GameTextures game_texture)
 {
+    //changed texture
     m_object.setTexture(Resources::instance().getGameTexture(game_texture), true);
     const sf::Vector2f spriteSize(m_object.getTextureRect().width, m_object.getTextureRect().height);
     m_object.setOrigin(spriteSize.x / 2, spriteSize.y / 2);

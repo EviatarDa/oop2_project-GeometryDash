@@ -75,7 +75,7 @@ void Enemy::swap()
 }
 
 
-
+//register all the enemies to the moving object factory
 bool Enemy::m_registerit1 = Factory<MovingObject>::registerObject(ENEMY1_COLOR,
 	[](b2World& world, sf::Vector2f location) -> std::unique_ptr<MovingObject> {
 		return std::make_unique<Enemy>(world, Enemy1, location, false,

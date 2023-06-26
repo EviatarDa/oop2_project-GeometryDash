@@ -12,6 +12,7 @@ void ScoreTableButton::execute()
 {
     bool click = false;
 
+    //rendering the score table
     while (m_window.isOpen() && !click)
     {
         m_window.clear();

@@ -11,6 +11,7 @@
 PlayButton::PlayButton(Game* game,  sf::RenderWindow& window)
 	:Command(game, window), m_levels_menu(m_game, m_window)
 {
+    //adding buttons to the submenu
 	m_levels_menu.add(WithoutYou, std::make_unique<WithoutYouButton>(m_game, m_window));
 	m_levels_menu.add(Greyhound, std::make_unique<GreyhoundButton>(m_game, m_window));
 	m_levels_menu.add(OnlyTheHorses, std::make_unique<OnlyTheHorsesButton>(m_game, m_window));
@@ -32,15 +33,19 @@ void PlayButton::execute()
             {
             case sf::Event::MouseButtonReleased:
             {
+                //getting the click location, checking what button pressed
                 const auto location = m_window.mapPixelToCoords(
                     { event.mouseButton.x, event.mouseButton.y });
                 const int button = m_levels_menu.getOptionFromUser(location);
+
+                //performing the button action acordingly
                 m_levels_menu.performAction(button);
                 click = true;
                 break;
             }
             case sf::Event::MouseMoved:
             {
+                //indicate if the mouse on the buttons 
                 const auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
                 m_levels_menu.handleLevelMenuMouseMoved(location);
                 break;
