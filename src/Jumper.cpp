@@ -12,7 +12,7 @@ Jumper::Jumper(b2World& world, const GameTextures texture, const sf::Vector2f lo
 	}
 }
 
-
+//register all the jumpers to the static object factory
  bool Jumper::m_registerit1 = Factory<StaticObject>::registerObject(JUMPER1_COLOR,
 	[](b2World& world, const sf::Vector2f location) -> std::unique_ptr<StaticObject> {
 		return std::make_unique<Jumper>(world, Jumper1, sf::Vector2f(location.x, location.y + 13)

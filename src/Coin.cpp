@@ -10,6 +10,7 @@ Coin::Coin(b2World& world, const GameTextures texture, const sf::Vector2f locati
 {
 }
 
+//register the coin to the static object factory
 bool Coin::m_registerit1 = Factory<StaticObject>::registerObject(COIN_COLOR,
 	[](b2World& world, sf::Vector2f location) -> std::unique_ptr<StaticObject> {
 		return std::make_unique<class Coin>(world, GameTextures::Coin, location,

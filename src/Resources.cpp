@@ -150,7 +150,7 @@ void Resources::LoadFromFile()
 
 	//game textures
 	m_game_textures[Floor].loadFromFile("Floor.png");
-	m_game_textures[Level_Background].loadFromFile("Menu_Backgound.png");
+	m_game_textures[Level_Background].loadFromFile("Menu_Background.png");
 	m_game_textures[PlayerBox1].loadFromFile("PlayerBox1.png");
 	m_game_textures[PlayerBox2].loadFromFile("PlayerBox2.png");
 	m_game_textures[PlayerBox3].loadFromFile("PlayerBox3.png");

@@ -3,11 +3,15 @@
 #include "MyContactListener.h"
 
 
-//=====functions-colision====:
+//======================collision functions======================:
+//all the game collisions:
 
+
+//prototype
 void processCollision(GameObject& object1, GameObject& object2);
 
 //--------------------------------------------------------------------
+
 
 void playerCoin(GameObject& player_object, GameObject& coin_object)
 {

@@ -12,7 +12,7 @@ LevelsMenu::LevelsMenu(Game* game, sf::RenderWindow& window)
 	{
 		m_buttons[button].setTexture(Resources::instance().getLevelsMenuButtons((LevelsMenuButtons)button));
 		m_back_buttons[button].setTexture(Resources::instance().getLevelsMenuButtons((LevelsMenuButtons)button));
-		m_back_buttons[button].setColor(sf::Color::Green);
+		m_back_buttons[button].setColor(sf::Color::Green); // putting a bold button behind so the button will bold when we set his brithness low
 	}
 	locateObjects();
 }
@@ -30,39 +30,48 @@ void LevelsMenu::drawLevelsMenu() const
 
 const int LevelsMenu::getOptionFromUser(const sf::Vector2f location) const
 {
+	//check if the button contains the click location 
 	for (int button = WithoutYou; button < m_options.size(); button++)
 	{
 		if (m_options[button].first.getGlobalBounds().contains(location))
 		{
+			//return the button we clicked at
 			return button;
 		}
 	}
+	//no button
 	return m_options.size() + 1;
 }
 
 void LevelsMenu::performAction(const int action)const
 {
+	//if no button pressed
 	if (action > m_options.size())
 		return;
+
 	m_options[action].second->execute();
 }
 
 void LevelsMenu::add(const LevelsMenuButtons button, std::unique_ptr<Command> command)
 {
+	//adding new button to the menu
 	m_options.emplace_back(option(m_buttons[button], move(command)));
 }
 
 
 void LevelsMenu::handleLevelMenuMouseMoved(const sf::Vector2f location)
 {
+	//indicate the location of the mouse 
 	for (int button = WithoutYou; button < m_options.size(); button++)
 	{
 		if (m_options[button].first.getGlobalBounds().contains(location))
 		{
+			//bolding the button
 			ButtonPress(LevelsMenuButtons(button));
 		}
 		else
 		{
+			//unbolding the button
 			ButtonRelease(LevelsMenuButtons(button));
 		}
 	}

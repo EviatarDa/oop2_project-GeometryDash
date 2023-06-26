@@ -15,7 +15,6 @@ public:
 	void drawInstructions(const MenuInstructions) const;
 	void drawScoreTable()const;
 	void drawBoxShips()const;
-	void drawLevelsPage()const;
 
 	const int getOptionFromUser(const sf::Vector2f)const;
 	void performAction(const int)const;
@@ -29,7 +28,7 @@ public:
 	void boxShipPress(const MenuBoxShips);
 	void boxShipRelease(const MenuBoxShips);
 
-	std::pair<GameTextures, GameTextures> getPlayerTextures();
+	const std::pair<GameTextures, GameTextures> getPlayerTextures() const;
 	void chooseBoxShip(const MenuBoxShips);
 
 	void updateScoreTable(const int, std::string);

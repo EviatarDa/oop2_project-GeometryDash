@@ -5,6 +5,7 @@
 Menu::Menu(sf::RenderWindow& window)
 	:m_window(window), m_score_table(window), m_box_ship(BoxShip1)
 {
+	//setting menu textures
 	m_background.setTexture(Resources::instance().getMenuTexture(Menu_Background));
 	m_background.scale(1.6f, 1.6f);
 
@@ -62,38 +63,47 @@ void Menu::drawMenu() const
 
 const int Menu::getOptionFromUser(const sf::Vector2f location) const
 {
+	//check if the button contains the click location 
 	for (int button = Play; button < m_options.size(); button++)
 	{
 		if (m_options[button].first.getGlobalBounds().contains(location))
 		{
+			//return the button we clicked at
 			return button;
 		}
 	}
+	//no button
 	return m_options.size() + 1;
 }
 
 void Menu::performAction(const int action)const
 {
+	//if no button pressed
 	if (action > m_options.size())
 		return;
+
 	m_options[action].second->execute();
 }
 
 void Menu::add(const MenuButtons button, std::unique_ptr<Command> command)
 {
+	//adding new button to the menu
 	m_options.emplace_back(option(m_buttons[button], move(command)));
 }
 
 void Menu::handleMenuMouseMoved(const sf::Vector2f location)
 {
+	//indicate the location of the mouse 
 	for (int button = Play; button < m_options.size(); button++)
 	{
 		if (m_options[button].first.getGlobalBounds().contains(location))
 		{
+			//bolding the button
 			ButtonPress(MenuButtons(button));
 		}
 		else
 		{
+			//unbolding the button
 			ButtonRelease(MenuButtons(button));
 		}
 	}
@@ -101,6 +111,7 @@ void Menu::handleMenuMouseMoved(const sf::Vector2f location)
 
 const sf::Sprite Menu::getBoxShip(const MenuBoxShips box_ship) const
 {
+	//return the sprite
 	return m_box_ships[box_ship];
 }
 
@@ -147,8 +158,9 @@ void Menu::drawBoxShips()const
 }
 
 
-std::pair<GameTextures, GameTextures> Menu::getPlayerTextures()
+const std::pair<GameTextures, GameTextures> Menu::getPlayerTextures() const
 {
+	//returning the player textures picked by pair of box and ship
 	switch (m_box_ship)
 	{
 	case BoxShip1:
@@ -179,29 +191,23 @@ std::pair<GameTextures, GameTextures> Menu::getPlayerTextures()
 
 void Menu::chooseBoxShip(const MenuBoxShips box_ship)
 {
+	//updating the player
 	m_box_ship = box_ship;
-}
-
-void Menu::drawLevelsPage()const
-{
-	m_window.draw(m_background);
-	for (int button = WithoutYou; button <= Spectre; button++)
-	{
-		m_window.draw(m_back_buttons[button]);
-		m_window.draw(m_buttons[button]);
-	}
 }
 
 void Menu::updateScoreTable(const int score, std::string player_name)
 {
+	//if no name inserted
 	if (player_name == "")
 		player_name = "Unknown Player";
+
 	m_score_table.addScore(player_name, score);
 	m_score_table.saveScoresToFile();
 }
 
 void Menu::playSong()
 {
+	//reset the song before start
 	stopSong();
 	m_menu_sound.play();
 }

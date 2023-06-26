@@ -5,8 +5,8 @@
 #include <map>
 #include <vector>
 #include <string>
-#include  "StaticObject.h"
-#include  "MovingObject.h"
+#include "StaticObject.h"
+#include "MovingObject.h"
 #include <SFML/Graphics.hpp>
 
 

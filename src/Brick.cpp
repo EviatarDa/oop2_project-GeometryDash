@@ -9,7 +9,7 @@ Brick::Brick(b2World& world, const GameTextures texture, const sf::Vector2f loca
 {
 }
 
-
+//register all the bricks to the static object factory
 bool Brick::m_registerit1 = Factory<StaticObject>::registerObject(CUBE1_COLOR,
 	[](b2World& world, const sf::Vector2f location) -> std::unique_ptr<StaticObject> {
 		return std::make_unique<Brick>(world, Cube1, location, false, (GameAnimations)0, (GameTextures)0); });

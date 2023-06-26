@@ -13,6 +13,8 @@ Enemy::Enemy(b2World& world, const GameTextures texture, const sf::Vector2f loca
 {
 	//for correcting first direction
 	swap();
+
+	//attaching the object to the floor and rotate hin according to his location
 	if (up)
 	{
 		m_attach = -1.f;
@@ -21,17 +23,19 @@ Enemy::Enemy(b2World& world, const GameTextures texture, const sf::Vector2f loca
 	else
 		m_attach = 1.f;
 
+	//cancel the physisc gravity powers
 	m_object_body->SetGravityScale(0.0f);
-
 }
 
 void Enemy::move()
 {
+	//move right acording to the gravity
 	if(m_direction[Right])
 		m_object_body->SetLinearVelocity({ ENEMY_MOVEMENT_SPEED, m_attach });
 	else
 		m_object_body->SetLinearVelocity({ -ENEMY_MOVEMENT_SPEED, m_attach });
 
+	//moving the sprite after the body
 	m_object.setPosition(SCALE * m_object_body->GetPosition().x, SCALE * m_object_body->GetPosition().y);
 	const auto delta = m_clock.restart();
 	m_animation.update(delta);
@@ -39,12 +43,14 @@ void Enemy::move()
 
 void Enemy::updateDirection()
 {
+	//swaping the direction from left to right
 	if(m_swap)
 	{
 		m_direction[Right] = !m_direction[Right];
 		m_direction[Left] = !m_direction[Left];
 		if (m_up)
 		{
+			//up enemy animation
 			if (m_direction[Right])
 				m_animation.direction(Left);
 			else
@@ -52,11 +58,13 @@ void Enemy::updateDirection()
 		}
 		else
 		{
+			//down enemy animation
 			if (m_direction[Right])
 				m_animation.direction(Right);
 			else
 				m_animation.direction(Left);
 		}
+		//no need to swap untill the next collision
 		m_swap = false;
 	}
 }

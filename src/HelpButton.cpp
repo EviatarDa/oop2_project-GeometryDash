@@ -12,6 +12,7 @@ void HelpButton::execute()
 {
     int page = OhNo;
 
+    //drowing the instructions pages and moving forward with click
     while (m_window.isOpen() && page <= DropTheMic)
     {
         m_window.clear();
@@ -24,6 +25,7 @@ void HelpButton::execute()
             {
             case sf::Event::MouseButtonReleased:
             {
+                //moving to next page
                 page++;
                 break;
             }

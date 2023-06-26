@@ -25,8 +25,11 @@ void BoxButton::execute()
             {
             case sf::Event::MouseButtonReleased:
             {
+                //getting the click location, checking what button pressed
                 const auto location = m_window.mapPixelToCoords(
                     { event.mouseButton.x, event.mouseButton.y });
+
+                //performing the button action acordingly
                 m_game->handleBoxShipPageClick(location);
                 m_game->getBoard().changeBoxShip(m_game->getMenu().getPlayerTextures());
                 click = true;
@@ -34,6 +37,7 @@ void BoxButton::execute()
             }
             case sf::Event::MouseMoved:
             {
+                //indicate if the mouse on the buttons 
                 const auto location = m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window));
                 m_game->handleBoxShipMouseMoved(location);
                 break;

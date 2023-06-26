@@ -9,6 +9,8 @@ Gate::Gate(b2World& world, const GameTextures texture, const sf::Vector2f locati
 {
 }
 
+
+//register all the gates to the static object factory
 bool Gate::m_registerit1 = Factory<StaticObject>::registerObject(GATE1_COLOR,
 	[](b2World& world, const sf::Vector2f location) -> std::unique_ptr<StaticObject>
 	{
